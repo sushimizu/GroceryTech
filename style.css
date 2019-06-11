@@ -22,3 +22,11 @@ body{
 	display: flex;
 }
 
+
+.pgName{
+	text-align: center;
+	padding-top: 100px;
+	padding-bottom: auto;
+	
+	
+}
