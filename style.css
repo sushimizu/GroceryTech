@@ -5,6 +5,23 @@ body{
 	color: #003057;
 }
 
+.column {
+  float: left;
+  width: 50%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+
+
+
+/*
 .box{
 	text-align: center;
 	background-color: #D8BFD8;
@@ -30,6 +47,9 @@ body{
 	text-align: center;
 	padding-top: 100px;
 	padding-bottom: auto;
+
+
+*/
 	
 	
 }
