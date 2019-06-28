@@ -3,15 +3,22 @@
 import cgi
 
 
-args = cgi.FieldStorage()
+form = cgi.FieldStorage()
 
+"""
 try:
 	#catch username 
-	uname = args['username'].value
-	url = args['URL'].value
+	uname = form['username'].value
+	url = form['URL'].value
 except KeyError as E:
 	pass
-  
+""" 
+if form.getvalue("username"): 
+	uname = form.getvalue("username")
+if form.getvalue("password"): 
+	pwd = form.getvalue("password")
+	
+	
   
 uname, pwd = map(String, uname.split(',')) 
 
