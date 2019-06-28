@@ -1,9 +1,14 @@
 #!/usr/bin/python
 
 import cgi
+import requests 
 
 
-form = cgi.FieldStorage()
+r = requests.post("login1.html", data={'username','password'})
+print (r.text)
+
+
+#form = cgi.FieldStorage()
 
 """
 try:
@@ -13,12 +18,13 @@ try:
 except KeyError as E:
 	pass
 """ 
+"""
 if form.getvalue("username"): 
 	uname = form.getvalue("username")
 if form.getvalue("password"): 
 	pwd = form.getvalue("password")
 	
-	
+
   
 uname, pwd = map(String, uname.split(',')) 
 
@@ -26,4 +32,4 @@ f = open("usernamePwd.csv","rb")
 f.write(uname; pwd) 
 f.close() 
 
- 
+ """	
