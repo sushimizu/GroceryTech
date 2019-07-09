@@ -9,6 +9,8 @@ r = requests.post("login1.html", data={'username','password'})
 #print (r.text)
 if data['username'] == 'buyer' :
 	webbrowser.open("buyerFunctionality6.html")
+else :
+	webbrowser.open("login1.html")
 	
 
 
