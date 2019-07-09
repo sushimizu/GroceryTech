@@ -48,10 +48,10 @@ def buyerFunctionlity():
 		if validBuyer(request.form['username'], request.form['password']):
 			return render_template('buyerFunctionality6.html')
 		
-		else if validDeliverer(request.form['username'], request.form['password']):
+		elif validDeliverer(request.form['username'], request.form['password']):
 			return render_template('delivererFunctionality18.html')
 		
-		else if validManager(request.form['username'], request.form['password']):
+		elif validManager(request.form['username'], request.form['password']):
 			return render_template('managerFunctionality22.html')
 		
 		else:
