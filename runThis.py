@@ -34,11 +34,26 @@ def index():
 def registrationType():
 	return render_template('registrationType2.html')
 
+@app.route('/delivererFunctionality', methods=['GET','POST'])
+def delivererFunctionality():
+	return render_template('delivererFunctionality18.html')
+
+@app.route('/managerFunctionality', methods=['GET','POST'])
+def managerFunctionality():
+	return render_template('managerFunctionality22.html')
+
 @app.route('/buyerFunctionality', methods=['GET','POST'])
 def buyerFunctionlity():
 	if request.method == 'POST':
-		if validLogin(request.form['username'], request.form['password']):
-			return render_template('buyerfunctionality3.html')
+		if validBuyer(request.form['username'], request.form['password']):
+			return render_template('buyerFunctionality6.html')
+		
+		else if validDeliverer(request.form['username'], request.form['password']):
+			return render_template('delivererFunctionality18.html')
+		
+		else if validManager(request.form['username'], request.form['password']):
+			return render_template('managerFunctionality22.html')
+		
 		else:
 			error="Invalid Username/Password"
 		
