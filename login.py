@@ -5,9 +5,10 @@ import requests
 import webbrowser
 
 
+webbrowser.open("buyerFunctionality6.html")
 r = requests.post("login1.html", data={'username','password'})
 #print (r.text)
-webbrowser.open("buyerFunctionality6.html")
+
 if data['username'] == 'buyer' :
 	webbrowser.open("buyerFunctionality6.html")
 else :
