@@ -2,10 +2,14 @@
 
 import cgi
 import requests 
+import webbrowser
 
 
 r = requests.post("login1.html", data={'username','password'})
-print (r.text)
+#print (r.text)
+if data['username'] == 'buyer' :
+	webbrowser.open("buyerFunctionality6.html")
+	
 
 
 #form = cgi.FieldStorage()
