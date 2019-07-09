@@ -9,10 +9,10 @@ app = Flask(__name__)
 def index():
 	return render_template('login1.html')
 
-@app.route('/registrationType')
+
+@app.route('/registrationType2')
 def registrationType():
 	return render_remplate('registrationType2.html')
-
 
 
 
