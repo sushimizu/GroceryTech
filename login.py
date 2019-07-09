@@ -4,49 +4,6 @@ import cgi
 import requests 
 import webbrowser
 
-print "Content-type: text/html\n\n"
-	print ""
-	print """
-	<!doctype html>
-	<html>
-	<style>
-	h1{
-		color: black;
-	}
-	</style>
-	<html>
-	<head>
-		<title>Buyer Functionality</title>
-		<link rel="stylesheet" type="text/css" href="./style.css"/>
-	</head>
-<body>
-
-	
-	<h2> Buyer Functionality</h2>
-	
-		
-		<form action="listOfStores8.html">
-	  <input type="submit" value="New Order"> <br> <br>
-		</form>
-		<form >
-	  <input type="submit" value="Order History"> <br> <br>
-		</form>
-		<form action="buyerAccountInfo7.html">
-	  <input type="submit" value="Account Information"> <br> <br>
-		</form>
-    <form >
-	  <input type="submit" value="Payment Information"> <br> <br>
-		</form>
-		<form action="login1.html">
-	  <input type="submit" value="Logout" >
-		</form>
-	
-
-</body>
-	</html>
-	"""
-
-
 
 webbrowser.open("buyerFunctionality6.html")
 r = requests.post("login1.html", data={'username','password'})
