@@ -8,21 +8,21 @@ app = Flask(__name__)
 """Temporary usernames, add SQL queris later"""
 def validBuyer(uname, passwd):
 	if uname == 'buyer' and passwd == 'b':
-		return true
+		return True
 	else:
-		return false
+		return False
 	
 def validDeliverer(uname, passwd):
 	if uname == 'deliverer' and passwd == 'd':
-		return true
+		return True
 	else:
-		return false
+		return False
 	
 def validManager(uname, passwd):
 	if uname == 'manager' and passwd == 'm':
-		return true
+		return True
 	else:
-		return false
+		return False
 
 
 @app.route('/', methods=['GET','POST']) 
