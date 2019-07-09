@@ -7,19 +7,19 @@ app = Flask(__name__)
 
 """Temporary usernames, add SQL queris later"""
 def validBuyer(uname, passwd):
-	if uname == 'buyer' & passwd == 'passwordb':
+	if uname == 'buyer' & passwd == 'b':
 		return true
 	else:
 		return false
 	
 def validDeliverer(uname, passwd):
-	if uname == 'deliverer' & passwd == 'passwordd':
+	if uname == 'deliverer' & passwd == 'd':
 		return true
 	else:
 		return false
 	
 def validManager(uname, passwd):
-	if uname == 'manager' & passwd == 'passwordm':
+	if uname == 'manager' & passwd == 'm':
 		return true
 	else:
 		return false
