@@ -60,8 +60,17 @@ def buyerFunctionlity():
 	return render_template('login1.html', error=error)
 
 
+@app.route('/registerBuyer', methods=['GET','POST'])
+def registerBuyer():
+	return render_template('registerBuyer3.html')
 
+@app.route('/registerDeliverer', methods=['GET','POST'])
+def registerBuyer():
+	return render_template('registerDeliverer4.html')
 
+@app.route('/registerManager', methods=['GET','POST'])
+def registerBuyer():
+	return render_template('registerManager5.html')
 
 
 
