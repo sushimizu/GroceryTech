@@ -5,12 +5,12 @@ app = Flask(__name__)
 
 
 
-@app.route('/') 
+@app.route('/', methods=['GET','POST']) 
 def index():
 	return render_template('login1.html')
 
 
-@app.route('/registrationType2')
+@app.route('/registrationType2', methods=['GET','POST'])
 def registrationType():
 	return render_template('registrationType2.html')
 
