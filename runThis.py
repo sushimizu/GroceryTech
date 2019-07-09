@@ -5,6 +5,25 @@ from flask import request
 app = Flask(__name__) 
 
 
+"""Temporary usernames, add SQL queris later"""
+def validBuyer(uname, passwd):
+	if uname == buyer && passwd == passwordb:
+		return true
+	else:
+		return false
+	
+def validDeliverer(uname, passwd):
+	if uname == deliverer && passwd == passwordd:
+		return true
+	else:
+		return false
+	
+def validManager(uname, passwd):
+	if uname == manager && passwd == passwordm:
+		return true
+	else:
+		return false
+
 
 @app.route('/', methods=['GET','POST']) 
 def index():
