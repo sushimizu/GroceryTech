@@ -10,7 +10,7 @@ def index():
 	return render_template('login1.html')
 
 
-@app.route('/registrationType')
+@app.route('/registrationType2')
 def registrationType():
 	return render_template('registrationType2.html')
 
