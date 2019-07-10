@@ -72,7 +72,7 @@ def registerDeliverer():
 def registerManager():
 	return render_template('registerManager5.html')
 
-arr = [Maki, Tobin, Daniel, Oldrin] 
+arr = ['Maki', 'Tobin', 'Daniel', 'Oldrin'] 
 @app.route('/test', methods=['GET','POST'])
 def test():
 	print "Content-type: text/html\n\n"
