@@ -72,6 +72,13 @@ def registerDeliverer():
 def registerManager():
 	return render_template('registerManager5.html')
 
+@app.route('/storeHomepage', methods=['GET','POST'])
+def registerManager():
+	return render_template('storeHomepage9.html')
+
+
+
+
 arr = ['Maki', 'Tobin', 'Daniel', 'Oldrin'] 
 @app.route('/test', methods=['GET','POST'])
 def test():
