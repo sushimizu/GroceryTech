@@ -75,9 +75,9 @@ def registerManager():
 arr = ['Maki', 'Tobin', 'Daniel', 'Oldrin'] 
 @app.route('/test', methods=['GET','POST'])
 def test():
-	print "Content-type: text/html\n\n"
-	print ""
-	print """
+	#print "Content-type: text/html\n\n"
+	#print ""
+	return """
 	<!doctype html>
 	<html>
 	<head>
