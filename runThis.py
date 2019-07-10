@@ -72,7 +72,27 @@ def registerDeliverer():
 def registerManager():
 	return render_template('registerManager5.html')
 
-
+@app.route('/test', methods=['GET','POST'])
+def test():
+	arr = [Maki, Tobin, Daniel, Oldrin] 
+	
+	print "Content-type: text/html\n\n"
+	print ""
+	print """
+	<!doctype html>
+	<html>
+	<head>
+		<link rel="stylesheet" href="/static/style.css"/>
+	</head>
+	<body>
+	<h1><center> Go home </h1></center>
+	<section>
+	<center><a href='http://0.0.0.0:5000'> Login </a></center>
+	</section>
+	</body>
+	</html>
+	"""
+	
 
 
 
