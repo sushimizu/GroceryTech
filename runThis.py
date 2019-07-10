@@ -88,9 +88,6 @@ def test():
 	<section>
 	<center><a href='http://0.0.0.0:5000'> Login </a></center>
 	</section>
-	{% for i in arr %}
-	 	{{ arr[i] }} <br>
-	{% endfor %}
 	</body>
 	</html>
 	"""
