@@ -73,7 +73,7 @@ def registerManager():
 	return render_template('registerManager5.html')
 
 @app.route('/storeHomepage', methods=['GET','POST'])
-def registerManager():
+def storeHomepage():
 	return render_template('storeHomepage9.html')
 
 
