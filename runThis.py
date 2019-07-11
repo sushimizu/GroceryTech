@@ -108,7 +108,7 @@ def test():
 	<center><a href='http://0.0.0.0:5000'> Login </a></center>
 	</section> """
 	middle = ""
-	for i in arr:
+	for i in range(0,4):
 		middle = middle + arr[i] + " " 
 	end = """ </body>
 	</html>
