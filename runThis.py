@@ -82,9 +82,7 @@ def storeHomepage():
 arr = ['Maki', 'Tobin', 'Daniel', 'Oldrin'] 
 @app.route('/test', methods=['GET','POST'])
 def test():
-	#print "Content-type: text/html\n\n"
-	#print ""
-	return """
+	"""
 	<!doctype html>
 	<html>
 	<head>
@@ -98,6 +96,28 @@ def test():
 	</body>
 	</html>
 	"""
+	top = """
+	<!doctype html>
+	<html>
+	<head>
+		<link rel="stylesheet" href="/static/style.css"/>
+	</head>
+	<body>
+	<h1><center> Go home </h1></center>
+	<section>
+	<center><a href='http://0.0.0.0:5000'> Login </a></center>
+	</section> """
+	middle = ""
+	for i in arr:
+		middle = middle + arr[i] + " " 
+	end = """ </body>
+	</html>
+	"""
+	page = top + middle + end
+	return page
+		
+		
+	
 	
 
 
