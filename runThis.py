@@ -1,6 +1,6 @@
 from flask import Flask , render_template
 from flask import request
-from buyerAccountInfo7 import buyerAccInfo
+from templates/buyerAccountInfo7 import buyerAccInfo
 
 
 app = Flask(__name__) 
