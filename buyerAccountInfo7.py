@@ -17,6 +17,14 @@ tempdictionary = {
 	'cardNo': '222222222'
 }
 
+def makeLine(name):
+	s = "<input type="text" name="fname" placeholder="
+	s += tempdictionary.get(name)
+	s += "> <br> <br>"
+	return s
+
+
+
 
 def buyerAccInfo():
 	top = """ <!DOCTYPE HTML> 
@@ -54,14 +62,13 @@ def buyerAccInfo():
 
 
 	middle = """ <div class="row">
-	  <div class="column">
-	  First Name:
-			 <input type="text" name="fname" placeholder=""" 
-	middle += tempdictionary.get('fname') 
-	
+	  <div class="column"> 
+	  First Name:"""
+			 
+	middle += makeLine('fname') 
 	 
-	middle += """ > <br> <br>
-	  Username:
+	middle += """
+	  Username:"""
 			 <input type="text" name="uname"> <br> <br>
 	  Preferred Grocery Store:
 			 <input type="text" name="prefStore"> <br> <br>
