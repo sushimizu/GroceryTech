@@ -56,7 +56,10 @@ def buyerAccInfo():
 	middle = """ <div class="row">
 	  <div class="column">
 	  First Name:
-			 <input type="text" name="fname"> <br> <br>
+			 <input type="text" name="fname" placeholder=""" 
+	+ tempdictionary.get('fname') +
+	 
+			""" > <br> <br>
 	  Username:
 			 <input type="text" name="uname"> <br> <br>
 	  Preferred Grocery Store:
@@ -93,7 +96,7 @@ def buyerAccInfo():
 
 
 
-  text = top 
+  text = top + middle + bottom
   
   
   return text
