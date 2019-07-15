@@ -77,7 +77,7 @@ def storeHomepage():
 	return render_template('storeHomepage9.html')
 
 @app.route('/buyerAccountInfo', methods=['GET','POST'])
-def storeHomepage():
+def buyerAccountInfo():
 	return render_template('buyerAccountInfo7.html')
 
 
