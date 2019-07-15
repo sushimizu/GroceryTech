@@ -42,6 +42,7 @@ def delivererFunctionality():
 def managerFunctionality():
 	return render_template('managerFunctionality22.html')
 
+"""Will have to change the name of this """
 @app.route('/buyerFunctionality', methods=['GET','POST'])
 def buyerFunctionlity():
 	if request.method == 'POST':
