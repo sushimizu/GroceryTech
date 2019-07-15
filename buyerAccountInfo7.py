@@ -1,7 +1,7 @@
 
 
 
-tempdictionary{
+tempdictionary = {
 	'fname': 'John',
 	'lname': 'Smith',
 	'uname': 'Jsmith',
