@@ -1,6 +1,6 @@
 from flask import Flask , render_template
 from flask import request
-import buyerAccountInfo7 as BAI
+from templates/buyerAccountInfo7 import buyerAccInfo
 
 
 app = Flask(__name__) 
