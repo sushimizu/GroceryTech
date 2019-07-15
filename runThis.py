@@ -81,7 +81,7 @@ def storeHomepage():
 
 @app.route('/buyerAccountInfo', methods=['GET','POST'])
 def buyerAccountInfo():
-	return BAI.buyerAccInfo()
+	return buyerAccInfo()
 
 
 
