@@ -36,7 +36,7 @@ def buyerAccInfo():
 		<form action="buyerAccountInfo7.html" method="post">  """
 
 
-	 bottom = """  <input type="submit" value="update"> <br> <br>
+	bottom = """  <input type="submit" value="update"> <br> <br>
 
 		</form>
 
