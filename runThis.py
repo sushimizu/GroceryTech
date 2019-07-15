@@ -1,5 +1,6 @@
 from flask import Flask , render_template
 from flask import request
+import buyerAccountInfo7 as BAI
 
 
 app = Flask(__name__) 
@@ -79,7 +80,7 @@ def storeHomepage():
 
 @app.route('/buyerAccountInfo', methods=['GET','POST'])
 def buyerAccountInfo():
-	return render_template('buyerAccountInfo7.html')
+	return BAI.buyerAccInfo()
 
 
 
