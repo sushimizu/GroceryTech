@@ -18,7 +18,7 @@ tempdictionary = {
 }
 
 def makeLine(name):
-	s = "<input type="text" name="fname" placeholder="
+	s = """<input type="text" name="fname" placeholder="""
 	s += tempdictionary.get(name)
 	s += "> <br> <br>"
 	return s
