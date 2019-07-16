@@ -69,20 +69,31 @@ def buyerAccInfo():
 	 
 	middle += """
 	  Username:"""
-			 <input type="text" name="uname"> <br> <br>
-	  Preferred Grocery Store:
-			 <input type="text" name="prefStore"> <br> <br>
-	   Store Address:
-			 <input type="text" name="storeAddress"> <br> <br>
-
-	     Email:
-			 <input type="text" name="email"> <br> <br>
-
-	     Preferred Card Number:
-			 <input type="text" name="prefCard"> <br> <br>
-	     Routing Number:
-			 <input type="text" name="routingNo"> <br> <br>
-
+	middle += makeLine('uname') 
+		
+	middle += """
+	  Preferred Grocery Store:"""
+	middle += makeLine('prefStore') 
+	
+	middle += """
+	  Store Address:"""
+	middle += makeLine('storeAddr') 
+	
+	middle += """
+	  Email:"""
+	middle += makeLine('email') 
+	
+	middle += """
+	  Preferred Card Number:"""
+	middle += makeLine('cardNo') 
+	
+	  
+	middle += """
+	  Routing Number:"""
+	middle += makeLine('defaultPay') 
+	     
+		
+	middle += """
 	  </div>
 	  <div class="column">
 	  Last Name:
