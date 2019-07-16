@@ -6,7 +6,7 @@ tempdictionary = {
 	'lname': 'Smith',
 	'uname': 'Jsmith',
 	'prefStore': 'Kroger',
-	'storeAddr' : '600 McPublix Crl',
+	'storeAddr' : "600 McPublix Crl",
 	'email': 'jsmith@gmail.com',
 	'phone': '888-888-8888',
 	'address': '123 north ave',
