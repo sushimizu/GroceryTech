@@ -17,7 +17,7 @@ body{
   clear: both;
 }
 
-.placeholder{
+::placeholder{
 	color: black;
 }
 
