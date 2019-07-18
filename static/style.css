@@ -19,6 +19,7 @@ body{
 
 ::placeholder{
 	color: red;
+	opacity: 1;
 }
 
 
