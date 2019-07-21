@@ -38,13 +38,15 @@ def loginReq():
 		_name = request.form['username']
 		_password = request.form['password']
 		num = db.login(_name, _password)
+		global currentUser
 		if num == 1:
+			currentUser = _name
 			return render_template('managerFunctionality22.html')
 		elif num == 2:
-			#global logged_user
-			#logged_user = _name
+			currentUser = _name
 			return render_template('delivererFunctionality18.html')
 		elif num == 3:
+			currentUser = _name
 			return render_template('buyerFunctionality6.html')
 		else:
 			return render_template("login1.html", error="Credentials Incorrect")
