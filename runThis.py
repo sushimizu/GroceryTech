@@ -5,7 +5,7 @@ import db
 from buyerAccountInfo7 import buyerAccInfo
 
 app = Flask(__name__)
-
+currentUser = ""
 """Temporary usernames, add SQL queries later"""
 def validBuyer(uname, passwd):
 	if uname == 'buyer' and passwd == 'b':
