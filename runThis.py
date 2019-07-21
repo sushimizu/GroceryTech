@@ -56,9 +56,7 @@ def login():
     can replace or be replaced sign_up()
     """
 
-
 	error="Invalid Username/Password"
-
 
 	return render_template('login1.html', error=error)
 
