@@ -83,7 +83,6 @@ def login():
 
 	error="Invalid Username/Password"
 
-
 	return render_template('login1.html', error=error)
 
 
