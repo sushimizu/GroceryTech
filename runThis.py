@@ -81,7 +81,12 @@ def login():
     can replace or be replaced sign_up()
     """
 
-    return render_template("login1.html")
+
+	error="Invalid Username/Password"
+
+
+	return render_template('login1.html', error=error)
+
 
 @app.route('/buyerFunctionality', methods=['GET','POST'])
 def buyerFunctionlity():

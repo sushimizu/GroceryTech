@@ -7,6 +7,7 @@ conn = pymysql.connect(host="localhost",
 cursor = conn.cursor()
 
 
+
 # returns 0 if credentials are invalid
 # returns 1 if user is a manager
 # returns 2 if user is NOT a manager
@@ -33,3 +34,8 @@ def login(username, password):
             return 2
         else:
             return 3
+
+
+def insertBuyer(Username, Phone, AddressID, DefaultPayment, DefaultStoreID):
+	query = "INSERT INTO Buyer (username, phone, address_id, default_payment, default_store_id) VALUES(%s,%d,%d,%s,%s)"
+	cursor.execute(query, )
