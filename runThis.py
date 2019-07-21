@@ -45,8 +45,8 @@ def managerFunctionality():
 	return render_template('managerFunctionality22.html')
 
 """Will have to change the name of this """
-@app.route('/buyerFunctionality', methods=['GET','POST'])
-def buyerFunctionlity():
+@app.route('/loginReq', methods=['GET','POST'])
+def loginReq():
 	if request.method == 'POST':
 		if validBuyer(request.form['username'], request.form['password']):
 			return render_template('buyerFunctionality6.html')
@@ -61,6 +61,11 @@ def buyerFunctionlity():
 			error="Invalid Username/Password"
 		
 	return render_template('login1.html', error=error)
+
+
+@app.route('/buyerFunctionality', methods=['GET','POST'])
+def buyerFunctionlity():
+	return render_template('buyerFunctionality6.html')
 
 
 @app.route('/registerBuyer', methods=['GET','POST'])
