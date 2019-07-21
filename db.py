@@ -3,7 +3,7 @@ import pymysql
 conn = pymysql.connect(host="localhost",
 							db="GroceryTech",
 							user="root",
-							passwd='CornyJoke12')
+							passwd='password')
 cursor = conn.cursor()
 
 # returns 0 if credentials are invalid
