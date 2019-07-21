@@ -120,7 +120,7 @@ def buyerAccountInfo():
 
 @app.route('/findItem', methods=['GET','POST'])
 def findItem():
-	return findItem('findItem10.html')
+	return render_template('findItem10.html')
 
 
 
