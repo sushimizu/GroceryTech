@@ -118,43 +118,11 @@ def buyerAccountInfo():
 	return buyerAccInfo()
 
 
+@app.route('/findItem', methods=['GET','POST'])
+def findItem():
+	return findItem('findItem10.html')
 
-arr = ['Maki', 'Tobin', 'Daniel', 'Oldrin']
-@app.route('/test', methods=['GET','POST'])
-def test():
-	"""
-	<!doctype html>
-	<html>
-	<head>
-		<link rel="stylesheet" href="/static/style.css"/>
-	</head>
-	<body>
-	<h1><center> Go home </h1></center>
-	<section>
-	<center><a href='http://0.0.0.0:5000'> Login </a></center>
-	</section>
-	</body>
-	</html>
-	"""
-	top = """
-	<!doctype html>
-	<html>
-	<head>
-		<link rel="stylesheet" href="/static/style.css"/>
-	</head>
-	<body>
-	<h1><center> Go home </h1></center>
-	<section>
-	<center><a href='http://0.0.0.0:5000'> Login </a></center>
-	</section> """
-	middle = ""
-	for i in range(0,4):
-		middle = middle + arr[i] + " "
-	end = """ </body>
-	</html>
-	"""
-	page = top + middle + end
-	return page
+
 
 
 if __name__ == '__main__' :
