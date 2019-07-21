@@ -5,3 +5,4 @@ conn = pymysql.connect(host="localhost",
 							user="root",
 							passwd='password')
 cursor = conn.cursor()
+

@@ -70,6 +70,39 @@ def buyerFunctionlity():
 
 @app.route('/registerBuyer', methods=['GET','POST'])
 def registerBuyer():
+
+	if request.method == "POST":
+		fname = request.form['fname']
+		uname = request.form['uname']
+		password = request.form['password']
+		email = request.form['email']
+		street = request.form['street']
+		houseNo = request.form['houseNo']
+		city = request.form['city']
+		lname = request.form['lname']
+		phone = request.form['phone']
+		cpassword = request.form['cpassword']
+		state = request.form['state']
+		zip = request.form['zip']
+
+		error1 = "your password is messed up bro"
+		error2 = "phone has incorrect number of digits"
+		error3 = "zip code has incorrect number of digits"
+		error4 = "email contains non-alphanumeric characters"
+		if password != cpassword:
+			return render_template("registerBuyer3.html", error=error1)
+		if (len(str(abs(phone)))) != 10:
+			return render_template("registerBuyer3.html", error=error2)
+		if (len(str(abs(zip)))) != 5:
+			return render_template("registerBuyer3.html", error=error3)
+		a, b, c = email.rsplit('@', '.')
+		if a.isalnum() and b.isalnum() and c.isalnum():
+			return render_template("registerBuyer3.html", error=error4)
+
+
+
+
+
 	return render_template('registerBuyer3.html')
 
 @app.route('/registerDeliverer', methods=['GET','POST'])
