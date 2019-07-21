@@ -1,5 +1,6 @@
 from flask import Flask , render_template
 from flask import request
+import db
 
 from buyerAccountInfo7 import buyerAccInfo
 
@@ -11,13 +12,13 @@ def validBuyer(uname, passwd):
 		return True
 	else:
 		return False
-	
+
 def validDeliverer(uname, passwd):
 	if uname == 'deliverer' and passwd == 'd':
 		return True
 	else:
 		return False
-	
+
 def validManager(uname, passwd):
 	if uname == 'manager' and passwd == 'm':
 		return True
@@ -25,41 +26,38 @@ def validManager(uname, passwd):
 		return False
 
 
-@app.route('/', methods=['GET','POST']) 
+@app.route('/', methods=['GET','POST'])
 def index():
 	return render_template('login1.html')
 
-
-@app.route('/registrationType', methods=['GET','POST'])
-def registrationType():
-	return render_template('registrationType2.html')
-
-@app.route('/delivererFunctionality', methods=['GET','POST'])
-def delivererFunctionality():
-	return render_template('delivererFunctionality18.html')
-
-@app.route('/managerFunctionality', methods=['GET','POST'])
-def managerFunctionality():
-	return render_template('managerFunctionality22.html')
 
 """Will have to change the name of this """
 @app.route('/loginReq', methods=['GET','POST'])
 def loginReq():
 	if request.method == 'POST':
-		if validBuyer(request.form['username'], request.form['password']):
-			return render_template('buyerFunctionality6.html')
-		
-		elif validDeliverer(request.form['username'], request.form['password']):
-			return render_template('delivererFunctionality18.html')
-		
-		elif validManager(request.form['username'], request.form['password']):
+		_name = request.form['username']
+		_password = request.form['password']
+		num = db.login(_name, _password)
+		if num == 1:
 			return render_template('managerFunctionality22.html')
-		
+		elif num == 2:
+			#global logged_user
+			#logged_user = _name
+			return render_template('delivererFunctionality18.html')
+		elif num == 3:
+			return render_template('buyerFunctionality6.html')
 		else:
-			
-			error="Invalid Username/Password"
-			
-		
+			return render_template("login1.html", error="Credentials Incorrect")
+
+@app.route("/login")
+def login():
+    """
+    Login the user
+    can replace or be replaced sign_up()
+    """
+
+	error="Invalid Username/Password"
+
 	return render_template('login1.html', error=error)
 
 
@@ -123,7 +121,7 @@ def buyerAccountInfo():
 
 
 
-arr = ['Maki', 'Tobin', 'Daniel', 'Oldrin'] 
+arr = ['Maki', 'Tobin', 'Daniel', 'Oldrin']
 @app.route('/test', methods=['GET','POST'])
 def test():
 	"""
@@ -153,7 +151,7 @@ def test():
 	</section> """
 	middle = ""
 	for i in range(0,4):
-		middle = middle + arr[i] + " " 
+		middle = middle + arr[i] + " "
 	end = """ </body>
 	</html>
 	"""
