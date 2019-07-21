@@ -51,10 +51,6 @@ def loginReq():
 
 @app.route("/login")
 def login():
-    """
-    Login the user
-    can replace or be replaced sign_up()
-    """
 
 	error="Invalid Username/Password"
 
