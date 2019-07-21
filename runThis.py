@@ -31,18 +31,6 @@ def index():
 	return render_template('login1.html')
 
 
-@app.route('/registrationType', methods=['GET','POST'])
-def registrationType():
-	return render_template('registrationType2.html')
-
-@app.route('/delivererFunctionality', methods=['GET','POST'])
-def delivererFunctionality():
-	return render_template('delivererFunctionality18.html')
-
-@app.route('/managerFunctionality', methods=['GET','POST'])
-def managerFunctionality():
-	return render_template('managerFunctionality22.html')
-
 """Will have to change the name of this """
 @app.route('/loginReq', methods=['GET','POST'])
 def loginReq():
@@ -60,19 +48,6 @@ def loginReq():
 			return render_template('buyerFunctionality6.html')
 		else:
 			return render_template("login1.html", error="Credentials Incorrect")
-	'''if validBuyer(request.form['username'], request.form['password']):
-		return render_template('buyerFunctionality6.html')
-
-	elif validDeliverer(request.form['username'], request.form['password']):
-		return render_template('delivererFunctionality18.html')
-
-	elif validManager(request.form['username'], request.form['password']):
-		return render_template('managerFunctionality22.html')
-
-	else:
-		error="Invalid Username/Password"'''
-
-	#return render_template('login1.html', error=error)
 
 @app.route("/login")
 def login():
