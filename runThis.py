@@ -58,7 +58,7 @@ def loginReq():
 		else:
 			
 			error="Invalid Username/Password"
-			flash('error')
+			
 		
 	return render_template('login1.html', error=error)
 
