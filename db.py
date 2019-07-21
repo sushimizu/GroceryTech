@@ -8,6 +8,6 @@ cursor = conn.cursor()
 
 
 
-def insertBuyer():
+def insertBuyer(Username, Phone, AddressID, DefaultPayment, DefaultStoreID):
 	query = "INSERT INTO Buyer (username, phone, address_id, default_payment, default_store_id) VALUES(%s,%d,%d,%s,%s)"
-	cursor.execute()
+	cursor.execute(query, )
