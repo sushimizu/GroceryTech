@@ -56,7 +56,9 @@ def loginReq():
 			return render_template('managerFunctionality22.html')
 		
 		else:
+			
 			error="Invalid Username/Password"
+			flash('error')
 		
 	return render_template('login1.html', error=error)
 
