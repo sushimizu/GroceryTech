@@ -115,7 +115,5 @@ def buyerAccInfo():
 
 
 
-  	text = top + middle + bottom
-  
-  
-  	return text
+	text = top + middle + bottom
+	return text

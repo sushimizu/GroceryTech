@@ -3,11 +3,9 @@ from flask import request
 
 from buyerAccountInfo7 import buyerAccInfo
 
+app = Flask(__name__)
 
-app = Flask(__name__) 
-
-
-"""Temporary usernames, add SQL queris later"""
+"""Temporary usernames, add SQL queries later"""
 def validBuyer(uname, passwd):
 	if uname == 'buyer' and passwd == 'b':
 		return True
@@ -126,26 +124,7 @@ def test():
 	"""
 	page = top + middle + end
 	return page
-		
-		
-	
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 if __name__ == '__main__' :
-	app.run(debug=True, host='0.0.0.0') 
+	app.run()

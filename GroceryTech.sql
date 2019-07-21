@@ -2,10 +2,28 @@ CREATE DATABASE IF NOT EXISTS GroceryTech /*!40100 DEFAULT CHARACTER SET latin1 
 use GroceryTech;
 
 --
+-- Fresh initialization of the database
+--
+DROP TABLE IF EXISTS `SystemInformation`;
+DROP TABLE IF EXISTS `Payments`;
+DROP TABLE IF EXISTS `manages`;
+DROP TABLE IF EXISTS `orderedBy`;
+DROP TABLE IF EXISTS `selectItem`;
+DROP TABLE IF EXISTS `orderFrom`;
+DROP TABLE IF EXISTS `soldAt`;
+DROP TABLE IF EXISTS `deliveredBy`;
+DROP TABLE IF EXISTS `Buyer`;
+DROP TABLE IF EXISTS `Item`;
+DROP TABLE IF EXISTS `Orderr`;
+DROP TABLE IF EXISTS `GroceryStore`;
+DROP TABLE IF EXISTS `Address`;
+DROP TABLE IF EXISTS `Userr`;
+
+
+
+--
 -- Table structure for table `SystemInformation`
 --
-
-DROP TABLE IF EXISTS `SystemInformation`;
 CREATE TABLE SystemInformation ( 
     system_id             INT (2)        NOT NULL,
     user_codes             INT(16)        NOT NULL,
@@ -20,11 +38,11 @@ LOCK TABLES `SystemInformation` WRITE;
 INSERT INTO `SystemInformation` VALUES (0, 123456789), (1, 777888999);
 UNLOCK TABLES;
 
+
+
 --
 -- Table structure for table `Address`
 --
-
-DROP TABLE IF EXISTS Address;
 CREATE TABLE Address (
     id                INT(2)            NOT NULL,
 house_number            INT(8)            NOT NULL,
@@ -44,11 +62,11 @@ INSERT INTO `Address` VALUES (1, 9093, 'Dorrit Crescent', 'Atlanta', 'Georgia', 
 UNLOCK TABLES;
 
 
+
+
 --
 -- Table structure for table `Userr`
 --
-
-DROP TABLE IF EXISTS Userr;
 CREATE TABLE Userr ( 
     username            VARCHAR(64)        NOT NULL,
     password            VARCHAR(64)        NOT NULL,
@@ -67,11 +85,12 @@ LOCK TABLES `Userr` WRITE;
 INSERT INTO `Userr` VALUES ('adepttimberry', 'cakeholmium', 'buyer', 'dingconie@gmail.com', 'Ganizani', 'States'), ('admirableneville', 'apricotsscandium', 'buyer', 'fripperychamois@yahoo.com', 'Wolfgang', 'Stranberg'), ('bossywilfer', 'bagelsantimony', 'buyer', 'magmacoyote@comcast.net', 'Fintan', 'Lewis'), ('bowedhannibal', 'polentahafnium', 'buyer', 'rhubarbcheetah@gatech.edu', 'Tempest', 'Donnerstein'), ('breakabletim', 'milkshakestin', 'buyer', 'manholeiguana@gmail.com', 'Nakato', 'Matlock'), ('coldsnewkes', 'oilstrontium', 'buyer', 'lozengecattle@gatech.edu', 'Eurydike', 'Saar'), ('corruptbayton', 'garliccerium', 'buyer', 'crudivorebarracuda@gmail.com', 'Joonas', 'Larkin'), ('dazzlingjohnny', 'doughnutaluminum', 'buyer', 'rickshawtoucan@gmail.com', 'Elmas', 'Davenport'), ('decimalherbert', 'riceuranium', 'buyer', 'bloviatecardinal@yahoo.com', 'Sawyer', 'Baltz'), ('disfiguredalderman', 'chileerbium', 'buyer', 'flannelcurlew@yahoo.com', 'Rajendra', 'Wicks'), ('fainthannah', 'oatmealgold', 'buyer', 'fardsandpiper@gmail.com', 'Petronela', 'Kelvin'), ('firmdedlock', 'lardpalladium', 'buyer', 'poppysmicgoose@gmail.com', 'Bilyana', 'Cuthbertson'), ('freshpeltirogus', 'caviardubnium', 'buyer', 'gashbaboon@yahoo.com', 'Haig', 'Heyde'), ('frightenedsmallweed', 'mueslicurium', 'buyer', 'bamboodingo@gmail.com', 'Hannibal', 'Engell'), ('hurriedplornish', 'coconutcopper', 'buyer', 'doodlepolarbear@yahoo.com', 'Maximilien', 'Felix'), ('inactivejane', 'pepperoniberyllium', 'buyer', 'snarkypeafowl@comcast.net', 'Nelli', 'Dimare'), ('maddeningfladdock', 'abaloneterbium', 'buyer', 'smashinggoldfinch@gmail.com', 'Nadja', 'Fienberg'), ('marvelousjinkins', 'pistachiopraseodymium', 'buyer', 'drizzlebacteria@comcast.net', 'Anneliese', 'Dickson'), ('melodicsparkler', 'raisinsthorium', 'buyer', 'wabbitkapi@gmail.com', 'Vera', 'Agee'), ('noxiousmould', 'trufflemanganese', 'buyer', 'codswallopbobolink@gmail.com', 'Shui', 'Agostinelli'), ('putridsnagsby', 'gatoradecalifornium', 'buyer', 'liripoopunicorn@gatech.edu', 'Jupiter', 'Leitman'), ('rowdysteerforth', 'crackersosmium', 'buyer', 'sickleturtle@gmail.com', 'Mahesh', 'Parsons'), ('sablemagnus', 'sausageastatine', 'buyer', 'lugubriousquail@gmail.com', 'Lauma', 'Romberger'), ('severelucy', 'burritosneptunium', 'buyer', 'cougarcur@gmail.com', 'Brendan', 'Pool'), ('snobbymorleena', 'granolaniobium', 'buyer', 'nincompoopcockatoo@gmail.com', 'Hieremihel', 'Doeringer'), ('tastyadams', 'puddingneon', 'buyer', 'crunchcapon@gmail.com', 'Sextilius', 'Blew'), ('torpidkenge', 'syrupsilicon', 'buyer', 'dollopcoot@comcast.net', 'Pravin', 'Blumberg'), ('unwrittensloppy', 'tacoseuropium', 'buyer', 'felinerat@gmail.com', 'Evalds', 'Carper'), ('vitalbetty', 'pepperthallium', 'buyer', 'centipedeanaconda@gmail.com', 'Agneta', 'Inoue'), ('welcomeleicester', 'cheeseboron', 'buyer', 'igloopilchard@gmail.com', 'Moric', 'Prezelin'), ('wellmadeconkey', 'cordialsamarium', 'buyer', 'chinchillapanda@gmail.com', 'Feliciana', 'Burgio'), ('woozyprice', 'venisonlithium', 'buyer', 'snoutoxbird@gmail.com', 'Lelia', 'Marschall'), ('chivalrouspotatoes', 'clamcarbon', 'deliverer', 'pratfallwhiting@gmail.com', 'Clio', 'Allitto'), ('downrightcorney', 'basmatiphosphorus', 'deliverer', 'pantsdunlin@gmail.com', 'Katerina', 'Rowse'), ('glumsmike', 'salamiiridium', 'deliverer', 'folderolraccoon@yahoo.com', 'Nimet', 'Bogorad'), ('inventivenickleby', 'sardinesoxygen', 'deliverer', 'gazebolinnet@comcast.net', 'Greta', 'Berkowitz'), ('languidtopsawyer', 'applestitanium', 'deliverer', 'conniptionbadger@gatech.edu', 'Rivka', 'Guenthart'), ('methodicalcharity', 'pearfrancium', 'deliverer', 'glomhound@comcast.net', 'Alessio', 'Griesenbeck'), ('reasonablewrayburn', 'saltradium', 'deliverer', 'glabellaswift@yahoo.com', 'Hamida', 'Gugel'), ('shadowywestlock', 'orangetellurium', 'deliverer', 'samovartuna@gmail.com', 'Hristijan', 'Furshpan'), ('spiffyjudith', 'eggsselenium', 'deliverer', 'fuddyduddyvole@gmail.com', 'Aerona', 'Agren'), ('stylishtowlinson', 'jerkygermanium', 'deliverer', 'masticateguillemot@gmail.com', 'Breixo', 'Sanders'), ('teenyroads', 'icecreamargon', 'deliverer', 'goonavocet@gmail.com', 'Matty', 'Von kapff'), ('twinchicken', 'vegetablesprotactinium', 'deliverer', 'bobbintamarin@comcast.net', 'Riannon', 'Kelsch'), ('unknownswidger', 'tomatoeplutonium', 'deliverer', 'filibusterbuck@comcast.net', 'Oto', 'Bayo'), ('colorlessabbey', 'mayonnaisemeitnerium', 'manager', 'noodleschimpanzee@gmail.com', 'Blythe', 'Aiken'), ('optimalpluck', 'quicheiron', 'manager', 'sousaphonegnu@yahoo.com', 'Doris', 'Bae'), ('quickestmortimer', 'lolliescalcium', 'manager', 'allegatorhornet@gatech.edu', 'Tarana', 'Goodwin'), ('smoothbetsy', 'paellatechnetium', 'manager', 'shenaniganbison@gatech.edu', 'Hilde', 'Secor'), ('pepsisilicon', 'hondapromethium', 'manager', 'pepsisilicon@gmail.com', 'Aime', 'Stephenson'), ('facebookoxygen', 'chaseiodine', 'manager', 'facebookoxygen@comcast.net', 'Tiburcio', 'Lans'), ('hyundaimeitnerium', 'ferrariberkelium', 'manager', 'hyundaimeitnerium@gmail.com', 'Katri', 'Lehr'), ('colgatesulfur', 'volkswagonholmium', 'manager', 'colgatesulfur@gmail.com', 'Benedict', 'Reinhardt'), ('mcdonaldssodium', 'shelltitanium', 'manager', 'mcdonaldssodium@gatech.edu', 'Lorayne', 'Bretscher'), ('amazonzirconium', 'dellyttrium', 'manager', 'amazonzirconium@gatech.edu', 'Bartholomei', 'Holm'), ('nescafeselenium', 'applechlorine', 'manager', 'nescafeselenium@comcast.net', 'Melqart', 'Voligny'), ('chaneliridium', 'microsoftactinium', 'manager', 'chaneliridium@gatech.edu', 'Dragos', 'Shephard'), ('heinzrutherfordium', 'allianztin', 'manager', 'heinzrutherfordium@gmail.com', 'Kynthia', 'Ramella'), ('visahafnium', 'audihassium', 'manager', 'visahafnium@gmail.com', 'Klara', 'Meehan'), ('chevroletberyllium', 'kellogsterbium', 'manager', 'chevroletberyllium@gatech.edu', 'Adrian', 'Chayes'), ('guccinickel', 'krafthydrogen', 'manager', 'guccinickel@gmail.com', 'Nyoman', 'Mccue'), ('exxonindium', 'cartiercalifornium', 'manager', 'exxonindium@gmail.com', 'Wairimu', 'Wiske'), ('pradaphosphorus', 'nestlemercury', 'manager', 'pradaphosphorus@comcast.net', 'Henrikas', 'Stine'), ('ciscocobalt', 'santandercesium', 'manager', 'ciscocobalt@gmail.com', 'Manuela', 'Saivetz'), ('lancomegermanium', 'siemenschromium', 'manager', 'lancomegermanium@gmail.com', 'Tobiah', 'Currall'), ('foxbarium', 'colauranium', 'manager', 'foxbarium@gmail.com', 'Ernust', 'Nupdal'), ('starbucksrhenium', 'pampersfermium', 'manager', 'starbucksrhenium@gatech.edu', 'Sybella', 'Stagliano'), ('adidaslawrencium', 'ibmpalladium', 'manager', 'adidaslawrencium@comcast.net', 'Alberich', 'Fauroat'), ('heinekenplatinum', 'toyotasilicon', 'manager', 'heinekenplatinum@gmail.com', 'Lorinda', 'Kinlin'), ('rolexfluorine', 'ciscorhodium', 'manager', 'rolexfluorine@comcast.net', 'Wallace', 'Castelda'), ('toyotacarbon', 'colayttrium', 'manager', 'toyotacarbon@comcast.net', 'Kathe', 'Forte'), ('gillettetellurium', 'santandercalifornium', 'manager', 'gillettetellurium@comcast.net', 'Branca', 'Schroth'), ('lexuslanthanum', 'philipslutetium', 'manager', 'lexuslanthanum@gmail.com', 'Alte', 'Renner'), ('boeingaluminum', 'nescafeiodine', 'manager', 'boeingaluminum@gmail.com', 'Niga', 'Sacchetti'), ('fordlead', 'nissanindium', 'manager', 'fordlead@gmail.com', 'Geronimo', 'Sobol'), ('canonxenon', 'ikearadium', 'manager', 'canonxenon@gatech.edu', 'Duri', 'Glazer'), ('burberrycopper', 'guccihydrogen', 'manager', 'burberrycopper@gmail.com', 'Nereus', 'Kearns'), ('malboroneodymium', 'foxsulfur', 'manager', 'malboroneodymium@gmail.com', 'Mari', 'Medin'), ('legothorium', 'gillettecerium', 'manager', 'legothorium@gmail.com', 'Anselm', 'Parnas'), ('batmanisbetterthanmoonknight', 'duhduhduh', 'manager', 'batmanisbetterthanmoonknight@ofcourse.yeah', 'Bruce', 'Campbell');
 UNLOCK TABLES;
 
+
+
+
 --
 -- Table structure for table `GroceryStore`
 --
-
-DROP TABLE IF EXISTS GroceryStore;
 CREATE TABLE GroceryStore (
     store_id              INT(2)             NOT NULL,
     store_name            VARCHAR(16)        NOT NULL,
@@ -79,9 +98,10 @@ CREATE TABLE GroceryStore (
     opening_time            TIME            NOT NULL,
     closing_time            TIME            NOT NULL,
     phone                FLOAT(16)        NOT NULL,
-    PRIMARY KEY(store_id),
-CONSTRAINT ad1 FOREIGN KEY(address_id) REFERENCES Address (id) ON DELETE CASCADE ON UPDATE CASCADE
+    PRIMARY KEY (store_id),
+    CONSTRAINT ad9 FOREIGN KEY(address_id) REFERENCES Address (id) ON DELETE CASCADE ON UPDATE CASCADE   
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 
 --
 -- Dumping data for table `GroceryStore`
@@ -93,11 +113,11 @@ UNLOCK TABLES;
 
 
 
+
+
 --
 -- Table structure for table `Payments`
 --
-
-DROP TABLE IF EXISTS Payments;
 CREATE TABLE Payments (
     username             VARCHAR(64)        NOT NULL,
     payment_name            VARCHAR(16)        NOT NULL,
@@ -117,11 +137,11 @@ UNLOCK TABLES;
 
 
 
+
+
 --
 -- Table structure for table `Buyer`
 --
-
-DROP TABLE IF EXISTS Buyer;
 CREATE TABLE Buyer (
     username            VARCHAR(64)        NOT NULL,
 phone                INT(16)        NOT NULL,
@@ -130,8 +150,8 @@ default_payment        VARCHAR(16)        NOT NULL,
 default_store_id      INT(16)             NOT NULL,
     PRIMARY KEY(username),
 CONSTRAINT us FOREIGN KEY(username) REFERENCES Userr(username) ON DELETE CASCADE ON UPDATE CASCADE,
-CONSTRAINT ad FOREIGN KEY(address_id) REFERENCES Address(id) ON DELETE CASCADE ON UPDATE CASCADE,
-CONSTRAINT ad FOREIGN KEY(default_store_id) REFERENCES GroceryStore(store_id) ON DELETE CASCADE ON UPDATE CASCADE
+CONSTRAINT ad1 FOREIGN KEY(address_id) REFERENCES Address(id) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT dsid FOREIGN KEY(default_store_id) REFERENCES GroceryStore(store_id) ON DELETE CASCADE ON UPDATE CASCADE
  ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
  
 --
@@ -143,15 +163,16 @@ INSERT INTO `Buyer` VALUES ('coldsnewkes', 404466738, 1, 'Visa', 6), ('severeluc
 UNLOCK TABLES;
 
  
+
+
+
 --
 -- Table structure for table `manages`
 --
-
-DROP TABLE IF EXISTS manages;
 CREATE TABLE manages (
     username            VARCHAR(64)        NOT NULL,
     store_address        INT(2)            NOT NULL,
-    PRIMARY KEY(username, assigned_store_address),
+    PRIMARY KEY(username, store_address),
 CONSTRAINT us1 FOREIGN KEY(username) REFERENCES Userr (username) ON DELETE CASCADE ON UPDATE CASCADE,
 CONSTRAINT ad0 FOREIGN KEY(store_address) REFERENCES Address (id) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -168,12 +189,9 @@ UNLOCK TABLES;
 
 
 
-
 --
 -- Table structure for table `Orderr`
 --
-
-DROP TABLE IF EXISTS Orderr;
 CREATE TABLE Orderr (
     order_id            INT(8)            NOT NULL,
     delivery_instructions        VARCHAR(256),
@@ -186,21 +204,23 @@ CREATE TABLE Orderr (
 --
 
 LOCK TABLES `Orderr` WRITE; 
-INSERT INTO `Orderr` VALUES (64677, 'leave at door', '2018-06-04'), (62224, nan, '2018-06-13'), (71533, nan, '2018-06-15'), (33861, 'ring bell', '2018-06-22'), (96079, nan, '2018-06-27'), (23231, 'avoid dog', '2018-07-04'), (13075, nan, '2018-07-19'), (32787, 'violent dog on property, leave in mailbox', '2018-07-26'), (36188, nan, '2018-08-02'), (68759, 'All the icecream in the same bag please.', '2018-08-09'), (24784, 'thank you!', '2018-08-15'), (59856, nan, '2018-09-17'), (80145, 'no rush', '2018-09-19'), (92049, nan, '2018-10-04'), (20958, 'I have a party at 4 please hurry ', '2018-10-09'), (46403, nan, '2018-10-15'), (65334, 'Please keep meat separate from the rest.', '2018-10-24'), (72039, nan, '2018-11-08'), (47215, nan, '2018-11-15'), (67217, nan, '2018-11-19'), (68211, 'no rush', '2018-12-10'), (99511, nan, '2018-12-24'), (47361, 'sos', '2018-12-28'), (81845, nan, '2019-08-13'), (63145, "I haven't eaten in days", '2019-08-27'), (17466, nan, '2019-09-10'), (34346, 'please bring me fruit', '2019-09-11'), (96350, nan, '2019-09-19'), (94516, "if there's meat, don't let it get bad please. If you have a cooler, use it please.", '2019-10-14'), (31541, nan, '2019-10-17'), (87232, nan, '2019-11-18'), (87897, "I won't be home, leave at front door please.", '2019-11-25'), (40389, nan, '2019-11-28'), (31354, nan, '2019-12-02'), (78318, 'Thanks', '2020-01-02');
+INSERT INTO `Orderr` VALUES 
+(64677, 'leave at door', '2018-06-04'), (62224, NULL, '2018-06-13'), (71533, NULL, '2018-06-15'), (33861, 'ring bell', '2018-06-22'), (96079, NULL, '2018-06-27'), (23231, 'avoid dog', '2018-07-04'), (13075, NULL, '2018-07-19'), (32787, 'violent dog on property, leave in mailbox', '2018-07-26'), (36188, NULL, '2018-08-02'), (68759, 'All the icecream in the same bag please.', '2018-08-09'), (24784, 'thank you!', '2018-08-15'), (59856, NULL, '2018-09-17'), (80145, 'no rush', '2018-09-19'), (92049, NULL, '2018-10-04'), (20958, 'I have a party at 4 please hurry ', '2018-10-09'), (46403, NULL, '2018-10-15'), (65334, 'Please keep meat separate from the rest.', '2018-10-24'), (72039, NULL, '2018-11-08'), (47215, NULL, '2018-11-15'), (67217, NULL, '2018-11-19'), (68211, 'no rush', '2018-12-10'), (99511, NULL, '2018-12-24'), (47361, 'sos', '2018-12-28'), (81845, NULL, '2019-08-13'), (63145, "I haven't eaten in days", '2019-08-27'), (17466, NULL, '2019-09-10'), (34346, 'please bring me fruit', '2019-09-11'), (96350, NULL, '2019-09-19'), (94516, "if there's meat, don't let it get bad please. If you have a cooler, use it please.", '2019-10-14'), (31541, NULL, '2019-10-17'), (87232, NULL, '2019-11-18'), (87897, "I won't be home, leave at front door please.", '2019-11-25'), (40389, NULL, '2019-11-28'), (31354, NULL, '2019-12-02'), (78318, 'Thanks', '2020-01-02');
 UNLOCK TABLES;
+
+
+
 
 
 --
 -- Table structure for table `orderedBy`
 --
-
-DROP TABLE IF EXISTS orderedBy;
 CREATE TABLE orderedBy (
     order_id            INT(8)            NOT NULL,
     buyer_username        VARCHAR(64)        NOT NULL,
     PRIMARY KEY (order_id),
-CONSTRAINT od FOREIGN KEY (order_id) REFERENCES Orderr (order_id) ON DELETE CASCADE ON UPDATE CASCADE,
-CONSTRAINT od FOREIGN KEY (buyer_username) REFERENCES Buyer (username) ON DELETE CASCADE ON UPDATE CASCADE
+CONSTRAINT od1 FOREIGN KEY (order_id) REFERENCES Orderr (order_id) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT bun FOREIGN KEY (buyer_username) REFERENCES Buyer (username) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
@@ -214,11 +234,12 @@ INSERT INTO `orderedBy` VALUES (64677, 'adepttimberry'), (62224, 'adepttimberry'
 UNLOCK TABLES;
 
 
+
+
+
 --
 -- Table structure for table `Item`
 --
-
-DROP TABLE IF EXISTS Item;
 CREATE TABLE Item (
     item_id            INT(2)            NOT NULL,
     item_name        VARCHAR(64)        NOT NULL,
@@ -240,18 +261,19 @@ INSERT INTO `Item` VALUES (1, 'guavas', 'Produce', '2023-02-27', 3, 14.54, 6.19,
 UNLOCK TABLES;
 
 
+
+
+
 --
 -- Table structure for table `selectItem`
 --
-
-DROP TABLE IF EXISTS selectItem;
 CREATE TABLE selectItem (
     item_id            INT(2)            NOT NULL,
     quantity            INT(8)            NOT NULL,
     order_id                INT(8)            NOT NULL,
     PRIMARY KEY (item_id, order_id),
-CONSTRAINT od1 FOREIGN KEY (order_id) REFERENCES Orderr (order_id) ON DELETE CASCADE ON UPDATE CASCADE,
-CONSTRAINT id FOREIGN KEY (item_id) REFERENCES Item (item_id) ON DELETE CASCADE ON UPDATE CASCADE
+CONSTRAINT od2 FOREIGN KEY (order_id) REFERENCES Orderr (order_id) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT iid FOREIGN KEY (item_id) REFERENCES Item (item_id) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -259,21 +281,22 @@ CONSTRAINT id FOREIGN KEY (item_id) REFERENCES Item (item_id) ON DELETE CASCADE 
 --
 
 LOCK TABLES `selectItem` WRITE; 
-INSERT INTO `selectItem` VALUES (23, 8, 13075), (33, 3, 13075), (34, 1, 13075), (38, 2, 13075), (1, 14, 17466), (18, 6, 20958), (15, 4, 23231), (16, 1, 23231), (20, 1, 23231), (21, 5, 23231), (22, 13, 23231), (24, 9, 23231), (32, 2, 23231), (37, 5, 23231), (40, 15, 23231), (46, 5, 23231), (25, 5, 24784), (44, 4, 31354), (39, 1, 31541), (12, 1, 32787), (21, 2, 33861), (8, 1, 34346), (29, 8, 34346), (37, 5, 34346), (40, 7, 34346), (45, 12, 34346), (48, 7, 34346), (2, 13, 36188), (3, 3, 36188), (7, 14, 36188), (14, 9, 36188), (20, 11, 36188), (21, 13, 36188), (23, 8, 36188), (27, 7, 36188), (29, 4, 36188), (32, 3, 36188), (33, 4, 36188), (37, 10, 36188), (25, 4, 40389), (1, 8, 46403), (3, 3, 46403), (7, 3, 46403), (8, 4, 46403), (20, 7, 46403), (23, 5, 46403), (39, 9, 46403), (45, 15, 46403), (45, 6, 46403), (49, 9, 46403), (3, 15, 47215), (5, 1, 47215), (21, 10, 47215), (36, 5, 47215), (39, 13, 47215), (11, 6, 47361), (13, 3, 59856), (22, 5, 59856), (25, 8, 59856), (29, 8, 59856), (38, 12, 59856), (43, 12, 59856), (44, 15, 59856), (7, 15, 62224), (19, 6, 62224), (50, 13, 62224), (32, 13, 63145), (12, 6, 64677), (30, 6, 64677), (43, 3, 64677), (45, 3, 64677), (49, 9, 65334), (14, 4, 67217), (2, 1, 68211), (18, 8, 68759), (1, 14, 71533), (5, 12, 71533), (19, 12, 71533), (22, 2, 71533), (24, 13, 71533), (25, 11, 71533), (39, 11, 71533), (42, 11, 71533), (2, 15, 72039), (14, 5, 78318), (13, 9, 80145), (6, 9, 81845), (15, 1, 81845), (20, 6, 81845), (26, 12, 81845), (27, 3, 81845), (29, 3, 81845), (36, 12, 81845), (18, 2, 87232), (16, 4, 87897), (28, 13, 87897), (36, 13, 87897), (41, 5, 87897), (46, 11, 87897), (22, 13, 92049), (1, 13, 94516), (5, 10, 96079), (23, 10, 96079), (38, 13, 96079), (49, 15, 96079), (50, 4, 96079), (15, 13, 96350), (41, 10, 99511);
+INSERT INTO `selectItem` VALUES (23, 8, 13075), (33, 3, 13075), (34, 1, 13075), (38, 2, 13075), (1, 14, 17466), (18, 6, 20958), (15, 4, 23231), (16, 1, 23231), (20, 1, 23231), (21, 5, 23231), (22, 13, 23231), (24, 9, 23231), (32, 2, 23231), (37, 5, 23231), (40, 15, 23231), (46, 5, 23231), (25, 5, 24784), (44, 4, 31354), (39, 1, 31541), (12, 1, 32787), (21, 2, 33861), (8, 1, 34346), (29, 8, 34346), (37, 5, 34346), (40, 7, 34346), (45, 12, 34346), (48, 7, 34346), (2, 13, 36188), (3, 3, 36188), (7, 14, 36188), (14, 9, 36188), (20, 11, 36188), (21, 13, 36188), (23, 8, 36188), (27, 7, 36188), (29, 4, 36188), (32, 3, 36188), (33, 4, 36188), (37, 10, 36188), (25, 4, 40389), (1, 8, 46403), (3, 3, 46403), (7, 3, 46403), (8, 4, 46403), (20, 7, 46403), (23, 5, 46403), (39, 9, 46403), (45, 15, 46403), (49, 9, 46403), (3, 15, 47215), (5, 1, 47215), (21, 10, 47215), (36, 5, 47215), (39, 13, 47215), (11, 6, 47361), (13, 3, 59856), (22, 5, 59856), (25, 8, 59856), (29, 8, 59856), (38, 12, 59856), (43, 12, 59856), (44, 15, 59856), (7, 15, 62224), (19, 6, 62224), (50, 13, 62224), (32, 13, 63145), (12, 6, 64677), (30, 6, 64677), (43, 3, 64677), (45, 3, 64677), (49, 9, 65334), (14, 4, 67217), (2, 1, 68211), (18, 8, 68759), (1, 14, 71533), (5, 12, 71533), (19, 12, 71533), (22, 2, 71533), (24, 13, 71533), (25, 11, 71533), (39, 11, 71533), (42, 11, 71533), (2, 15, 72039), (14, 5, 78318), (13, 9, 80145), (6, 9, 81845), (15, 1, 81845), (20, 6, 81845), (26, 12, 81845), (27, 3, 81845), (29, 3, 81845), (36, 12, 81845), (18, 2, 87232), (16, 4, 87897), (28, 13, 87897), (36, 13, 87897), (41, 5, 87897), (46, 11, 87897), (22, 13, 92049), (1, 13, 94516), (5, 10, 96079), (23, 10, 96079), (38, 13, 96079), (49, 15, 96079), (50, 4, 96079), (15, 13, 96350), (41, 10, 99511);
 UNLOCK TABLES;
+
+
+
 
 
 --
 -- Table structure for table `orderFrom`
 --
-
-DROP TABLE IF EXISTS orderFrom;
 CREATE TABLE orderFrom (
     store_address_id        INT(2)            NOT NULL,
     order_id            INT(8)            NOT NULL,
     PRIMARY KEY (order_id),
 CONSTRAINT ad2 FOREIGN KEY (store_address_id) REFERENCES Address (id) ON DELETE CASCADE ON UPDATE CASCADE,
-CONSTRAINT od2 FOREIGN KEY (order_id) REFERENCES Orderr (order_id) ON DELETE CASCADE ON UPDATE CASCADE
+CONSTRAINT od3 FOREIGN KEY (order_id) REFERENCES Orderr (order_id) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -285,18 +308,18 @@ INSERT INTO `orderFrom` VALUES (15, 13075), (31, 17466), (17, 20958), (2, 23231)
 UNLOCK TABLES;
 
 
+
+
+
 --
 -- Table structure for table `soldAt`
 --
-
-
-DROP TABLE IF EXISTS soldAt;
 CREATE TABLE soldAt (
     item_id                INT(2)            NOT NULL,
     store_id        INT(2)            NOT NULL,
 PRIMARY KEY (item_id, store_id),
 CONSTRAINT it FOREIGN KEY (item_id) REFERENCES Item (item_id) ON DELETE CASCADE ON UPDATE CASCADE,
-CONSTRAINT ad3 FOREIGN KEY (store_id) REFERENCES GroceryStore (id) ON DELETE CASCADE ON UPDATE CASCADE
+CONSTRAINT ad3 FOREIGN KEY (store_id) REFERENCES GroceryStore (store_id) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
@@ -308,19 +331,21 @@ LOCK TABLES `soldAt` WRITE;
 INSERT INTO `soldAt` VALUES (1, 13), (2, 16), (3, 13), (4, 16), (5, 29), (6, 6), (7, 2), (8, 2), (9, 15), (10, 20), (11, 31), (12, 26), (13, 19), (14, 24), (15, 2), (16, 20), (17, 17), (18, 1), (19, 16), (20, 24), (21, 13), (22, 24), (23, 8), (24, 17), (25, 27), (26, 10), (27, 20), (28, 22), (29, 30), (30, 26), (31, 14), (33, 17), (33, 4), (33, 7), (33, 18), (33, 9), (34, 4), (35, 24), (36, 8), (37, 17), (38, 27), (38, 10), (39, 20), (39, 22), (39, 30), (39, 26), (40, 14), (41, 17), (42, 4), (43, 13), (44, 16), (45, 29), (46, 6), (47, 2), (48, 2), (49, 15), (50, 20);
 UNLOCK TABLES;
 
+
+
+
+
 --
 -- Table structure for table `deliveredBy`
 --
-
-DROP TABLE IF EXISTS deliveredBy;
 CREATE TABLE deliveredBy (
     order_id            INT(8)            NOT NULL,
     deliverer_username        VARCHAR(64)        NOT NULL,
     time                VARCHAR(16)            NOT NULL,
     is_delivered            BOOLEAN        NOT NULL,
     PRIMARY KEY(order_id),
-CONSTRAINT od3 FOREIGN KEY (order_id) REFERENCES Orderr (order_id) ON DELETE CASCADE ON UPDATE CASCADE,
-CONSTRAINT od3 FOREIGN KEY (deliverer_username) REFERENCES Buyer (username) ON DELETE CASCADE ON UPDATE CASCADE
+CONSTRAINT od4 FOREIGN KEY (order_id) REFERENCES Orderr (order_id) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT dun1 FOREIGN KEY (deliverer_username) REFERENCES Userr (username) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -330,3 +355,5 @@ CONSTRAINT od3 FOREIGN KEY (deliverer_username) REFERENCES Buyer (username) ON D
 LOCK TABLES `deliveredBy` WRITE; 
 INSERT INTO `deliveredBy` VALUES (64677, 'chivalrouspotatoes', '05:10', 1), (62224, 'chivalrouspotatoes', '05:15', 1), (71533, 'chivalrouspotatoes', '05:25', 1), (33861, 'chivalrouspotatoes', '05:35', 1), (96079, 'chivalrouspotatoes', '05:40', 1), (23231, 'chivalrouspotatoes', '05:50', 1), (13075, 'chivalrouspotatoes', '06:05', 1), (32787, 'chivalrouspotatoes', '06:25', 1), (36188, 'chivalrouspotatoes', '06:35', 1), (68759, 'chivalrouspotatoes', '07:05', 1), (24784, 'chivalrouspotatoes', '07:25', 1), (59856, 'chivalrouspotatoes', '08:30', 1), (80145, 'chivalrouspotatoes', '09:00', 1), (92049, 'chivalrouspotatoes', '09:20', 1), (20958, 'chivalrouspotatoes', '09:35', 1), (46403, 'chivalrouspotatoes', '09:40', 1), (65334, 'downrightcorney', '10:15', 1), (72039, 'glumsmike', '10:40', 1), (47215, 'inventivenickleby', '11:25', 1), (67217, 'languidtopsawyer', '11:35', 1), (68211, 'methodicalcharity', '11:40', 1), (99511, 'reasonablewrayburn', '12:05', 1), (47361, 'reasonablewrayburn', '14:15', 1), (81845, 'reasonablewrayburn', '14:55', 0), (63145, 'shadowywestlock', '15:00', 0), (17466, 'spiffyjudith', '15:35', 0), (34346, 'stylishtowlinson', '15:55', 0), (96350, 'stylishtowlinson', '16:45', 0), (94516, 'stylishtowlinson', '16:50', 0), (31541, 'teenyroads', '17:15', 0), (87232, 'teenyroads', '18:30', 0), (87897, 'teenyroads', '19:45', 0), (40389, 'twinchicken', '20:40', 0), (31354, 'twinchicken', '21:20', 0), (78318, 'unknownswidger', '21:25', 0);
 UNLOCK TABLES;
+
+-- EOF
