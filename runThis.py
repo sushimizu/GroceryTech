@@ -125,10 +125,11 @@ def storeHomepage():
 def buyerAccountInfo():
 	return buyerAccInfo()
 """
-firstname = 'Fred'
+dict = {}
+dict['fname'] = 'Fred'
 @app.route('/buyerAccountInfo', methods=['GET','POST'])
-def buyerAccountInfo(firstname):
-	return render_template("buyerAccountInfo7.html", firstname=firstname)
+def buyerAccountInfo(dict):
+	return render_template("buyerAccountInfo7.html", dict=dict)
 
 
 @app.route('/findItem', methods=['GET','POST'])
