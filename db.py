@@ -64,4 +64,18 @@ def insertAddress(AddID,house_num,street,state,city,zipp):
     response = cursor.execute(query, (AddID,house_num,street,state,city,zipp))
     # clear cursor
     cursor.fetchall()
+	
+	
+	
+	
+def selectBuyerInfo(uname):
+	cur = con.cursor()
+	cur.execute("SELECT * FROM Buyer Where username=%s",uname)
+	rows = cur.fetchall()
+	dictry = {}
+	dictry['uname'] = rows['username']
+	dictry['phone'] = rows['phone']
+	dictry['address'] = rows['address']
+	dictry['defaultPayment'] = rows['default_payment']
+	dictry['defaultStore'] = rows['default_store']
 
