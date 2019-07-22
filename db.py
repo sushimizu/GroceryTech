@@ -3,7 +3,7 @@ import pymysql
 conn = pymysql.connect(host="localhost",
 							db="GroceryTech",
 							user="root",
-							passwd='password')
+							passwd='CornyJoke12')
 cursor = conn.cursor()
 
 # returns 0 if credentials are invalid
@@ -36,5 +36,5 @@ def login(username, password):
 
 
 def insertBuyer(Username, Phone, AddressID, DefaultPayment, DefaultStoreID):
-	query = "INSERT INTO Buyer (username, phone, address_id, default_payment, default_store_id) VALUES(%s,%d,%d,%s,%s)"
+	query = "INSERT INTO Buyer(username, phone, address_id, default_payment, default_store_id) VALUES(%s,%d,%d,%s,%s)"
 	cursor.execute(query, )
