@@ -142,6 +142,9 @@ def itemType(Itype):
 def cart():
 	return render_template('cart12.html')
 
+@app.route('/checkout', methods=['GET','POST'])
+def checkout():
+	return render_template('checkout13.html')
 
 
 if __name__ == '__main__' :
