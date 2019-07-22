@@ -2,28 +2,30 @@
 
 <html>
 	<head>
-		<title>Reciept</title>
+		<title>Assignment</title>
 		<link rel="stylesheet" type="text/css" href="/static/style.css"/>
 	</head>
 <body>
 
 	
-	<h2> Reciept </h2>
+	<h2> Assignment</h2>
 	
 		
-	<form action="/buyerFunctionality" method="post">
-   Order Number:
- 		 <input type="text" name="orderNo"> <br> <br>
-		Payment Name:
- 		 <input type="text" name="payName"> <br> <br>
-     Deliverer's Name:
- 		 <input type="text" name="deliverer"> <br> <br>
-   	Number of Items:
- 		 <input type="text" name="noItems"> <br> <br>
-     Time Order Places:
- 		 <input type="text" name="orderTime"> <br> <br>
-     Time of Delivery:
+	<form action="/assignments" method="post">
+        Order Placed:
+ 		 <input type="text" name="orderPlaced"> <br> <br>
+		Delivery Time:
  		 <input type="text" name="deliveryTime"> <br> <br>
+         Status:
+ 		 <select>
+          <option value="Pending">Pending</option>
+           <option value="Delivered">Delivered</option>
+		  </select>
+   	Buyer Address:
+ 		 <input type="text" name="buyerAddress"> <br> <br>
+     Store Name:
+ 		 <input type="text" name="StoreName"> <br> <br>
+    
    
     
     
