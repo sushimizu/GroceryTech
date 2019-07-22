@@ -159,6 +159,10 @@ def newPayment():
 def reciept():
 	return render_template('reciept16.html')
 
+@app.route('/orderHistory', methods=['GET','POST'])
+def orderHistory():
+	return render_template('orderHistory17.html')
+
 
 if __name__ == '__main__' :
 	app.run()
