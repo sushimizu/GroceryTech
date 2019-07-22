@@ -114,6 +114,10 @@ def registerDeliverer():
 def registerManager():
 	return render_template('registerManager5.html')
 
+@app.route('/listOfStores', methods=['GET','POST'])
+def listOfStores():
+	return render_template('listOfStores8.html' )
+
 @app.route('/storeHomepage', methods=['GET','POST'])
 def storeHomepage():
 	return render_template('storeHomepage9.html')
@@ -123,9 +127,14 @@ def buyerAccountInfo():
 	return buyerAccInfo()
 
 
+
+
 @app.route('/findItem', methods=['GET','POST'])
 def findItem():
 	return render_template('findItem10.html')
+
+
+
 
 
 
