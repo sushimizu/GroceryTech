@@ -33,8 +33,33 @@ def login(username, password):
         else:
             return 3
 
+def insertUser(uname,password,user_type,email,fname,lname):
+    query = "INSERT INTO Userr(uname,password,user_type,email,fname,lname)"\
+    "VALUES (%s,%s,%s,%s,%s);"
+    try:
+        response = _cursor.execute(query, (uname,password,user_type,email,fname,lname))
+        _database.commit()
 
+        return 0
+
+    except Exception as e:
+        if e[1][-2:] == 'Y\'':  # violates primary key constraint, username
+            return 1
+        '''else:
+            return 2'''
 
 def insertBuyer(Username, Phone, AddressID, DefaultPayment, DefaultStoreID):
-	query = "INSERT INTO Buyer(username, phone, address_id, default_payment, default_store_id) VALUES(%s,%d,%d,%s,%s)"
-	cursor.execute(query, )
+    query = "INSERT INTO Buyer(username, phone, address_id, default_payment, default_store_id)"\
+    "VALUES (%s,%d,%d,%s,%d);"
+    response = _cursor.execute(query, (Username, Phone, AddressID, DefaultPayment, DefaultStoreID))
+
+    _database.commit()
+
+
+def insertAddress(AddID,house_num,street,state,city,zipp):
+    query = "INSERT INTO Address(AddID,house_num,street,state,city,zipp)"\
+    "VALUES (%d,%d,%s,%s,%s,%d);"
+    response = cursor.execute(query, (AddID,house_num,street,state,city,zipp))
+    # clear cursor
+    cursor.fetchall()
+

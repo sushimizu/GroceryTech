@@ -2,7 +2,6 @@ from flask import Flask , render_template
 from flask import request
 import db
 
-from buyerAccountInfo7 import buyerAccInfo
 
 app = Flask(__name__)
 currentUser = ""
@@ -82,21 +81,34 @@ def registerBuyer():
 		phone = request.form['phone']
 		cpassword = request.form['cpassword']
 		state = request.form['state']
-		zip = request.form['zip']
+		zipp = request.form['zip']
 
 		error1 = "your password is messed up bro"
 		error2 = "phone has incorrect number of digits"
 		error3 = "zip code has incorrect number of digits"
 		error4 = "email contains non-alphanumeric characters"
+		a, b, c = email.rsplit('@', '.')
 		if password != cpassword:
 			return render_template("registerBuyer3.html", error=error1)
-		if (len(str(abs(phone)))) != 10:
+		elif (len(str(abs(phone)))) != 10:
 			return render_template("registerBuyer3.html", error=error2)
-		if (len(str(abs(zip)))) != 5:
+		elif (len(str(abs(zip)))) != 5:
 			return render_template("registerBuyer3.html", error=error3)
-		a, b, c = email.rsplit('@', '.')
-		if a.isalnum() and b.isalnum() and c.isalnum():
+		elif a.isalnum() and b.isalnum() and c.isalnum():
 			return render_template("registerBuyer3.html", error=error4)
+		else:
+			query = "SELECT MAX(id) FROM Address;"
+			response = cursor.execute(query)
+			cursor.fetchall()
+			AddID = response + 1
+			user_type = 'buyer'
+			reg = db.insertUser(uname,password,user_type,email,fname,lname)
+			if reg != 0:
+				return render_template("registerBuyer3.html", error="Username is Taken.")
+
+			reg = db.insertAddress(AddID,houseNo,street,city,zipp)
+			reg = db.insertBuyer(uname,phone,AddID,'Visa',6)
+			return render_template('login1.html')
 
 
 
