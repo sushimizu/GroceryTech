@@ -120,11 +120,14 @@ def listOfStores():
 def storeHomepage():
 	return render_template('storeHomepage9.html')
 
+"""
 @app.route('/buyerAccountInfo', methods=['GET','POST'])
 def buyerAccountInfo():
 	return buyerAccInfo()
-
-
+"""
+@app.route('/buyerAccountInfo', methods=['GET','POST'])
+def buyerAccountInfo():
+	return render_template("buyerAccountInfo7.html")
 
 
 @app.route('/findItem', methods=['GET','POST'])
