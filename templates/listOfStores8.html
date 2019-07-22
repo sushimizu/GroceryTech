@@ -2,31 +2,64 @@
 
 <html>
 	<head>
-		<title>Buyer Functionality</title>
+		<title>list of stores</title>
 		<link rel="stylesheet" type="text/css" href="/static/style.css"/>
 	</head>
 <body>
 
 	
-	<h2> Buyer Functionality</h2>
+	<h2> List Of Stores</h2>
 	
 		
-		<form action="listOfStores8.html">
-	  <input type="submit" value="New Order"> <br> <br>
-		</form>
-		<form >
-	  <input type="submit" value="Order History"> <br> <br>
-		</form>
-		<form action="/buyerAccountInfo">
-	  <input type="submit" value="Account Information"> <br> <br>
-		</form>
-    <form >
-	  <input type="submit" value="Payment Information"> <br> <br>
-		</form>
-		<form action="/">
-	  <input type="submit" value="Logout" >
-		</form>
-	
+		<form action="/buyerFunctionality" method="post">
+		
+		
+		<div class="row">
+  			<div class="column">
+			First Name:
+ 		 <input type="text" name="fname"> <br> <br>
+			Username:
+ 		 <input type="text" name="uname"> <br> <br>
+			Password:
+ 		 <input type="text" name="password"> <br> <br>
+			Email:
+ 		 <input type="text" name="email"> <br> <br>
+			Street Name:
+ 		 <input type="text" name="street"> <br> <br>	
+			House Number:
+ 		 <input type="text" name="houseNo"> <br> <br>
+			City:
+ 		 <input type="text" name="city"> <br> <br>
+				
+			</div>
+ 		 	<div class="column">
+			Last Name:
+ 		 <input type="text" name="lname"> <br> <br>
+			Phone:
+ 		 <input type="text" name="phone"> <br> <br>
+			Confirm Password:
+ 		 <input type="text" name="cpassword"> <br> <br>
+			State:
+ 		 <input type="text" name="state"> <br> <br>
+			ZipCode:
+ 		 <input type="text" name="zip"> <br> <br>
+			</div>
+		</div>
+	   	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	  <input type="submit" value="Register"> <br> <br>
+
+	</form>
 
 </body>
 
