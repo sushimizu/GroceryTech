@@ -34,19 +34,21 @@ def login(username, password):
             return 3
 
 def insertUser(uname,password,user_type,email,fname,lname):
-    query = "INSERT INTO Userr(uname,password,user_type,email,fname,lname)"\
-    "VALUES (%s,%s,%s,%s,%s);"
-    try:
+    query = "SELECT COUNT(username) FROM Userr WHERE username=%s"
+    response = cursor.execute(query, uname)
+    return response
+    cursor.fetchall()
+    if response != 1:
+        query = "INSERT INTO Userr(uname,password,user_type,email,fname,lname)"\
+        "VALUES (%s,%s,%s,%s,%s);"
+
         response = cursor.execute(query, (uname,password,user_type,email,fname,lname))
         conn.commit()
-
         return 0
+    else:
+        return 1
+        #return 0
 
-    except Exception as e:
-        if e[1][-2:] == 'Y\'':  # violates primary key constraint, username
-            return 1
-        '''else:
-            return 2'''
 
 def insertBuyer(Username, Phone, AddressID, DefaultPayment, DefaultStoreID):
     query = "INSERT INTO Buyer(username, phone, address_id, default_payment, default_store_id)"\

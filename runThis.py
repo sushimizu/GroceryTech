@@ -1,6 +1,7 @@
 from flask import Flask , render_template
 from flask import request
 import db
+import re
 
 
 app = Flask(__name__)
@@ -92,25 +93,28 @@ def checkregisterBuyer():
 		error2 = "phone has incorrect number of digits"
 		error3 = "zip code has incorrect number of digits"
 		error4 = "email contains non-alphanumeric characters"
-		a, b, c = email.rsplit('@', '.')
+		a = 'a'
+		b = 'b'
+		c = 'c'
+		#parts = email.split('@', '.')
 		if password != cpassword:
 			return render_template("registerBuyer3.html", error=error1)
-		elif (len(str(abs(phone)))) != 10:
+		elif (len(str(phone))) != 10:
 			return render_template("registerBuyer3.html", error=error2)
-		elif (len(str(abs(zip)))) != 5:
+		elif (len(str(zipp))) != 5:
 			return render_template("registerBuyer3.html", error=error3)
-		elif a.isalnum() and b.isalnum() and c.isalnum():
+		elif (a.isalnum() and b.isalnum() and c.isalnum())/1 != 1:
 			return render_template("registerBuyer3.html", error=error4)
 		else:
 			query = "SELECT MAX(id) FROM Address;"
-			response = cursor.execute(query)
-			cursor.fetchall()
+			response = db.cursor.execute(query)
+			db.cursor.fetchall()
 			AddID = response + 1
 			user_type = 'buyer'
 			reg = db.insertUser(uname,password,user_type,email,fname,lname)
-			if reg != 0:
+			return render_template("registerBuyer3.html", error=reg)
+			if reg == 1:
 				return render_template("registerBuyer3.html", error="Username is Taken.")
-
 			reg = db.insertAddress(AddID,houseNo,street,city,zipp)
 			reg = db.insertBuyer(uname,phone,AddID,'Visa',6)
 			return render_template('login1.html')
@@ -159,7 +163,7 @@ def litemType():
 	if request.method == 'POST':
 		Itype = request.form['value']
 		itemType(Itype)
-	
+
 
 @app.route('/itemType/<Itype>', methods=['GET','POST'])
 def itemTypeI(Itype):
