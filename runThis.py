@@ -125,7 +125,7 @@ def storeHomepage():
 def buyerAccountInfo():
 	return buyerAccInfo()
 """
-fname = Fred
+fname = 'Fred'
 @app.route('/buyerAccountInfo', methods=['GET','POST'])
 def buyerAccountInfo(fname):
 	return render_template("buyerAccountInfo7.html", fname=fname)
