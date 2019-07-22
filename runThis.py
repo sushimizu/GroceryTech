@@ -151,6 +151,10 @@ def checkout():
 def paymentMethods():
 	return render_template('paymentMethods14.html')
 
+@app.route('/newPayment', methods=['GET','POST'])
+def newPayment():
+	return render_template('newPayment15.html')
+
 
 
 if __name__ == '__main__' :
