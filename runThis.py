@@ -190,6 +190,17 @@ def assignment():
 def managerFunctionality():
 	return render_template('managerFunctionality22.html')
 
+@app.route('/revenueReport', methods=['GET','POST'])
+def revenueReport():
+	return render_template('revenueReport24.html')
+
+@app.route('/outstandingOrders', methods=['GET','POST'])
+def outstnadingOrders():
+	return render_template('outstandingOrders25.html')
+@app.route('/inventory', methods=['GET','POST'])
+def inventory():
+	return render_template('inventory26.html')
+
 
 
 if __name__ == '__main__' :
