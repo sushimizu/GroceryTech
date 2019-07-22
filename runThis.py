@@ -133,7 +133,9 @@ def buyerAccountInfo():
 def findItem():
 	return render_template('findItem10.html')
 
-
+@app.route('/itemType', methods=['GET','POST'])
+def itemType():
+	return render_template('itemType11.html')
 
 
 
