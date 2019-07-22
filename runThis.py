@@ -165,6 +165,12 @@ def orderHistory():
 
 
 
+
+
+@app.route('/delivererFunctionality', methods=['GET','POST'])
+def delivererFunctionality():
+	return render_template('delivererFunctionality18.html')
+
 @app.route('/delivererAccInfo', methods=['GET','POST'])
 def delivererAccInfo():
 	return render_template('delivererAccountInfo19.html')
@@ -177,6 +183,12 @@ def assignments():
 def assignment():
 	return render_template('assignment21.html')
 
+
+
+
+@app.route('/managerFunctionality', methods=['GET','POST'])
+def managerFunctionality():
+	return render_template('managerFunctionality22.html')
 
 
 
