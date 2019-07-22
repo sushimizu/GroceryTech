@@ -127,8 +127,8 @@ def buyerAccountInfo():
 """
 fname = 'Fred'
 @app.route('/buyerAccountInfo', methods=['GET','POST'])
-def buyerAccountInfo():
-	return render_template("buyerAccountInfo7.html")
+def buyerAccountInfo(fname):
+	return render_template("buyerAccountInfo7.html", fname=fname)
 
 
 @app.route('/findItem', methods=['GET','POST'])
