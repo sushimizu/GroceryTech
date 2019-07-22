@@ -64,6 +64,11 @@ def buyerFunctionlity():
 	return render_template('buyerFunctionality6.html')
 
 
+@app.route('/registrationType', methods=['GET','POST'])
+def registrationType():
+	return render_template('registrationType2.html.html')
+
+
 @app.route('/registerBuyer', methods=['GET','POST'])
 def registerBuyer():
 
