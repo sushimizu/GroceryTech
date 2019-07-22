@@ -6,6 +6,7 @@ import db
 app = Flask(__name__)
 currentUser = ""
 """Temporary usernames, add SQL queries later"""
+"""
 def validBuyer(uname, passwd):
 	if uname == 'buyer' and passwd == 'b':
 		return True
@@ -23,7 +24,7 @@ def validManager(uname, passwd):
 		return True
 	else:
 		return False
-
+"""
 
 @app.route('/', methods=['GET','POST'])
 def index():
@@ -149,8 +150,15 @@ def buyerAccountInfo():
 def findItem():
 	return render_template('findItem10.html')
 
+@app.route('/itemType', methods=['GET','POST'])
+def litemType():
+	if request.method == 'POST':
+		Itype = request.form['value']
+		itemType(Itype)
+	
+
 @app.route('/itemType/<Itype>', methods=['GET','POST'])
-def itemType(Itype):
+def itemTypeI(Itype):
 	return render_template('itemType11.html', Itype=Itype)
 
 
