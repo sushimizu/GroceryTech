@@ -157,8 +157,8 @@ def findItem():
 @app.route('/itemType', methods=['GET','POST'])
 def litemType():
 	if request.method == 'POST':
-		Itype = request.form['value']
-		itemType(Itype)
+		item = request.form['value']
+		itemType(item)
 	
 
 @app.route('/itemType/<Itype>', methods=['GET','POST'])
