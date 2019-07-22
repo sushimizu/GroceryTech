@@ -138,6 +138,9 @@ def itemType(Itype):
 	return render_template('itemType11.html', Itype=Itype)
 
 
+@app.route('/cart', methods=['GET','POST'])
+def cart():
+	return render_template('cart12.html')
 
 
 
