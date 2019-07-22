@@ -11,7 +11,7 @@
 	<h2> {{Itype}}</h2>
 	
 		
-		<form action="/buyerFunctionality" method="post">
+		<form action="/cart" method="post">
 		
 		
 		<table>
@@ -52,31 +52,34 @@
 		  </tr>
 		</table>
 				
-	  <input type="submit" value="Select"> <br> <br>
+	  <input type="submit" value="Add To Cart"> <br> <br>
 
 	</form>
 	
 		<div class="row"> 
-			<div class="column">
-				<form action="/buyerFunctionality" method="post">
-				  <input type="submit" value="Back" color ="blue">
-					</form> 
-			</div>
+			
 			
 			<div class="column">
-				<form action="/registrationType" method="post">
+				<form action="/itemType/{{Itype}}" method="post">
 				  <input type="submit" value="Previous" color ="blue">
 					</form> 
 			</div>
 			<div class="column">
-				<form action="/registrationType" method="post">
+				<form action="/itemType/{{Itype}}" method="post">
 				  <input type="submit" value="Next" color ="blue">
 					</form> 
 			
 			</div>
 		</div>
  
+			<form action="/checkout" method="post">
+				  <input type="submit" value="Check Out" color ="blue">
+					</form> 
 
+				<form action="/findItem" method="post">
+				  <input type="submit" value="Back" color ="blue">
+					</form> 
+			
 </body>
 
 	
