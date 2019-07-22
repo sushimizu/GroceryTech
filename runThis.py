@@ -125,10 +125,10 @@ def storeHomepage():
 def buyerAccountInfo():
 	return buyerAccInfo()
 """
-fname = 'Fred'
+firstname = 'Fred'
 @app.route('/buyerAccountInfo', methods=['GET','POST'])
-def buyerAccountInfo(fname):
-	return render_template("buyerAccountInfo7.html", fname=fname)
+def buyerAccountInfo(firstname):
+	return render_template("buyerAccountInfo7.html", firstname=firstname)
 
 
 @app.route('/findItem', methods=['GET','POST'])
