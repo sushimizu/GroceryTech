@@ -158,13 +158,22 @@ def buyerAccountInfo():
 def findItem():
 	return render_template('findItem10.html')
 
+
+"""
 @app.route('/itemType', methods=['GET','POST'])
 def litemType():
 	if request.method == 'POST':
-		Itype = request.form['value']
-		itemType(Itype)
+
+		Itype = request.form['name']
+		itemTypeI(Itype)
+
+		@app.route('/itemType/<Itype>', methods=['GET','POST'])
+		def itemTypeI(Itype):
+			return render_template('itemType11.html', Itype=Itype)
 
 
+
+"""
 @app.route('/itemType/<Itype>', methods=['GET','POST'])
 def itemTypeI(Itype):
 	return render_template('itemType11.html', Itype=Itype)
