@@ -155,6 +155,9 @@ def paymentMethods():
 def newPayment():
 	return render_template('newPayment15.html')
 
+@app.route('/reciept', methods=['GET','POST'])
+def reciept():
+	return render_template('reciept16.html')
 
 
 if __name__ == '__main__' :
