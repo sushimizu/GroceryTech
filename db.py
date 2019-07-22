@@ -37,8 +37,8 @@ def insertUser(uname,password,user_type,email,fname,lname):
     query = "INSERT INTO Userr(uname,password,user_type,email,fname,lname)"\
     "VALUES (%s,%s,%s,%s,%s);"
     try:
-        response = _cursor.execute(query, (uname,password,user_type,email,fname,lname))
-        _database.commit()
+        response = cursor.execute(query, (uname,password,user_type,email,fname,lname))
+        conn.commit()
 
         return 0
 
@@ -51,9 +51,9 @@ def insertUser(uname,password,user_type,email,fname,lname):
 def insertBuyer(Username, Phone, AddressID, DefaultPayment, DefaultStoreID):
     query = "INSERT INTO Buyer(username, phone, address_id, default_payment, default_store_id)"\
     "VALUES (%s,%d,%d,%s,%d);"
-    response = _cursor.execute(query, (Username, Phone, AddressID, DefaultPayment, DefaultStoreID))
+    response = cursor.execute(query, (Username, Phone, AddressID, DefaultPayment, DefaultStoreID))
 
-    _database.commit()
+    conn.commit()
 
 
 def insertAddress(AddID,house_num,street,state,city,zipp):
