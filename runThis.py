@@ -158,17 +158,18 @@ def findItem():
 def litemType():
 	if request.method == 'POST':
 		Itype = request.form['name']
-		#itemTypeI(item)
+		itemTypeI(Itype)
+		"""
 		@app.route('/itemType/<Itype>', methods=['GET','POST'])
 		def itemTypeI(Itype):
-			return render_template('itemType11.html', Itype=Itype)
+			return render_template('itemType11.html', Itype=Itype) """
 	
-"""
+
 
 @app.route('/itemType/<Itype>', methods=['GET','POST'])
 def itemTypeI(Itype):
 	return render_template('itemType11.html', Itype=Itype)
-"""
+
 
 @app.route('/cart', methods=['GET','POST'])
 def cart():
