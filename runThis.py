@@ -68,6 +68,10 @@ def registrationType():
 
 @app.route('/registerBuyer', methods=['GET','POST'])
 def registerBuyer():
+	return render_template('registerBuyer3.html')
+
+@app.route('/checkregisterBuyer', methods=['GET','POST'])
+def checkregisterBuyer():
 
 	if request.method == "POST":
 		fname = request.form['fname']
@@ -114,7 +118,7 @@ def registerBuyer():
 
 
 
-	return render_template('registerBuyer3.html')
+	return render_template('registerBuyer3.html', error="something wrong")
 
 @app.route('/registerDeliverer', methods=['GET','POST'])
 def registerDeliverer():
