@@ -164,5 +164,21 @@ def orderHistory():
 	return render_template('orderHistory17.html')
 
 
+
+@app.route('/delivererAccInfo', methods=['GET','POST'])
+def delivererAccInfo():
+	return render_template('delivererAccountInfo19.html')
+
+@app.route('/assignments', methods=['GET','POST'])
+def assignments():
+	return render_template('assignments20.html')
+
+@app.route('/assignment', methods=['GET','POST'])
+def assignment():
+	return render_template('assignment21.html')
+
+
+
+
 if __name__ == '__main__' :
 	app.run()
