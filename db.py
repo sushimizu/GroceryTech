@@ -3,7 +3,7 @@ import pymysql
 conn = pymysql.connect(host="localhost",
 							db="GroceryTech",
 							user="root",
-							passwd='password')
+							passwd='CornyJoke12')
 cursor = conn.cursor()
 
 # returns 0 if credentials are invalid
@@ -43,7 +43,6 @@ def insertUser(uname,password,user_type,email,fname,lname):
     if response != 1:
         query = "INSERT INTO Userr(username,password,user_type,email,first_name,last_name)"\
         "VALUES (%s,%s,%s,%s,%s,%s);"
-
         cursor.execute(query, (uname,password,user_type,email,fname,lname))
         conn.commit()
         return 0
@@ -56,12 +55,12 @@ def insertManager(uname,dsID):
     cursor.execute(query, dsID)
     for i in cursor:
         response = i[0]
+        print(response)
     #return cursor
     cursor.fetchall()
     query = "INSERT INTO manages(username,store_address)"\
     "VALUES (%s,%s);"
-
-    cursor.execute(query, (uname,dsID))
+    cursor.execute(query, (uname,response))
     conn.commit()
 
 def insertBuyer(Username, Phone, AddressID, DefaultPayment, DefaultStoreID):

@@ -210,7 +210,6 @@ def checkregisterManager():
 				return render_template("registerManager5.html", error="Username is Taken.")
 			reg = db.insertManager(uname,dsID)
 			return render_template('login1.html')
-
 	return render_template('registerManager5.html', error="something wrong")
 
 @app.route('/listOfStores', methods=['GET','POST'])
