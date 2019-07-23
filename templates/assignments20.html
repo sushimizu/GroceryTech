@@ -12,8 +12,34 @@
 	
 		
 		<form action="/assignment" method="post">
-		
-		
+		<table>
+		<tr>
+		   <th>Store Name</th>
+		   <th>Order ID</th>
+		   <th>Date</th>
+		   <th>Time Order Made</th>
+		   <th>Time Of Delivery</th>
+		   <th>Order Price</th>
+		   <th>Total Number of Items</th>
+		  </tr>
+			{%for i in info %} 
+				<tr>
+				
+		   	 <td><input type="radio" name="store" value=info[1]></td>
+		   	 <td>info[2]</td>
+		   	 <td>info[3]</td>
+			<td>info[4]</td>
+			<td>info[5]</td>
+			<td>info[6]</td>
+			<td>info[7]</td>
+		 	 
+				
+			{% endfor %}
+			
+		</table>
+			
+			
+		<!--
 		<table>
 		  <tr>
 		   <th>Store Name</th>
@@ -71,6 +97,7 @@
 		  </tr>
 		  
 		</table>
+ -->
 				
 	  <input type="submit" value="View Assignment Details"> <br> <br>
 
