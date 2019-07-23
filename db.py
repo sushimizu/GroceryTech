@@ -98,6 +98,13 @@ def selectBuyerInfo(uname):
 	dictry['address'] = address
 	dictry['defaultPay'] = default_payment
 	dictry['defaultStore'] = default_store
-
+	cursor.execute("SELECT * FROM Userr Where username=%s",uname)
+	username, password, userType, email, first_name, last_name = cursor.fetchone()
+	dictry['email'] = email
+	dictry['fname'] = first_name
+	dictry['lname'] = last_name
+	
+	
+	
 	return dictry
 
