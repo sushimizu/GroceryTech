@@ -318,8 +318,14 @@ def reciept():
 @app.route('/orderHistory', methods=['GET','POST'])
 def orderHistory():
 	info = db.orderHist(currentUser)
-	
-	return render_template('orderHistory17.html', info=info)
+	isDel = []
+	for i in info:
+		if info[5] == 1:
+			isDel.append(Yes)
+		else:
+			isDel.append(No)
+		
+	return render_template('orderHistory17.html', info=info, isDel=isDel)
 
 
 
