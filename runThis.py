@@ -337,6 +337,8 @@ def orderHistory():
 			isDel.append('Yes')
 		else:
 			isDel.append('No')
+			
+	info.append(isDel)
 	return render_template('orderHistory17.html', info=info, isDel=isDel)
 
 
