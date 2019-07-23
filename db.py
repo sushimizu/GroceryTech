@@ -176,3 +176,17 @@ def selectManagerInfo(uname):
 	dictry['state'] = state
 	dictry['zipp'] = zipp
 	return dictry
+
+
+def revenueRep(uname):
+	dictry = {}
+	cursor.execute("SELECT * FROM manages Where username=%s",uname)
+	username , store_id = cursor.fetchone()
+	cursor.execute("SELECT * FROM GroceryStore Where address_id=%s",store_id)
+	store_id, storename, address_id, opening, closing, phone = cursor.fetchone()
+	dictry['storename'] = storename
+	return dictry
+	
+	
+	
+	
