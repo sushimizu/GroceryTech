@@ -322,15 +322,12 @@ def reciept():
 def orderHistory():
 	info = db.orderHist(currentUser)
 	isDel = []
-
-
+	
 	for i in info:
-		for j in i[5]:
-			if int(j) == 1:
-				isDel.append('Yes')
-			else:
-				isDel.append('No')
-
+		if int(i[5]) == 1:
+			isDel.append('Yes')
+		else:
+			isDel.append('No')
 	return render_template('orderHistory17.html', info=info, isDel=isDel)
 
 
