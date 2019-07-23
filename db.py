@@ -80,7 +80,7 @@ def insertAddress(AddID,house_num,street,state,city,zipp):
     zipp = int(zipp)'''
     cursor.execute(query, (AddID,house_num,street,state,city,zipp))
     # clear cursor
-    cursor.commit()
+    conn.commit()
 
 def systeminfo(sysID,code):
     query = "SELECT user_codes FROM SystemInformation WHERE system_id = 0"
