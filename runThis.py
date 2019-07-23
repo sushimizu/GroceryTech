@@ -97,6 +97,8 @@ def checkregisterBuyer():
 		error2 = "phone has incorrect number of digits"
 		error3 = "zip code has incorrect number of digits"
 		error4 = "email has improper format"
+		error5 = "C'mon brug you messed up your account number"
+		error6 = "Lmao try dat routing number again"
 		arr = re.split(r'[@.]', email)
 		if password != cpassword:
 			return render_template("registerBuyer3.html", error=error1)
@@ -106,6 +108,10 @@ def checkregisterBuyer():
 			return render_template("registerBuyer3.html", error=error3)
 		elif (len(arr) != 3) or (arr[0].isalnum() and arr[1].isalnum() and arr[2].isalnum())/1 != 1:
 			return render_template("registerBuyer3.html", error=error4)
+		elif (len(str(routingNo))) != 9:#10:
+			return render_template("registerBuyer3.html", error=error5)
+		elif (len(str(accNo))) != 9:#10:
+			return render_template("registerBuyer3.html", error=error6)
 		else:
 			query = "SELECT MAX(id) FROM Address;"
 			response = db.cursor.execute(query)
@@ -121,9 +127,9 @@ def checkregisterBuyer():
 				return render_template("registerBuyer3.html", error="Payment name already Used.")
 			else:
 				query = "INSERT INTO Payments(username,payment_name,account_number,routing_number)"\
-    			"VALUES (%s,%s,%s,%s);"
-    			db.cursor.execute(query, (uname,payment,accNo,routingNo))
-    			db.cursor.commit()
+				"VALUES (%s,%s,%s,%s);"
+				db.cursor.execute(query, (uname,payment,accNo,routingNo))
+				db.conn.commit()
 			reg = db.insertAddress(AddID,houseNo,street,state,city,zipp)
 			reg = db.insertBuyer(uname,phone,AddID,payment,dsID)
 			return render_template('login1.html')
