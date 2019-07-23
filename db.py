@@ -138,3 +138,29 @@ def selectDelivererInfo(uname):
 	dictry['lname'] = last_name
 	return dictry
 
+
+
+
+
+def selectManagerInfo(uname):
+	cursor.execute("SELECT * FROM Userr Where username=%s",uname)
+	username, password, userType, email, first_name, last_name = cursor.fetchone()
+	dictry = {}
+	dictry['uname'] = username
+	dictry['email'] = email
+	dictry['fname'] = first_name
+	dictry['lname'] = last_name
+	cursor.execute("SELECT * FROM manages Where username=%s",uname)
+	username , store_id = cursor.fetchone()
+	cursor.execute("SELECT * FROM GroceryStore Where store_id=%s",store_id)
+	store_id, storename, address_id, opening, closing, phone = cursor.fetchone()
+	dictry['storename'] = storename
+	dictry['phone'] = phone
+	cursor.execute("SELECT * FROM Address Where address_id=%s",address_id)
+	addid, house, street, city, state, zipp = cursor.fetchone()
+	dictry['houseNo'] = house
+	dictry['street'] = street
+	dictry['city'] = city
+	dictry['state'] = state
+	dictry['zipp'] = zipp
+	return dictry
