@@ -6,3 +6,5 @@
 .idea/workspace.xml
 *.xml
 *.pyc
+__pycache__/db.cpython-37.pyc
+.idea/workspace.xml

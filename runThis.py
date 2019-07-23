@@ -265,10 +265,10 @@ def updateBuyerAccountInfo():
 		else:
 			val =  db.updateBuyerInfo(uname,refStore,email,prefCard,routingNo,phone,houseNo,streetAddress,city,state,zipp)
 			if val == 0:
-				return render_template("buyerAccountInfo7.html", error = "Updates Saved")
+				return render_template("buyerAccountInfo7.html", error = "Updates Saved", dictry=dictry)
 			else:
-				return render_template("buyerAccountInfo7.html",error = "SQL query error")
-	return render_template("buyerAccountInfo7.html", error = "Something Wrong")
+				return render_template("buyerAccountInfo7.html",error = "SQL query error", dictry=dictry)
+	return render_template("buyerFunctionality6.html", error = "Something Wrong")
 
 @app.route('/deleteAccountInfo', methods=['GET','POST'])
 def deleteAccountInfo():
@@ -330,14 +330,23 @@ def orderHistory():
 	info = db.orderHist(currentUser)
 	isDel = []
 
-
+	count = 0
+	"""
 	for i in info:
-		for j in i[5]:
-			if int(j) == 1:
-				isDel.append('Yes')
-			else:
-				isDel.append('No')
 
+		if int(i[5]) == 1:
+			info[count,5] = 'Yes'
+		else:
+			info[count,5] = 'No'
+		count = count +1
+	"""
+	for i in info:
+		if int( i[5]) == 1:
+			isDel.append('Yes')
+		else:
+			isDel.append('No')
+
+	info.append(isDel)
 	return render_template('orderHistory17.html', info=info, isDel=isDel)
 
 
