@@ -210,13 +210,14 @@ def reciept(orderID):
 	return dictry
 
 def revenueRep(uname):
+	#SELECT DATEADD(yy, DATEDIFF(yy, 0, GETDATE()) - 1, 0))
 	dictry = {}
 	cursor.execute("SELECT * FROM manages Where username=%s",uname)
 	username , store_id = cursor.fetchone()
 	cursor.execute("SELECT * FROM GroceryStore Where address_id=%s",store_id)
 	store_id, storename, address_id, opening, closing, phone = cursor.fetchone()
 	dictry['storename'] = storename
-	itemCount, revenue =  cursor.execute("SELECT COUNT(Item.listed_price*selectItem.quantity),SUM(Item.listed_price*selectItem.quantity-Item.wholesale_price*selectItem.quantity) FROM Item JOIN selectItem on Item.item_id=selectItem.item_id Where selectItem.order_id in (select order_id from Order where Order.order_placed_date > SELECT DATEADD(yy, DATEDIFF(yy, 0, GETDATE()) - 1, 0)) AND selectItem.item_id in(SELECT item_id from SoldAt JOIN manages on SoldAt.store_address=manages.store_address and manages.manager_username = username=%s",uname)
+	itemCount, revenue =  cursor.execute("SELECT COUNT(Item.listed_price*selectItem.quantity),SUM(Item.listed_price*selectItem.quantity-Item.wholesale_price*selectItem.quantity) FROM Item JOIN selectItem on Item.item_id=selectItem.item_id Where selectItem.order_id in (select order_id from Order where Order.order_placed_date > 2018-07-23  AND selectItem.item_id in(SELECT item_id from SoldAt JOIN manages on SoldAt.store_address=manages.store_address and manages.manager_username = username=%s",uname)
 	dictry['itemCount'] = itemCount
 	dictry['revenue'] = revenue
 	
