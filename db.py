@@ -6,6 +6,14 @@ conn = pymysql.connect(host="localhost",
 							passwd='CornyJoke12')
 cursor = conn.cursor()
 
+
+def tuplesToList(tlist):
+    newlist = []
+    for item in tlist:
+        newlist.append(item[0])
+    return newlist
+
+
 # returns 0 if credentials are invalid
 # returns 1 if user is a manager
 # returns 2 if user is NOT a manager
@@ -230,5 +238,11 @@ def revenueRep(uname):
 	return dictry
 	
 	
+def assignments():
+	cursor.execute("select GroceryStore.store_name, Orderr.order_id, Orderr.order_placed_date, Orderr.order_placed_time, sum(selectItem.quantity*Item.listed_price),count(selectItem.quantity) from GroceryStore Join orderFrom on GroceryStore.store_id=orderFrom.store_address Join Orderr on Orderr.order_id=orderFrom.order_id Join selectItem on selectItem.order_id=Orderr.order_id Join Item on Item.item_id=selectItem.item_id join deliveredBy on deliveredBy.order_id=Orderr.order_id where deliveredBy.deliverer_username='chivalrouspotatoes' group by Orderr.order_id")
+	info = tuplesToList(cursor.fetchall())
+	#store, orderID, orderDate, orderTime, noItems, quantity = cursor.fetchone()
+	info.append("")
+	return info
 	
 	
