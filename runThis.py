@@ -300,7 +300,8 @@ def delivererAccInfo():
 
 @app.route('/assignments', methods=['GET','POST'])
 def assignments():
-	return render_template('assignments20.html')
+	info = assignments(currentUser)
+	return render_template('assignments20.html', info=info)
 
 @app.route('/assignment', methods=['GET','POST'])
 def assignment():
