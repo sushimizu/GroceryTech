@@ -90,6 +90,8 @@ def checkregisterBuyer():
 		zipp = request.form['zip']
 		payment = request.form['payment']
 		routingNo = request.form['routingNo']
+		accNo = request.form['accNo']
+		dsID = request.form['dsID']
 
 		error1 = "your password is messed up bro"
 		error2 = "phone has incorrect number of digits"
@@ -112,13 +114,18 @@ def checkregisterBuyer():
 			AddID = AddID + 1#response + 1
 			user_type = 'buyer'
 			reg = db.insertUser(uname,password,user_type,email,fname,lname)
-			#return render_template("registerBuyer3.html", error=reg)
 			if reg == 1:
 				return render_template("registerBuyer3.html", error="Username is Taken.")
-			#var = type(AddID)#+type(houseNo)+type(street)+type(state)+type(city)+type(zipp)
-			#return render_template("registerBuyer3.html", error=var)
+			reg = db.insertPayment(uname,payment,accNo,routingNo)
+			if reg == 1:
+				return render_template("registerBuyer3.html", error="Payment name already Used.")
+			else:
+				query = "INSERT INTO Payments(username,payment_name,account_number,routing_number)"\
+    			"VALUES (%s,%s,%s,%s);"
+    			db.cursor.execute(query, (uname,payment,accNo,routingNo))
+    			db.cursor.commit()
 			reg = db.insertAddress(AddID,houseNo,street,state,city,zipp)
-			reg = db.insertBuyer(uname,phone,AddID,'Visa',6)
+			reg = db.insertBuyer(uname,phone,AddID,payment,dsID)
 			return render_template('login1.html')
 
 	return render_template('registerBuyer3.html', error="something wrong")
@@ -154,13 +161,8 @@ def checkregisterDeliverer():
 			if reg == 1:
 				return render_template("registerDeliverer4.html", error="Code incorrect.")
 			reg = db.insertUser(uname,password,user_type,email,fname,lname)
-			#return render_template("registerBuyer3.html", error=reg)
 			if reg == 1:
 				return render_template("registerDeliverer4.html", error="Username is Taken.")
-			#var = type(AddID)#+type(houseNo)+type(street)+type(state)+type(city)+type(zipp)
-			#return render_template("registerBuyer3.html", error=var)
-			reg = db.insertAddress(AddID,houseNo,street,state,city,zipp)
-			reg = db.insertBuyer(uname,phone,AddID,'Visa',6)
 			return render_template('login1.html')
 
 	return render_template('registerDeliverer4.html', error="something wrong")
@@ -170,6 +172,39 @@ def checkregisterDeliverer():
 @app.route('/registerManager', methods=['GET','POST'])
 def registerManager():
 	return render_template('registerManager5.html')
+
+@app.route('/checkregisterManager', methods=['GET','POST'])
+def checkregisterManager():
+
+	if request.method == "POST":
+		fname = request.form['fname']
+		uname = request.form['uname']
+		password = request.form['password']
+		email = request.form['email']
+		lname = request.form['lname']
+		cpassword = request.form['cpassword']
+		confcode = request.form['code']
+		dsID = request.form['dsID']
+
+		error1 = "your password is messed up bro"
+		error2 = "email contains non-alphanumeric characters"
+		arr = re.split(r'[@.]', email)
+		if password != cpassword:
+			return render_template("registerDeliverer4.html", error=error1)
+		elif (len(arr) != 3) or (arr[0].isalnum() and arr[1].isalnum() and arr[2].isalnum())/1 != 1:
+			return render_template("registerDeliverer4.html", error=error2)
+		else:
+			user_type = 'deliverer'
+			sysid = 0 #deliverer tag is 0 in system information
+			reg = db.systeminfo(sysid,confcode)
+			if reg == 1:
+				return render_template("registerDeliverer4.html", error="Code incorrect.")
+			reg = db.insertUser(uname,password,user_type,email,fname,lname)
+			if reg == 1:
+				return render_template("registerDeliverer4.html", error="Username is Taken.")
+			return render_template('login1.html')
+
+	return render_template('registerDeliverer4.html', error="something wrong")
 
 @app.route('/listOfStores', methods=['GET','POST'])
 def listOfStores():

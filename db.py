@@ -81,7 +81,16 @@ def systeminfo(sysID,code):
     else:
         return 1
 
-
+def insertPayment(uname,payment,accNo,routingNo):
+    query = "SELECT COUNT(*) FROM Payments WHERE username = %s AND payment_name = %s"
+    cursor.execute(query, (uname,payment))
+    for i in cursor:
+        res = i[0]
+    cursor.fetchall()
+    if res == 0:
+        return 0
+    else:
+        return 1
 
 
 def selectBuyerInfo(uname):
