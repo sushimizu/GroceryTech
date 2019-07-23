@@ -322,9 +322,18 @@ def reciept():
 def orderHistory():
 	info = db.orderHist(currentUser)
 	isDel = []
-	
+	count = 0
+	"""
 	for i in info:
+		
 		if int(i[5]) == 1:
+			info[count,5] = 'Yes'
+		else:
+			info[count,5] = 'No'
+		count = count +1 
+	"""
+	for i in info:
+		if int( i[5]) == 1:
 			isDel.append('Yes')
 		else:
 			isDel.append('No')
