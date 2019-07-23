@@ -279,7 +279,8 @@ def newPayment():
 
 @app.route('/reciept', methods=['GET','POST'])
 def reciept():
-	return render_template('reciept16.html')
+	dictry = db.reciept(orderID)
+	return render_template('reciept16.html', dictry = dictry)
 
 @app.route('/orderHistory', methods=['GET','POST'])
 def orderHistory():
