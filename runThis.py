@@ -364,7 +364,7 @@ def delivererAccInfo():
 
 @app.route('/updateDelivererAccInfo', methods=['GET','POST'])
 def updateDelivererAccInfo():
-
+	return
 
 @app.route('/assignments', methods=['GET','POST'])
 def assignments():
@@ -389,6 +389,7 @@ def managerAccInfo():
 
 @app.route('/updateManagerAccInfo', methods=['GET','POST'])
 def updateManagerAccInfo():
+	return
 
 @app.route('/revenueReport', methods=['GET','POST'])
 def revenueReport():
