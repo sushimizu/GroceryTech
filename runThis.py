@@ -317,7 +317,8 @@ def reciept():
 
 @app.route('/orderHistory', methods=['GET','POST'])
 def orderHistory():
-	return render_template('orderHistory17.html')
+	info = db.assignments(currentUser)
+	return render_template('orderHistory17.html', info=info)
 
 
 
