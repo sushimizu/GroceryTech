@@ -94,6 +94,33 @@ def selectBuyerInfo(uname):
 	dictry['address'] = address
 	dictry['defaultPay'] = default_payment
 	dictry['defaultStore'] = default_store
+	cursor.execute("SELECT * FROM Userr Where username=%s",uname)
+	username, password, userType, email, first_name, last_name = cursor.fetchone()
+	dictry['email'] = email
+	dictry['fname'] = first_name
+	dictry['lname'] = last_name
+	cursor.execute("SELECT * FROM Address Where id=%s",address)
+	addid, house, street, city, state, zipp = cursor.fetchone()
+	dictry['houseNo'] = house
+	dictry['street'] = street
+	dictry['city'] = city
+	dictry['state'] = state
+	dictry['zipp'] = zipp
+	cursor.execute("SELECT * FROM Payments Where username=%s",uname)
+	uname, payment, account, routing = cursor.fetchone()
+	dictry['payment'] = payment
+	dictry['account'] = account
+	dictry['routing'] = routing
+	cursor.execute("SELECT * FROM GroceryStore Where store_id=%s",default_store)
+	store_id, storeName,address_id,b,c,d = cursor.fetchone()
+	dictry['storeName'] = storeName
+	
+	
+	return dictry
 
+
+def selectDelivererInfo(uname):
+	cursor.execute("SELECT * FROM Buyer Where username=%s",uname)
+	dictry = {}
 	return dictry
 
