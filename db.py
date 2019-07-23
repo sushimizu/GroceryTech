@@ -191,6 +191,12 @@ def selectManagerInfo(uname):
 	return dictry
 
 
+
+def reciept(orderID):
+	dictry = {}
+	
+	return dictry
+
 def revenueRep(uname):
 	dictry = {}
 	cursor.execute("SELECT * FROM manages Where username=%s",uname)
