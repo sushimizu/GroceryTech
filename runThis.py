@@ -191,8 +191,9 @@ def buyerAccountInfo():
 
 @app.route('/buyerAccountInfo', methods=['GET','POST'])
 def buyerAccountInfo():
-	dictry = {}
-	dictry['fname'] = 'Fred'
+	currentUser = 'admirableneville'
+	dictry =  db.selectBuyerInfo(currentUser)
+	
 	return render_template("buyerAccountInfo7.html", dictry=dictry)
 
 
