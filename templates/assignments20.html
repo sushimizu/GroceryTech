@@ -12,8 +12,7 @@
 	
 		
 		<form action="/assignment" method="post">
-			{{dictry["date"]}}
-			<!--
+			
 		<table>
 		<tr>
 		   <th>Store Name</th>
@@ -27,19 +26,19 @@
 			{%for i in info %} 
 				<tr>
 				
-		   	 <td><input type="radio" name="store" value=info[1]></td>
-		   	 <td>info[2]</td>
-		   	 <td>info[3]</td>
-			<td>info[4]</td>
-			<td>info[5]</td>
-			<td>info[6]</td>
-			<td>info[7]</td>
+		   	 <td><input type="radio" name="store" value={{info[1]}}></td>
+		   	 <td>{{info[2]}}</td>
+		   	 <td>{{info[3]}}</td>
+			<td>{{info[4]}}</td>
+			<td>{{info[5]}}</td>
+			<td>{{info[6]}}</td>
+			<td>{{info[7]}}</td>
 		 	 
 				
 			{% endfor %}
 			
 		</table>
-			-->
+			
 			
 		<!--
 		<table>
