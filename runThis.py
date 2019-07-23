@@ -92,18 +92,17 @@ def checkregisterBuyer():
 		error1 = "your password is messed up bro"
 		error2 = "phone has incorrect number of digits"
 		error3 = "zip code has incorrect number of digits"
-		error4 = "email contains non-alphanumeric characters"
-		a = 'a'
-		b = 'b'
-		c = 'c'
-		#parts = email.split('@', '.')
+		error4 = "email has improper format"
+		arr = re.split(r'[@.]', email)
 		if password != cpassword:
 			return render_template("registerBuyer3.html", error=error1)
 		elif (len(str(phone))) != 9:#10:
 			return render_template("registerBuyer3.html", error=error2)
 		elif (len(str(zipp))) != 5:
 			return render_template("registerBuyer3.html", error=error3)
-		elif (a.isalnum() and b.isalnum() and c.isalnum())/1 != 1:
+		elif (len(arr) != 3):
+			return render_template("registerBuyer3.html", error=error4)
+		elif (len(arr) != 3) or (arr[0].isalnum() and arr[1].isalnum() and arr[2].isalnum())/1 != 1:
 			return render_template("registerBuyer3.html", error=error4)
 		else:
 			query = "SELECT MAX(id) FROM Address;"
