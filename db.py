@@ -152,7 +152,7 @@ def selectManagerInfo(uname):
 	dictry['lname'] = last_name
 	cursor.execute("SELECT * FROM manages Where username=%s",uname)
 	username , store_id = cursor.fetchone()
-	cursor.execute("SELECT * FROM GroceryStore Where store_id=%s",store_id)
+	cursor.execute("SELECT * FROM GroceryStore Where address_id=%s",store_id)
 	store_id, storename, address_id, opening, closing, phone = cursor.fetchone()
 	dictry['storename'] = storename
 	dictry['phone'] = phone
