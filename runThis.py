@@ -253,7 +253,8 @@ def delivererFunctionality():
 
 @app.route('/delivererAccInfo', methods=['GET','POST'])
 def delivererAccInfo():
-	return render_template('delivererAccountInfo19.html')
+	dictry = db.selectDelivererInfo(currentUser)
+	return render_template('delivererAccountInfo19.html', dictry=dictry)
 
 @app.route('/assignments', methods=['GET','POST'])
 def assignments():
