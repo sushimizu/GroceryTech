@@ -99,9 +99,12 @@ def checkregisterBuyer():
 		error4 = "email has improper format"
 		error5 = "C'mon brug you messed up your account number"
 		error6 = "Lmao try dat routing number again"
+		error7 = "phone has correct number of digits, motherfucker"
 		arr = re.split(r'[@.]', email)
 		if password != cpassword:
 			return render_template("registerBuyer3.html", error=error1)
+		elif (len(str(phone))) == 10:
+			return render_template("registerBuyer3.html", error=error7)
 		elif (len(str(phone))) != 9:#10:
 			return render_template("registerBuyer3.html", error=error2)
 		elif (len(str(zipp))) != 5:
@@ -113,9 +116,9 @@ def checkregisterBuyer():
 		elif (len(str(accNo))) != 9:#10:
 			return render_template("registerBuyer3.html", error=error6)
 		else:
-			query = "SELECT MAX(id) FROM Address;"
+			'''query = "SELECT MAX(id) FROM Address;"
 			response = db.cursor.execute(query)
-			db.cursor.fetchall()
+			db.cursor.fetchall()'''
 			AddID = 68
 			AddID = AddID + 1#response + 1
 			user_type = 'buyer'
@@ -233,6 +236,37 @@ def buyerAccountInfo():
 
 	return render_template("buyerAccountInfo7.html", dictry=dictry)
 
+@app.route('/updateBuyerAccountInfo', methods=['GET','POST'])
+def updateBuyerAccountInfo():
+	if request.method == "POST":
+		uname = request.form['uname']
+		prefStore = request.form['prefStore']
+		email = request.form['email']
+		prefCard = request.form['prefCard']
+		routingNo = request.form['routingNo']
+		phone = request.form['phone']
+		houseNo = request.form['houseNo']
+		streetAddress = request.form['streetAddress']
+		city = request.form['city']
+		state = request.form['state']
+		zipp = request.form['zip']
+
+		arr = re.split(r'[@.]', email)
+		error1 = "email contains non-alphanumeric characters"
+		error2 = "phone has incorrect number of digits"
+		error3 = "zip code has incorrect number of digits"
+
+		if (len(str(phone))) != 9:#10:
+			return render_template("buyerAccountInfo7.html", error=error1)
+		elif (len(str(zipp))) != 5:
+			return render_template("buyerAccountInfo7.html", error=error2)
+		elif (len(arr) != 3) or (arr[0].isalnum() and arr[1].isalnum() and arr[2].isalnum())/1 != 1:
+			return render_template("buyerAccountInfo7.html", error=error3)
+		else:
+			val =  db.updateBuyerInfo(uname,refStore,email,prefCard,routingNo,phone,houseNo,streetAddress,city,state,zipp)
+			return render_template("buyerAccountInfo7.html", error = "Updates Saved")
+	return render_template("buyerAccountInfo7.html", error = "Something Wrong")
+
 
 @app.route('/findItem', methods=['GET','POST'])
 def findItem():
@@ -283,7 +317,9 @@ def reciept():
 
 @app.route('/orderHistory', methods=['GET','POST'])
 def orderHistory():
-	return render_template('orderHistory17.html')
+	info = db.orderHist(currentUser)
+	
+	return render_template('orderHistory17.html', info=info)
 
 
 
@@ -300,7 +336,8 @@ def delivererAccInfo():
 
 @app.route('/assignments', methods=['GET','POST'])
 def assignments():
-	return render_template('assignments20.html')
+	info = db.assignments(currentUser)
+	return render_template('assignments20.html', info=info)
 
 @app.route('/assignment', methods=['GET','POST'])
 def assignment():
