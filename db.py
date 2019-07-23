@@ -122,3 +122,9 @@ def selectBuyerInfo(uname):
 	
 	return dictry
 
+
+def selectDelivererInfo(uname):
+	cursor.execute("SELECT * FROM Buyer Where username=%s",uname)
+	dictry = {}
+	return dictry
+
