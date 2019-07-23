@@ -239,7 +239,7 @@ def revenueRep(uname):
 	
 	
 def assignments(uname):
-	cursor.execute("SELECT GroceryStore.store_name, Orderr.order_id, Orderr.order_placed_date, Orderr.order_placed_time, SUM(selectItem.quantity*Item.listed_price), COUNT(selectItem.quantity) FROM GroceryStore Join orderFrom on GroceryStore.store_id=orderFrom.store_address Join Orderr on Orderr.order_id=orderFrom.order_id Join selectItem on selectItem.order_id=Orderr.order_id Join Item on Item.item_id=selectItem.item_id join deliveredBy on deliveredBy.order_id=Orderr.order_id where deliveredBy.deliverer_username=%s group by Orderr.order_id", uname)
+	cursor.execute("SELECT GroceryStore.store_name, Orderr.order_id, `Orderr.order_placed_date`, Orderr.order_placed_time, SUM(selectItem.quantity*Item.listed_price), COUNT(selectItem.quantity) FROM GroceryStore Join orderFrom on GroceryStore.store_id=orderFrom.store_address Join Orderr on Orderr.order_id=orderFrom.order_id Join selectItem on selectItem.order_id=Orderr.order_id Join Item on Item.item_id=selectItem.item_id join deliveredBy on deliveredBy.order_id=Orderr.order_id where deliveredBy.deliverer_username=%s group by Orderr.order_id", uname)
 	info = tuplesToList(cursor.fetchall())
 	#store, orderID, orderDate, orderTime, noItems, quantity = cursor.fetchone()
 	info.append("")
