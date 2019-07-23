@@ -102,8 +102,6 @@ def checkregisterBuyer():
 			return render_template("registerBuyer3.html", error=error2)
 		elif (len(str(zipp))) != 5:
 			return render_template("registerBuyer3.html", error=error3)
-		elif (len(arr) != 3):
-			return render_template("registerBuyer3.html", error=error4)
 		elif (len(arr) != 3) or (arr[0].isalnum() and arr[1].isalnum() and arr[2].isalnum())/1 != 1:
 			return render_template("registerBuyer3.html", error=error4)
 		else:
@@ -147,7 +145,7 @@ def checkregisterDeliverer():
 		arr = re.split(r'[@.]', email)
 		if password != cpassword:
 			return render_template("registerDeliverer4.html", error=error1)
-		elif (a.isalnum() and b.isalnum() and c.isalnum())/1 != 1:
+		elif (len(arr) != 3) or (arr[0].isalnum() and arr[1].isalnum() and arr[2].isalnum())/1 != 1:
 			return render_template("registerDeliverer4.html", error=error2)
 		else:
 			user_type = 'deliverer'
