@@ -263,9 +263,12 @@ def updateBuyerAccountInfo():
 		elif (len(arr) != 3) or (arr[0].isalnum() and arr[1].isalnum() and arr[2].isalnum())/1 != 1:
 			return render_template("buyerAccountInfo7.html", error=error3, dictry=dictry)
 		else:
-			val =  db.updateBuyerInfo(uname,refStore,email,prefCard,routingNo,phone,houseNo,streetAddress,city,state,zipp)
-			return render_template("buyerAccountInfo7.html", error = "Updates Saved", dictry=dictry)
-	return render_template("buyerAccountInfo7.html", error = "Something Wrong", dictry=dictry)
+			val = db.updateBuyerInfo(uname,prefStore,email,prefCard,routingNo,phone,houseNo,streetAddress,city,state,zipp)
+			if val == 0:
+				return render_template("buyerAccountInfo7.html", error = "Updates Saved")
+			else:
+				return render_template("buyerAccountInfo7.html",error = "SQL query error")
+	return render_template("buyerAccountInfo7.html", error = "Something Wrong")
 
 
 @app.route('/findItem', methods=['GET','POST'])
@@ -319,13 +322,12 @@ def reciept():
 def orderHistory():
 	info = db.orderHist(currentUser)
 	isDel = []
-	"""
+	
 	for i in info:
 		if int(i[5]) == 1:
 			isDel.append('Yes')
 		else:
 			isDel.append('No')
-	"""
 	return render_template('orderHistory17.html', info=info, isDel=isDel)
 
 
