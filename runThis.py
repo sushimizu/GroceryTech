@@ -156,7 +156,7 @@ def checkregisterDeliverer():
 			sysid = 0 #deliverer tag is 0 in system information
 			reg = db.systeminfo(sysid,confcode)
 			if reg == 1:
-				return render_template("registerDeliverer4.html", error="Code already used.")
+				return render_template("registerDeliverer4.html", error="Code incorrect.")
 			reg = db.insertUser(uname,password,user_type,email,fname,lname)
 			#return render_template("registerBuyer3.html", error=reg)
 			if reg == 1:
@@ -167,7 +167,7 @@ def checkregisterDeliverer():
 			reg = db.insertBuyer(uname,phone,AddID,'Visa',6)
 			return render_template('login1.html')
 
-	return render_template('registerBuyer3.html', error="something wrong")
+	return render_template('registerDeliverer4.html', error="something wrong")
 
 
 
@@ -193,7 +193,7 @@ def buyerAccountInfo():
 def buyerAccountInfo():
 	currentUser = 'admirableneville'
 	dictry =  db.selectBuyerInfo(currentUser)
-	
+
 	return render_template("buyerAccountInfo7.html", dictry=dictry)
 
 

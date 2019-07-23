@@ -71,25 +71,21 @@ def insertAddress(AddID,house_num,street,state,city,zipp):
     cursor.commit()
 
 def systeminfo(sysID,code):
-    query = "SELECT COUNT(user_codes) FROM SystemInformation WHERE user_codes=%s"
-    cursor.execute(query, code)
+    query = "SELECT user_codes FROM SystemInformation WHERE system_id = 0"
+    cursor.execute(query)
     for i in cursor:
-        response = i[0]
-    #return cursor
+        res = i[0]
     cursor.fetchall()
-    if response != 1:
-        query = "INSERT INTO SystemInformation(system_id,user_codes)"\
-        "VALUES (%s,%s);"
-        cursor.execute(query, (sysID,code))
-        conn.commit()
+    if res == code:
         return 0
     else:
         return 1
 
 
 
+
 def selectBuyerInfo(uname):
-	
+
 	cursor.execute("SELECT * FROM Buyer Where username=%s",uname)
 	username, phone, address, default_payment, default_store = cursor.fetchone()
 	dictry = {}
