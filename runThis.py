@@ -320,7 +320,7 @@ def orderHistory():
 	info = db.orderHist(currentUser)
 	isDel = []
 	for i in info:
-		if info[5] == 1:
+		if int(i[5]) == 1:
 			isDel.append(Yes)
 		else:
 			isDel.append(No)
