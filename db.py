@@ -151,6 +151,31 @@ def selectBuyerInfo(uname):
 
 	return dictry
 
+def updateBuyerInfo(uname,prefStore,email,prefCard,routingNo,phone,houseNo,streetAddress,city,state,zipp):
+    query = "UPDATE Userr SET email = %s WHERE Username = %s;"
+    cursor.execute(query, (email,uname))
+    # clear cursor
+    conn.commit()
+    query = "UPDATE Buyer SET phone = %s, default_store_id = %s WHERE Username = %s;"
+    cursor.execute(query, (phone,prefStore,uname))
+    # clear cursor
+    conn.commit()
+    query = "UPDATE Address SET house_number = %s, street = %s, city = %s, state = %s, zip_code = %s WHERE Username = %s;"
+    cursor.execute(query, (houseNo,streetAddress,city,state,zipp,uname))
+    # clear cursor
+    conn.commit()
+
+
+    query = "SELECT default_payment FROM Buyer WHERE username = %s"
+    cursor.execute(query, (uname))
+    payname = cursor.fetchone()
+    cursor.fetchall()
+    query = "UPDATE Payments SET account_number = %s, routing_number = %s WHERE Username = %s AND payment_name = %s;"
+    cursor.execute(query, (prefCard,routingNo,uname,payname))
+    # clear cursor
+    conn.commit()
+
+    return
 
 def selectDelivererInfo(uname):
 	cursor.execute("SELECT * FROM Userr Where username=%s",uname)
@@ -205,7 +230,7 @@ def reciept(orderID):
 	dictry['noItems'] = noItems
 	dictry['deliveryTime'] = delTime
 	dictry['orderTime'] = orderPlacedTime
-	
+
 	return dictry
 
 def revenueRep(uname):
@@ -219,7 +244,7 @@ def revenueRep(uname):
 	"""
 	item_id = cursor.execute("SELECT item_id FROM soldAt JOIN manages ON soldAt.store_id=manages.store_address AND manages.username= %s",uname)
 	dictry['itemCount'] = item_id
-	
+
 	"""
 	itemCount, revenue =  cursor.execute("SELECT COUNT(Item.listed_price*selectItem.quantity), SUM(Item.listed_price*selectItem.quantity-Item.wholesale_price*selectItem.quantity) FROM Item JOIN selectItem ON Item.item_id=selectItem.item_id WHERE selectItem.order_id IN (SELECT order_id FROM Orderr) AND selectItem.item_id IN (SELECT item_id FROM soldAt JOIN manages ON soldAt.store_id=manages.store_address AND manages.username= %s)",uname)
 	#itemCount, revenue =  cursor.execute("SELECT COUNT(Item.listed_price*selectItem.quantity),SUM(Item.listed_price*selectItem.quantity-Item.wholesale_price*selectItem.quantity) FROM Item JOIN selectItem on Item.item_id=selectItem.item_id Where selectItem.order_id in (select order_id from Order where Order.order_placed_date > 2018-07-23  AND selectItem.item_id in(SELECT item_id from SoldAt JOIN manages on SoldAt.store_address=manages.store_address and manages.username = username=%s",uname)
@@ -227,7 +252,7 @@ def revenueRep(uname):
 	dictry['revenue'] = revenue
 
 	return dictry
-	
-	
-	
-	
+
+
+
+
