@@ -12,18 +12,16 @@
 	
 		
 	<form action="/buyerFunctionality" method="post">
-   Order Number:
- 		 <input type="text" name="orderNo"> <br> <br>
-		Payment Name:
- 		 <input type="text" name="payName"> <br> <br>
-     Deliverer's Name:
- 		 <input type="text" name="deliverer"> <br> <br>
-   	Number of Items:
- 		 <input type="text" name="noItems"> <br> <br>
-     Time Order Places:
- 		 <input type="text" name="orderTime"> <br> <br>
-     Time of Delivery:
- 		 <input type="text" name="deliveryTime"> <br> <br>
+   Order Number: {{dictry["oid"]}}
+ 		 <br> <br>
+		Payment Name: {{dictry["payment"]}} <br> <br>
+      Deliverer's Name:  {{dictry["fname"]}} {{dictry["lname"]}} <br> <br>
+   	Number of Items:{{dictry["noItems"]}}
+ 		  <br> <br>
+     Time Order Places:  {{dictry["orderTime"]}}
+ 		 <br> <br>
+     Time of Delivery:  {{dictry["deliveryTime"]}}
+ 		 <br> <br>
    
     
     
