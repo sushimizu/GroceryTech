@@ -190,21 +190,22 @@ def checkregisterManager():
 		error2 = "email contains non-alphanumeric characters"
 		arr = re.split(r'[@.]', email)
 		if password != cpassword:
-			return render_template("registerDeliverer4.html", error=error1)
+			return render_template("registerManager5.html", error=error1)
 		elif (len(arr) != 3) or (arr[0].isalnum() and arr[1].isalnum() and arr[2].isalnum())/1 != 1:
-			return render_template("registerDeliverer4.html", error=error2)
+			return render_template("registerManager5.html", error=error2)
 		else:
-			user_type = 'deliverer'
-			sysid = 0 #deliverer tag is 0 in system information
+			user_type = 'manager'
+			sysid = 1 #manager tag is 1 in system information
 			reg = db.systeminfo(sysid,confcode)
 			if reg == 1:
-				return render_template("registerDeliverer4.html", error="Code incorrect.")
+				return render_template("registerManager5.html", error="Code incorrect.")
 			reg = db.insertUser(uname,password,user_type,email,fname,lname)
 			if reg == 1:
-				return render_template("registerDeliverer4.html", error="Username is Taken.")
+				return render_template("registerManager5.html", error="Username is Taken.")
+			reg = db.insertManager(uname,dsID)
 			return render_template('login1.html')
 
-	return render_template('registerDeliverer4.html', error="something wrong")
+	return render_template('registerManager5.html', error="something wrong")
 
 @app.route('/listOfStores', methods=['GET','POST'])
 def listOfStores():

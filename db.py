@@ -51,6 +51,18 @@ def insertUser(uname,password,user_type,email,fname,lname):
         return 1
         #return 0
 
+def insertManager(uname,dsID):
+    query = "SELECT address_id FROM GroceryStore WHERE store_id = %s"
+    cursor.execute(query, dsID)
+    for i in cursor:
+        response = i[0]
+    #return cursor
+    cursor.fetchall()
+    query = "INSERT INTO manages(username,store_address)"\
+    "VALUES (%s,%s);"
+
+    cursor.execute(query, (uname,dsID))
+    conn.commit()
 
 def insertBuyer(Username, Phone, AddressID, DefaultPayment, DefaultStoreID):
     query = "INSERT INTO Buyer(username, phone, address_id, default_payment, default_store_id)"\
