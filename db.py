@@ -110,6 +110,11 @@ def selectBuyerInfo(uname):
 	dictry['city'] = city
 	dictry['state'] = state
 	dictry['zipp'] = zipp
+	cursor.execute("SELECT * FROM Payments Where username=%s",uname)
+	uname, payment, account, routing = cursor.fetchone()
+	dictry['payment'] = payment
+	dictry['account'] = account
+	dictry['routing'] = routing
 	
 	
 	
