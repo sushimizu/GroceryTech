@@ -88,6 +88,8 @@ def checkregisterBuyer():
 		cpassword = request.form['cpassword']
 		state = request.form['state']
 		zipp = request.form['zip']
+		payment = request.form['payment']
+		routingNo = request.form['routingNo']
 
 		error1 = "your password is messed up bro"
 		error2 = "phone has incorrect number of digits"
@@ -142,10 +144,7 @@ def checkregisterDeliverer():
 
 		error1 = "your password is messed up bro"
 		error2 = "email contains non-alphanumeric characters"
-		a = 'a'
-		b = 'b'
-		c = 'c'
-		#parts = email.split('@', '.')
+		arr = re.split(r'[@.]', email)
 		if password != cpassword:
 			return render_template("registerDeliverer4.html", error=error1)
 		elif (a.isalnum() and b.isalnum() and c.isalnum())/1 != 1:
