@@ -325,9 +325,9 @@ def orderHistory():
 	
 	for i in info:
 		if int(i[5]) == 1:
-			isDel.append('Yes')
+			i[5] = 'Yes'
 		else:
-			isDel.append('No')
+			i[5] = 'No'
 	return render_template('orderHistory17.html', info=info, isDel=isDel)
 
 
