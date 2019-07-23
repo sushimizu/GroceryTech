@@ -9,7 +9,7 @@ cursor = conn.cursor()
 
 def tuplesToList(tlist):
     newlist = []
-    for i in tlist:	
+    for i in tlist:
         newlist.append(i)
     return newlist
 
