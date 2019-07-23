@@ -320,10 +320,10 @@ def orderHistory():
 	info = db.orderHist(currentUser)
 	isDel = []
 	for i in info:
-		if info[5] == 1:
-			isDel.append(Yes)
+		if int(i[5]) == 1:
+			isDel.append('Yes')
 		else:
-			isDel.append(No)
+			isDel.append('No')
 		
 	return render_template('orderHistory17.html', info=info, isDel=isDel)
 
