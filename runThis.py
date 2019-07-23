@@ -308,7 +308,8 @@ def managerFunctionality():
 
 @app.route('/managerAccInfo', methods=['GET','POST'])
 def managerAccInfo():
-	return render_template('managerAccountInfo23.html')
+	dictry = db.selectManagerInfo(currentUser)
+	return render_template('managerAccountInfo23.html', dictry=dictry)
 
 @app.route('/revenueReport', methods=['GET','POST'])
 def revenueReport():
