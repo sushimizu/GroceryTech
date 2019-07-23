@@ -120,7 +120,7 @@ def checkregisterBuyer():
 			response = db.cursor.execute(query)
 			db.cursor.fetchall()'''
 			AddID = 68
-			AddID = AddID + 1#response + 1
+			AddID = AddID + 1 #response + 1
 			user_type = 'buyer'
 			reg = db.insertUser(uname,password,user_type,email,fname,lname)
 			if reg == 1:
@@ -320,7 +320,16 @@ def reciept():
 
 @app.route('/orderHistory', methods=['GET','POST'])
 def orderHistory():
-	return render_template('orderHistory17.html')
+	info = db.orderHist(currentUser)
+	isDel = []
+	
+	for i in info[5]:
+		if int(i) == 1:
+			isDel.append('Yes')
+		else:
+			isDel.append('No')
+	
+	return render_template('orderHistory17.html', info=info, isDel=isDel)
 
 
 

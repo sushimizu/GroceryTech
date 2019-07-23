@@ -12,6 +12,7 @@
 	
 		
 		<form action="/assignment" method="post">
+			
 		<table>
 		<tr>
 		   <th>Store Name</th>
@@ -25,13 +26,14 @@
 			{%for i in info %} 
 				<tr>
 				
-		   	 <td><input type="radio" name="store" value=info[1]></td>
-		   	 <td>info[2]</td>
-		   	 <td>info[3]</td>
-			<td>info[4]</td>
-			<td>info[5]</td>
-			<td>info[6]</td>
-			<td>info[7]</td>
+		   	 <td><input type="radio" name="store" value={{i[1]}}>{{i[0]}}</td>
+		   	 <td>{{i[1]}}</td>
+		   	 <td>{{i[2]}}</td>
+			<td>{{i[3]}}</td>
+			<td>{{i[4]}}</td>
+			<td>{{i[5]}}</td>
+			<td>{{i[6]}}</td>
+			
 		 	 
 				
 			{% endfor %}
@@ -103,21 +105,7 @@
 
 	</form>
 	
-		<div class="row"> 
-			
-			
-			<div class="column">
-				<form action="/assignments" method="post">
-				  <input type="submit" value="Previous" color ="blue">
-					</form> 
-			</div>
-			<div class="column">
-				<form action="/assignments" method="post">
-				  <input type="submit" value="Next" color ="blue">
-					</form> 
-			
-			</div>
-		</div>
+		
  <br <br> 
 
 				<form action="/delivererFunctionality" method="post">

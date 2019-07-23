@@ -9,8 +9,8 @@ cursor = conn.cursor()
 
 def tuplesToList(tlist):
     newlist = []
-    for item in tlist:
-        newlist.append(item[0])
+    for i in tlist:	
+        newlist.append(i)
     return newlist
 
 
@@ -20,20 +20,21 @@ def tuplesToList(tlist):
 def login(username, password):
     query = "SELECT COUNT(*) FROM userr WHERE username = %s AND password = %s;"
     response = cursor.execute(query, (username, password))
+    for i in cursor:
+        i = (i[0])
     # clear cursor
     cursor.fetchall()
-
-    if response == 0:
+    if i == 0:
         return 0
     else:
         query = "SELECT user_type FROM userr WHERE username = %s;"
         response = cursor.execute(query, (username))
 
         result = cursor.fetchone()
-
+        print(result[0])
         # sanity check
         cursor.fetchall()
-
+        print(result[0])
         if result[0] == 'manager':  # if Is_manager
             return 1
         elif result[0] == 'deliverer':
@@ -267,15 +268,19 @@ def revenueRep(uname):
 	return dictry
 
 def assignments(uname):
-	cursor.execute("SELECT * FROM Orderr")
-	#cursor.execute("SELECT GroceryStore.store_name, Orderr.order_id, order_placed_date, Orderr.order_placed_time, SUM(selectItem.quantity*Item.listed_price), COUNT(selectItem.quantity) FROM GroceryStore Join orderFrom on GroceryStore.store_id=orderFrom.store_address Join Orderr on Orderr.order_id=orderFrom.order_id Join selectItem on selectItem.order_id=Orderr.order_id Join Item on Item.item_id=selectItem.item_id join deliveredBy on deliveredBy.order_id=Orderr.order_id where deliveredBy.deliverer_username=%s group by Orderr.order_id", uname)
-	#info = tuplesToList(cursor.fetchall())
-	#info = tuplesToList(cursor.fetchone())
-	a, b, c, d, e = cursor.fetchone()
+	#cursor.execute("SELECT * FROM Orderr")
+	cursor.execute("SELECT GroceryStore.store_name, Orderr.order_id, Orderr.order_placed_date, Orderr.order_placed_time, Orderr.delivery_time, SUM(selectItem.quantity*Item.listed_price), COUNT(selectItem.quantity) FROM GroceryStore Join orderFrom on GroceryStore.store_id=orderFrom.store_address_id Join Orderr on Orderr.order_id=orderFrom.order_id Join selectItem on selectItem.order_id=Orderr.order_id Join Item on Item.item_id=selectItem.item_id join deliveredBy on deliveredBy.order_id=Orderr.order_id where deliveredBy.deliverer_username=%s group by Orderr.order_id", uname)
+	info = tuplesToList(cursor.fetchall())
+	#a, b, c, d, e = cursor.fetchone()
 	#store, orderID, orderDate, orderTime, noItems, quantity = cursor.fetchone()
+	info.append("")
+	return info
 
+
+def orderHist(uname):
+	cursor.execute("SELECT GroceryStore.store_name, Orderr.order_id, Orderr.order_placed_date, SUM(selectItem.quantity*Item.listed_price), COUNT(selectItem.quantity), DeliveredBy.is_delivered FROM GroceryStore Join orderFrom on GroceryStore.store_id=orderFrom.store_address_id Join Orderr on Orderr.order_id=orderFrom.order_id Join selectItem on selectItem.order_id=Orderr.order_id Join Item on Item.item_id=selectItem.item_id join deliveredBy on deliveredBy.order_id=Orderr.order_id join orderedBy on orderedBy.order_id=Orderr.order_id where orderedBy.buyer_username=%s group by Orderr.order_id",uname)
+	#cursor.execute("SELECT GroceryStore.store_name, Orderr.order_id, Orderr.order_placed_date, SUM(selectItem.quantity*Item.listed_price), COUNT(selectItem.quantity), DeliveredBy.is_delivered FROM GroceryStore Join orderFrom on GroceryStore.store_id=orderFrom.store_address_id Join Orderr on Orderr.order_id=orderFrom.order_id Join selectItem on selectItem.order_id=Orderr.order_id Join Item on Item.item_id=selectItem.item_id join deliveredBy on deliveredBy.order_id=Orderr.order_id where orderedBy.buyer_username=%s group by Orderr.order_id", uname)
+	info = tuplesToList(cursor.fetchall())
 	#info.append("")
-	dictry = {}
-	dictry["date"] = d
-	return dictry
+	return info
 
