@@ -194,6 +194,18 @@ def selectManagerInfo(uname):
 
 def reciept(orderID):
 	dictry = {}
+	cursor.execute("SELECT * FROM Order Where order_id=%s",orderID)
+	oid, instructions, delivTime, orderPlacedDate, orderPlacedTime = cursor.fetchone()
+	cursor.execute("SELECT * FROM DeliveredBy Where order_id=%s",orderID)
+	oid, dusername, isDel, delTime, delDate = cursor.fetchone()
+	cursor.execute("SELECT first_name, last_name FROM DeliveredBy Where order_id=%s",orderID)
+	dictry['orderID'] = oid
+	dictry['payment'] = ""
+	dictry['fname'] = fname
+	dictry['lname'] = lname
+	dictry['noItems'] = noItems
+	dictry['deliveryTime'] = delTime
+	dictry['orderTime'] = orderPlacedTime
 	
 	return dictry
 
