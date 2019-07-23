@@ -198,6 +198,10 @@ def revenueRep(uname):
 	cursor.execute("SELECT * FROM GroceryStore Where address_id=%s",store_id)
 	store_id, storename, address_id, opening, closing, phone = cursor.fetchone()
 	dictry['storename'] = storename
+	itemCount, revenue =  cursor.execute("SELECT COUNT(Item.listed_price*SelectItem.quantity),SUM(Item.listed_price&SelectItem.quantity-Item.wholesale_price*SelectItem.quantity) FROM Item JOIN Select_Item on Item.id=SelectItem.id Where SelectItem.order_id in (select order_id from Order where Order.order_placed_date > SELECT DATEADD(yy, DATEDIFF(yy, 0, GETDATE()) - 1, 0)) AND SelectItem.item_id in(select item_id from SoldAt JOIN Manages on SoldAt.store_address=Manages.store_address and Manages.manager_username = username=%s",uname)
+	dictry['itemCount'] = itemCount
+	dictry['revenue'] = revenue
+	
 	return dictry
 	
 	
