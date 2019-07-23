@@ -120,7 +120,7 @@ def checkregisterBuyer():
 			response = db.cursor.execute(query)
 			db.cursor.fetchall()'''
 			AddID = 68
-			AddID = AddID + 1#response + 1
+			AddID = AddID + 1 #response + 1
 			user_type = 'buyer'
 			reg = db.insertUser(uname,password,user_type,email,fname,lname)
 			if reg == 1:
