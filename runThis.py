@@ -122,15 +122,54 @@ def checkregisterBuyer():
 			reg = db.insertBuyer(uname,phone,AddID,'Visa',6)
 			return render_template('login1.html')
 
-
-
-
-
 	return render_template('registerBuyer3.html', error="something wrong")
+
 
 @app.route('/registerDeliverer', methods=['GET','POST'])
 def registerDeliverer():
 	return render_template('registerDeliverer4.html')
+
+@app.route('/checkregisterDeliverer', methods=['GET','POST'])
+def checkregisterDeliverer():
+
+	if request.method == "POST":
+		fname = request.form['fname']
+		uname = request.form['uname']
+		password = request.form['password']
+		email = request.form['email']
+		lname = request.form['lname']
+		cpassword = request.form['cpassword']
+		confcode = request.form['code']
+
+		error1 = "your password is messed up bro"
+		error2 = "email contains non-alphanumeric characters"
+		a = 'a'
+		b = 'b'
+		c = 'c'
+		#parts = email.split('@', '.')
+		if password != cpassword:
+			return render_template("registerDeliverer4.html", error=error1)
+		elif (a.isalnum() and b.isalnum() and c.isalnum())/1 != 1:
+			return render_template("registerDeliverer4.html", error=error2)
+		else:
+			user_type = 'deliverer'
+			sysid = 0 #deliverer tag is 0 in system information
+			reg = db.systeminfo(sysid,confcode)
+			if reg == 1:
+				return render_template("registerDeliverer4.html", error="Code already used.")
+			reg = db.insertUser(uname,password,user_type,email,fname,lname)
+			#return render_template("registerBuyer3.html", error=reg)
+			if reg == 1:
+				return render_template("registerDeliverer4.html", error="Username is Taken.")
+			#var = type(AddID)#+type(houseNo)+type(street)+type(state)+type(city)+type(zipp)
+			#return render_template("registerBuyer3.html", error=var)
+			reg = db.insertAddress(AddID,houseNo,street,state,city,zipp)
+			reg = db.insertBuyer(uname,phone,AddID,'Visa',6)
+			return render_template('login1.html')
+
+	return render_template('registerBuyer3.html', error="something wrong")
+
+
 
 @app.route('/registerManager', methods=['GET','POST'])
 def registerManager():
