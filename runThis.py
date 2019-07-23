@@ -239,7 +239,7 @@ def buyerAccountInfo():
 @app.route('/updateBuyerAccountInfo', methods=['GET','POST'])
 def updateBuyerAccountInfo():
 	if request.method == "POST":
-		uname = request.form['uname']
+		#uname = request.form['uname']
 		prefStore = request.form['prefStore']
 		email = request.form['email']
 		prefCard = request.form['prefCard']
