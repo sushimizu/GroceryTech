@@ -329,7 +329,7 @@ def orderHistory():
 			info[count,5] = 'Yes'
 		else:
 			info[count,5] = 'No'
-		count++
+		count = count +1 
 	return render_template('orderHistory17.html', info=info, isDel=isDel)
 
 
