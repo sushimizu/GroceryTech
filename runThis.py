@@ -163,7 +163,7 @@ def checkregisterDeliverer():
 		else:
 			user_type = 'deliverer'
 			sysid = 0 #deliverer tag is 0 in system information
-			reg = db.systeminfo(sysid,confcode)
+			reg = db.systeminfoDeliverer(sysid,confcode)
 			if reg == 1:
 				return render_template("registerDeliverer4.html", error="Code incorrect.")
 			reg = db.insertUser(uname,password,user_type,email,fname,lname)
@@ -202,7 +202,7 @@ def checkregisterManager():
 		else:
 			user_type = 'manager'
 			sysid = 1 #manager tag is 1 in system information
-			reg = db.systeminfo(sysid,confcode)
+			reg = db.systeminfoManager(sysid,confcode)
 			if reg == 1:
 				return render_template("registerManager5.html", error="Code incorrect.")
 			reg = db.insertUser(uname,password,user_type,email,fname,lname)

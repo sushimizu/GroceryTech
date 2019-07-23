@@ -3,7 +3,7 @@ import pymysql
 conn = pymysql.connect(host="localhost",
 							db="GroceryTech",
 							user="root",
-							passwd='CornyJoke12')
+							passwd='password')
 cursor = conn.cursor()
 
 # returns 0 if credentials are invalid
@@ -82,16 +82,29 @@ def insertAddress(AddID,house_num,street,state,city,zipp):
     # clear cursor
     conn.commit()
 
-def systeminfo(sysID,code):
+def systeminfoDeliverer(sysID,code):
     query = "SELECT user_codes FROM SystemInformation WHERE system_id = 0"
     cursor.execute(query)
     for i in cursor:
         res = i[0]
     cursor.fetchall()
+    code = int(code)
     if res == code:
         return 0
     else:
         return 1
+
+def systeminfoManager(sysID, code):
+	query = "SELECT user_codes FROM SystemInformation WHERE system_id = 1"
+	cursor.execute(query)
+	for i in cursor:
+		res = i[0]
+	cursor.fetchall()
+	code = int(code)
+	if res == code:
+		return 0
+	else:
+		return 1
 
 def insertPayment(uname,payment,accNo,routingNo):
     query = "SELECT COUNT(*) FROM Payments WHERE username = %s AND payment_name = %s"
