@@ -99,7 +99,7 @@ def checkregisterBuyer():
 		#parts = email.split('@', '.')
 		if password != cpassword:
 			return render_template("registerBuyer3.html", error=error1)
-		elif (len(str(phone))) != 10:
+		elif (len(str(phone))) != 9:#10:
 			return render_template("registerBuyer3.html", error=error2)
 		elif (len(str(zipp))) != 5:
 			return render_template("registerBuyer3.html", error=error3)
@@ -109,13 +109,16 @@ def checkregisterBuyer():
 			query = "SELECT MAX(id) FROM Address;"
 			response = db.cursor.execute(query)
 			db.cursor.fetchall()
-			AddID = response + 1
+			AddID = 68
+			AddID = AddID + 1#response + 1
 			user_type = 'buyer'
 			reg = db.insertUser(uname,password,user_type,email,fname,lname)
-			return render_template("registerBuyer3.html", error=reg)
+			#return render_template("registerBuyer3.html", error=reg)
 			if reg == 1:
 				return render_template("registerBuyer3.html", error="Username is Taken.")
-			reg = db.insertAddress(AddID,houseNo,street,city,zipp)
+			#var = type(AddID)#+type(houseNo)+type(street)+type(state)+type(city)+type(zipp)
+			#return render_template("registerBuyer3.html", error=var)
+			reg = db.insertAddress(AddID,houseNo,street,state,city,zipp)
 			reg = db.insertBuyer(uname,phone,AddID,'Visa',6)
 			return render_template('login1.html')
 

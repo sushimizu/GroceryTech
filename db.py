@@ -35,14 +35,16 @@ def login(username, password):
 
 def insertUser(uname,password,user_type,email,fname,lname):
     query = "SELECT COUNT(username) FROM Userr WHERE username=%s"
-    response = cursor.execute(query, uname)
-    return response
+    cursor.execute(query, uname)
+    for i in cursor:
+        response = i[0]
+    #return cursor
     cursor.fetchall()
     if response != 1:
-        query = "INSERT INTO Userr(uname,password,user_type,email,fname,lname)"\
-        "VALUES (%s,%s,%s,%s,%s);"
+        query = "INSERT INTO Userr(username,password,user_type,email,first_name,last_name)"\
+        "VALUES (%s,%s,%s,%s,%s,%s);"
 
-        response = cursor.execute(query, (uname,password,user_type,email,fname,lname))
+        cursor.execute(query, (uname,password,user_type,email,fname,lname))
         conn.commit()
         return 0
     else:
@@ -52,16 +54,19 @@ def insertUser(uname,password,user_type,email,fname,lname):
 
 def insertBuyer(Username, Phone, AddressID, DefaultPayment, DefaultStoreID):
     query = "INSERT INTO Buyer(username, phone, address_id, default_payment, default_store_id)"\
-    "VALUES (%s,%d,%d,%s,%d);"
-    response = cursor.execute(query, (Username, Phone, AddressID, DefaultPayment, DefaultStoreID))
+    "VALUES (%s,%s,%s,%s,%s);"
+    cursor.execute(query, (Username, Phone, AddressID, DefaultPayment, DefaultStoreID))
 
     conn.commit()
 
 
 def insertAddress(AddID,house_num,street,state,city,zipp):
-    query = "INSERT INTO Address(AddID,house_num,street,state,city,zipp)"\
-    "VALUES (%d,%d,%s,%s,%s,%d);"
-    response = cursor.execute(query, (AddID,house_num,street,state,city,zipp))
+    query = "INSERT INTO Address(id,house_number,street,state,city,zip_code)"\
+    "VALUES (%s,%s,%s,%s,%s,%s);"
+    '''AddID = int(AddID)
+    house_num = int(house_num)
+    zipp = int(zipp)'''
+    cursor.execute(query, (AddID,house_num,street,state,city,zipp))
     # clear cursor
     cursor.fetchall()
 
