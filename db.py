@@ -103,7 +103,7 @@ def selectBuyerInfo(uname):
 	dictry['email'] = email
 	dictry['fname'] = first_name
 	dictry['lname'] = last_name
-	cursor.execute("SELECT * FROM Addresses Where address_id=%s",address)
+	cursor.execute("SELECT * FROM Address Where address_id=%s",address)
 	addid, house, street, city, state, zipp = cursor.fetchone()
 	dictry['houseNo'] = house
 	dictry['street'] = street
