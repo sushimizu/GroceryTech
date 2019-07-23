@@ -83,4 +83,5 @@ def selectBuyerInfo(uname):
 	dictry['address'] = rows['address']
 	dictry['defaultPayment'] = rows['default_payment']
 	dictry['defaultStore'] = rows['default_store']
+	return dictry
 
