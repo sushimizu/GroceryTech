@@ -47,8 +47,8 @@ CREATE TABLE Address (
     id                INT(2)            NOT NULL,
 house_number            INT(8)            NOT NULL,
 street                VARCHAR(64)        NOT NULL,
-state                VARCHAR(16)        NOT NULL,
     city                VARCHAR(16)        NOT NULL,
+state                VARCHAR(16)        NOT NULL,
     zip_code            INT(8)            NOT NULL,
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -97,7 +97,7 @@ CREATE TABLE GroceryStore (
     address_id            INT(2)            NOT NULL,
     opening_time            TIME            NOT NULL,
     closing_time            TIME            NOT NULL,
-    phone                FLOAT(16)        NOT NULL,
+    phone                CHAR(16)        NOT NULL,
     PRIMARY KEY (store_id),
     CONSTRAINT ad9 FOREIGN KEY(address_id) REFERENCES Address (id) ON DELETE CASCADE ON UPDATE CASCADE   
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -144,7 +144,7 @@ UNLOCK TABLES;
 --
 CREATE TABLE Buyer (
     username            VARCHAR(64)        NOT NULL,
-phone                INT(16)        NOT NULL,
+phone                CHAR(16)        NOT NULL,
 address_id            INT(2)            NOT NULL,
 default_payment        VARCHAR(16)        NOT NULL,
 default_store_id      INT(16)             NOT NULL,
@@ -191,11 +191,14 @@ UNLOCK TABLES;
 
 --
 -- Table structure for table `Orderr`
+-- order_id, delivery_instructions, delivery_time, order_placed_date, order_placed_time
 --
 CREATE TABLE Orderr (
     order_id            INT(8)            NOT NULL,
     delivery_instructions        VARCHAR(256),
-    date                DATE            NOT NULL,
+    delivery_time                VARCHAR(16)            NOT NULL,
+    order_placed_date                VARCHAR(16)            NOT NULL,
+    order_placed_time                VARCHAR(16)            NOT NULL,
     PRIMARY KEY (order_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -204,8 +207,7 @@ CREATE TABLE Orderr (
 --
 
 LOCK TABLES `Orderr` WRITE; 
-INSERT INTO `Orderr` VALUES 
-(64677, 'leave at door', '2018-06-04'), (62224, NULL, '2018-06-13'), (71533, NULL, '2018-06-15'), (33861, 'ring bell', '2018-06-22'), (96079, NULL, '2018-06-27'), (23231, 'avoid dog', '2018-07-04'), (13075, NULL, '2018-07-19'), (32787, 'violent dog on property, leave in mailbox', '2018-07-26'), (36188, NULL, '2018-08-02'), (68759, 'All the icecream in the same bag please.', '2018-08-09'), (24784, 'thank you!', '2018-08-15'), (59856, NULL, '2018-09-17'), (80145, 'no rush', '2018-09-19'), (92049, NULL, '2018-10-04'), (20958, 'I have a party at 4 please hurry ', '2018-10-09'), (46403, NULL, '2018-10-15'), (65334, 'Please keep meat separate from the rest.', '2018-10-24'), (72039, NULL, '2018-11-08'), (47215, NULL, '2018-11-15'), (67217, NULL, '2018-11-19'), (68211, 'no rush', '2018-12-10'), (99511, NULL, '2018-12-24'), (47361, 'sos', '2018-12-28'), (81845, NULL, '2019-08-13'), (63145, "I haven't eaten in days", '2019-08-27'), (17466, NULL, '2019-09-10'), (34346, 'please bring me fruit', '2019-09-11'), (96350, NULL, '2019-09-19'), (94516, "if there's meat, don't let it get bad please. If you have a cooler, use it please.", '2019-10-14'), (31541, NULL, '2019-10-17'), (87232, NULL, '2019-11-18'), (87897, "I won't be home, leave at front door please.", '2019-11-25'), (40389, NULL, '2019-11-28'), (31354, NULL, '2019-12-02'), (78318, 'Thanks', '2020-01-02');
+INSERT INTO `Orderr` VALUES (13075, NULL, 'ASAP', '2019-07-10', '06:05'), (17466, NULL, '1', '2019-07-12', '15:35'), (20958, 'I have a party at 4 please hurry ', '2', '2019-07-06', '09:35'), (23231, 'avoid dog', '3', '2019-07-03', '05:50'), (24784, 'thank you!', '4', '2019-07-01', '07:25'), (31354, NULL, '5', '2019-07-06', '21:20'), (31541, NULL, '10', '2019-07-08', '17:15'), (32787, 'violent dog on property, leave in mailbox', '12', '2019-07-06', '06:25'), (33861, 'ring bell', '24', '2019-07-09', '05:35'), (34346, 'please bring me fruit', 'ASAP', '2019-07-07', '15:55'), (36188, NULL, '1', '2019-07-10', '06:35'), (40389, NULL, '2', '2019-07-12', '20:40'), (46403, NULL, '3', '2019-07-02', '09:40'), (47215, NULL, '4', '2019-07-07', '11:25'), (47361, 'sos', 'ASAP', '2019-07-04', '14:15'), (59856, NULL, '10', '2019-07-14', '08:30'), (62224, NULL, '12', '2019-07-10', '05:15'), (63145, "I haven't eaten in days", 'ASAP', '2019-07-01', '15:00'), (64677, 'leave at door', 'ASAP', '2019-07-14', '05:10'), (65334, 'Please keep meat separate from the rest.', 'ASAP', '2019-07-12', '10:15'), (67217, NULL, '2', '2019-07-04', '11:35'), (68211, 'no rush', 'ASAP', '2019-07-12', '11:40'), (68759, 'All the icecream in the same bag please.', '4', '2019-07-01', '07:05'), (71533, NULL, '5', '2019-07-05', '05:25'), (72039, NULL, 'ASAP', '2019-07-13', '10:40'), (78318, 'Thanks', 'ASAP', '2019-07-01', '21:25'), (80145, 'no rush', 'ASAP', '2019-07-13', '09:00'), (81845, NULL, 'ASAP', '2019-07-11', '14:55'), (87232, NULL, '1', '2019-07-01', '18:30'), (87897, "I won't be home, leave at front door please.", 'ASAP', '2019-07-08', '19:45'), (92049, NULL, '3', '2019-07-03', '09:20'), (94516, "if there's meat, don't let it get bad please. If you have a cooler, use it please.", '4', '2019-07-11', '16:50'), (96079, NULL, '5', '2019-07-03', '05:40'), (96350, NULL, '10', '2017-07-13', '16:45'), (99511, NULL, 'ASAP', '2017-07-01', '12:05');
 UNLOCK TABLES;
 
 
@@ -295,7 +297,7 @@ CREATE TABLE orderFrom (
     store_address_id        INT(2)            NOT NULL,
     order_id            INT(8)            NOT NULL,
     PRIMARY KEY (order_id),
-CONSTRAINT ad2 FOREIGN KEY (store_address_id) REFERENCES Address (id) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT ad2 FOREIGN KEY (store_address_id) REFERENCES GroceryStore (store_id) ON DELETE CASCADE ON UPDATE CASCADE,
 CONSTRAINT od3 FOREIGN KEY (order_id) REFERENCES Orderr (order_id) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -341,8 +343,9 @@ UNLOCK TABLES;
 CREATE TABLE deliveredBy (
     order_id            INT(8)            NOT NULL,
     deliverer_username        VARCHAR(64)        NOT NULL,
-    time                VARCHAR(16)            NOT NULL,
     is_delivered            BOOLEAN        NOT NULL,
+    delivery_time                VARCHAR(16),
+    delivery_date                VARCHAR(16),
     PRIMARY KEY(order_id),
 CONSTRAINT od4 FOREIGN KEY (order_id) REFERENCES Orderr (order_id) ON DELETE CASCADE ON UPDATE CASCADE,
 CONSTRAINT dun1 FOREIGN KEY (deliverer_username) REFERENCES Userr (username) ON DELETE CASCADE ON UPDATE CASCADE
@@ -353,7 +356,7 @@ CONSTRAINT dun1 FOREIGN KEY (deliverer_username) REFERENCES Userr (username) ON 
 --
 
 LOCK TABLES `deliveredBy` WRITE; 
-INSERT INTO `deliveredBy` VALUES (64677, 'chivalrouspotatoes', '05:10', 1), (62224, 'chivalrouspotatoes', '05:15', 1), (71533, 'chivalrouspotatoes', '05:25', 1), (33861, 'chivalrouspotatoes', '05:35', 1), (96079, 'chivalrouspotatoes', '05:40', 1), (23231, 'chivalrouspotatoes', '05:50', 1), (13075, 'chivalrouspotatoes', '06:05', 1), (32787, 'chivalrouspotatoes', '06:25', 1), (36188, 'chivalrouspotatoes', '06:35', 1), (68759, 'chivalrouspotatoes', '07:05', 1), (24784, 'chivalrouspotatoes', '07:25', 1), (59856, 'chivalrouspotatoes', '08:30', 1), (80145, 'chivalrouspotatoes', '09:00', 1), (92049, 'chivalrouspotatoes', '09:20', 1), (20958, 'chivalrouspotatoes', '09:35', 1), (46403, 'chivalrouspotatoes', '09:40', 1), (65334, 'downrightcorney', '10:15', 1), (72039, 'glumsmike', '10:40', 1), (47215, 'inventivenickleby', '11:25', 1), (67217, 'languidtopsawyer', '11:35', 1), (68211, 'methodicalcharity', '11:40', 1), (99511, 'reasonablewrayburn', '12:05', 1), (47361, 'reasonablewrayburn', '14:15', 1), (81845, 'reasonablewrayburn', '14:55', 0), (63145, 'shadowywestlock', '15:00', 0), (17466, 'spiffyjudith', '15:35', 0), (34346, 'stylishtowlinson', '15:55', 0), (96350, 'stylishtowlinson', '16:45', 0), (94516, 'stylishtowlinson', '16:50', 0), (31541, 'teenyroads', '17:15', 0), (87232, 'teenyroads', '18:30', 0), (87897, 'teenyroads', '19:45', 0), (40389, 'twinchicken', '20:40', 0), (31354, 'twinchicken', '21:20', 0), (78318, 'unknownswidger', '21:25', 0);
+INSERT INTO `deliveredBy` VALUES (17466, 'spiffyjudith', 0, NULL, NULL), (31354, 'twinchicken', 0, NULL, NULL), (31541, 'teenyroads', 0, NULL, NULL), (34346, 'stylishtowlinson', 0, NULL, NULL), (40389, 'twinchicken', 0, NULL, NULL), (63145, 'shadowywestlock', 0, NULL, NULL), (78318, 'unknownswidger', 0, NULL, NULL), (81845, 'reasonablewrayburn', 0, NULL, NULL), (87232, 'teenyroads', 0, NULL, NULL), (87897, 'teenyroads', 0, NULL, NULL), (94516, 'stylishtowlinson', 0, NULL, NULL), (96350, 'stylishtowlinson', 0, NULL, NULL), (13075, 'chivalrouspotatoes', 1, '12:05', '2019-07-02'), (20958, 'chivalrouspotatoes', 1, '15:35', '2019-07-07'), (23231, 'chivalrouspotatoes', 1, '14:50', '2019-07-04'), (24784, 'chivalrouspotatoes', 1, '18:25', '2019-07-14'), (32787, 'chivalrouspotatoes', 1, '17:25', '2019-07-10'), (33861, 'chivalrouspotatoes', 1, '15:35', '2019-07-01'), (36188, 'chivalrouspotatoes', 1, '05:35', '2019-07-14'), (46403, 'chivalrouspotatoes', 1, '10:40', '2019-07-12'), (47215, 'inventivenickleby', 1, '13:25', '2019-07-04'), (47361, 'reasonablewrayburn', 1, '12:15', '2019-07-12'), (59856, 'chivalrouspotatoes', 1, '11:30', '2019-07-01'), (62224, 'chivalrouspotatoes', 1, '10:15', '2019-07-05'), (64677, 'chivalrouspotatoes', 1, '10:57', '2019-07-13'), (65334, 'downrightcorney', 1, '22:15', '2019-07-01'), (67217, 'languidtopsawyer', 1, '09:35', '2019-07-13'), (68211, 'methodicalcharity', 1, '15:40', '2019-07-11'), (68759, 'chivalrouspotatoes', 1, '19:05', '2019-07-01'), (71533, 'chivalrouspotatoes', 1, '20:25', '2019-07-08'), (72039, 'glumsmike', 1, '12:40', '2019-07-03'), (80145, 'chivalrouspotatoes', 1, '20:00', '2019-07-11'), (92049, 'chivalrouspotatoes', 1, '10:20', '2019-07-03'), (96079, 'chivalrouspotatoes', 1, '02:40', '2017-07-14'), (99511, 'reasonablewrayburn', 1, '12:35', '2017-07-01');
 UNLOCK TABLES;
 
 -- EOF
