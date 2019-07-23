@@ -9,8 +9,8 @@ cursor = conn.cursor()
 
 def tuplesToList(tlist):
     newlist = []
-    for item in tlist:
-        newlist.append(item[0])
+    for i in tlist:
+        newlist.append(i[0])
     return newlist
 
 
@@ -263,15 +263,11 @@ def revenueRep(uname):
 	return dictry
 
 def assignments(uname):
-	cursor.execute("SELECT * FROM Orderr")
-	#cursor.execute("SELECT GroceryStore.store_name, Orderr.order_id, order_placed_date, Orderr.order_placed_time, SUM(selectItem.quantity*Item.listed_price), COUNT(selectItem.quantity) FROM GroceryStore Join orderFrom on GroceryStore.store_id=orderFrom.store_address Join Orderr on Orderr.order_id=orderFrom.order_id Join selectItem on selectItem.order_id=Orderr.order_id Join Item on Item.item_id=selectItem.item_id join deliveredBy on deliveredBy.order_id=Orderr.order_id where deliveredBy.deliverer_username=%s group by Orderr.order_id", uname)
-	#info = tuplesToList(cursor.fetchall())
-	#info = tuplesToList(cursor.fetchone())
-	a, b, c, d, e = cursor.fetchone()
+	#cursor.execute("SELECT * FROM Orderr")
+	cursor.execute("SELECT GroceryStore.store_name, Orderr.order_id, order_placed_date, Orderr.order_placed_time, SUM(selectItem.quantity*Item.listed_price), COUNT(selectItem.quantity) FROM GroceryStore Join orderFrom on GroceryStore.store_id=orderFrom.store_address Join Orderr on Orderr.order_id=orderFrom.order_id Join selectItem on selectItem.order_id=Orderr.order_id Join Item on Item.item_id=selectItem.item_id join deliveredBy on deliveredBy.order_id=Orderr.order_id where deliveredBy.deliverer_username=%s group by Orderr.order_id", uname)
+	info = tuplesToList(cursor.fetchall())
+	#a, b, c, d, e = cursor.fetchone()
 	#store, orderID, orderDate, orderTime, noItems, quantity = cursor.fetchone()
-
-	#info.append("")
-	dictry = {}
-	dictry["date"] = d
-	return dictry
+	info.append("")
+	return info
 
