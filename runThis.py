@@ -265,10 +265,10 @@ def updateBuyerAccountInfo():
 		else:
 			val = db.updateBuyerInfo(uname,prefStore,email,prefCard,routingNo,phone,houseNo,streetAddress,city,state,zipp)
 			if val == 0:
-				return render_template("buyerAccountInfo7.html", error = "Updates Saved")
+				return render_template("buyerAccountInfo7.html", error = "Updates Saved", dictry=dictry)
 			else:
-				return render_template("buyerAccountInfo7.html",error = "SQL query error")
-	return render_template("buyerAccountInfo7.html", error = "Something Wrong")
+				return render_template("buyerAccountInfo7.html",error = "SQL query error", dictry=dictry)
+	return render_template("buyerFunctionality6.html", error = "Something Wrong")
 
 
 @app.route('/findItem', methods=['GET','POST'])
