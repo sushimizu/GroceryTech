@@ -320,7 +320,8 @@ def managerAccInfo():
 
 @app.route('/revenueReport', methods=['GET','POST'])
 def revenueReport():
-	return render_template('revenueReport24.html')
+	dictry = db.revenueRep(currentUser)
+	return render_template('revenueReport24.html', dictry=dictry)
 
 @app.route('/outstandingOrders', methods=['GET','POST'])
 def outstnadingOrders():
