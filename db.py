@@ -6,6 +6,14 @@ conn = pymysql.connect(host="localhost",
 							passwd='CornyJoke12')
 cursor = conn.cursor()
 
+
+def tuplesToList(tlist):
+    newlist = []
+    for item in tlist:
+        newlist.append(item[0])
+    return newlist
+
+
 # returns 0 if credentials are invalid
 # returns 1 if user is a manager
 # returns 2 if user is NOT a manager
@@ -246,13 +254,20 @@ def revenueRep(uname):
 	dictry['itemCount'] = item_id
 
 	"""
-	itemCount, revenue =  cursor.execute("SELECT COUNT(Item.listed_price*selectItem.quantity), SUM(Item.listed_price*selectItem.quantity-Item.wholesale_price*selectItem.quantity) FROM Item JOIN selectItem ON Item.item_id=selectItem.item_id WHERE selectItem.order_id IN (SELECT order_id FROM Orderr) AND selectItem.item_id IN (SELECT item_id FROM soldAt JOIN manages ON soldAt.store_id=manages.store_address AND manages.username= %s)",uname)
+	cursor.execute("SELECT COUNT(Item.listed_price*selectItem.quantity), SUM(Item.listed_price*selectItem.quantity-Item.wholesale_price*selectItem.quantity) FROM Item JOIN selectItem ON Item.item_id=selectItem.item_id WHERE selectItem.order_id IN (SELECT order_id FROM Orderr) AND selectItem.item_id IN (SELECT item_id FROM soldAt JOIN manages ON soldAt.store_id=manages.store_address AND manages.username= %s)",uname)
 	#itemCount, revenue =  cursor.execute("SELECT COUNT(Item.listed_price*selectItem.quantity),SUM(Item.listed_price*selectItem.quantity-Item.wholesale_price*selectItem.quantity) FROM Item JOIN selectItem on Item.item_id=selectItem.item_id Where selectItem.order_id in (select order_id from Order where Order.order_placed_date > 2018-07-23  AND selectItem.item_id in(SELECT item_id from SoldAt JOIN manages on SoldAt.store_address=manages.store_address and manages.username = username=%s",uname)
+	itemCount, revenue =  cursor.fetchone()
 	dictry['itemCount'] = itemCount
 	dictry['revenue'] = revenue
 
 	return dictry
 
-
-
+def assignments(uname):
+	cursor.execute("SELECT * FROM Orderr")
+	#cursor.execute("SELECT GroceryStore.store_name, Orderr.order_id, order_placed_date, Orderr.order_placed_time, SUM(selectItem.quantity*Item.listed_price), COUNT(selectItem.quantity) FROM GroceryStore Join orderFrom on GroceryStore.store_id=orderFrom.store_address Join Orderr on Orderr.order_id=orderFrom.order_id Join selectItem on selectItem.order_id=Orderr.order_id Join Item on Item.item_id=selectItem.item_id join deliveredBy on deliveredBy.order_id=Orderr.order_id where deliveredBy.deliverer_username=%s group by Orderr.order_id", uname)
+	#info = tuplesToList(cursor.fetchall())
+	info = tuplesToList(cursor.fetchone())
+	#store, orderID, orderDate, orderTime, noItems, quantity = cursor.fetchone()
+	info.append("")
+	return info
 
