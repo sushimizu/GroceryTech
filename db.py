@@ -3,7 +3,7 @@ import pymysql
 conn = pymysql.connect(host="localhost",
 							db="GroceryTech",
 							user="root",
-							passwd='CornyJoke12')
+							passwd='password')
 cursor = conn.cursor()
 
 # returns 0 if credentials are invalid
@@ -12,20 +12,21 @@ cursor = conn.cursor()
 def login(username, password):
     query = "SELECT COUNT(*) FROM userr WHERE username = %s AND password = %s;"
     response = cursor.execute(query, (username, password))
+    for i in cursor:
+        i = (i[0])
     # clear cursor
     cursor.fetchall()
-
-    if response == 0:
+    if i == 0:
         return 0
     else:
         query = "SELECT user_type FROM userr WHERE username = %s;"
         response = cursor.execute(query, (username))
 
         result = cursor.fetchone()
-
+        print(result[0])
         # sanity check
         cursor.fetchall()
-
+        print(result[0])
         if result[0] == 'manager':  # if Is_manager
             return 1
         elif result[0] == 'deliverer':
