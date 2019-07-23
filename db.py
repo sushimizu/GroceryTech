@@ -129,7 +129,12 @@ def selectBuyerInfo(uname):
 
 
 def selectDelivererInfo(uname):
-	cursor.execute("SELECT * FROM Buyer Where username=%s",uname)
+	cursor.execute("SELECT * FROM Userr Where username=%s",uname)
+	username, password, userType, email, first_name, last_name = cursor.fetchone()
 	dictry = {}
+	dictry['uname'] = username
+	dictry['email'] = email
+	dictry['fname'] = first_name
+	dictry['lname'] = last_name
 	return dictry
 
