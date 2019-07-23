@@ -13,7 +13,13 @@
 		
 	<form action="/paymentMethods" method="post">
 		Payment Name:
- 		 <input type="text" name="payName"> <br> <br>
+ 	
+ 		 <select name="payment">
+		      <option value="VISA">VISA</option>
+		      <option value="Debt">Debt</option>
+		      <option value="Check">Check</option>
+			  <option value="AE">American Express</option>
+		 </select> <br><br>
      Account Number:
  		 <input type="text" name="accName"> <br> <br>
      Routing Number:
