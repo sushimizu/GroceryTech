@@ -255,17 +255,17 @@ def updateBuyerAccountInfo():
 		error1 = "email contains non-alphanumeric characters"
 		error2 = "phone has incorrect number of digits"
 		error3 = "zip code has incorrect number of digits"
-
+		dictry = db.selectBuyerInfo(currentUser)
 		if (len(str(phone))) != 9:#10:
 			return render_template("buyerAccountInfo7.html", error=error1)
 		elif (len(str(zipp))) != 5:
 			return render_template("buyerAccountInfo7.html", error=error2)
 		elif (len(arr) != 3) or (arr[0].isalnum() and arr[1].isalnum() and arr[2].isalnum())/1 != 1:
-			return render_template("buyerAccountInfo7.html", error=error3)
+			return render_template("buyerAccountInfo7.html", error=error3, dictry=dictry)
 		else:
 			val =  db.updateBuyerInfo(uname,refStore,email,prefCard,routingNo,phone,houseNo,streetAddress,city,state,zipp)
-			return render_template("buyerAccountInfo7.html", error = "Updates Saved")
-	return render_template("buyerAccountInfo7.html", error = "Something Wrong")
+			return render_template("buyerAccountInfo7.html", error = "Updates Saved", dictry=dictry)
+	return render_template("buyerAccountInfo7.html", error = "Something Wrong", dictry=dictry)
 
 
 @app.route('/findItem', methods=['GET','POST'])
