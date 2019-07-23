@@ -264,7 +264,10 @@ def updateBuyerAccountInfo():
 			return render_template("buyerAccountInfo7.html", error=error3)
 		else:
 			val =  db.updateBuyerInfo(uname,refStore,email,prefCard,routingNo,phone,houseNo,streetAddress,city,state,zipp)
-			return render_template("buyerAccountInfo7.html", error = "Updates Saved")
+			if val == 0:
+				return render_template("buyerAccountInfo7.html", error = "Updates Saved")
+			else:
+				return render_template("buyerAccountInfo7.html",error = "SQL query error")
 	return render_template("buyerAccountInfo7.html", error = "Something Wrong")
 
 

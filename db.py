@@ -168,8 +168,12 @@ def updateBuyerInfo(uname,prefStore,email,prefCard,routingNo,phone,houseNo,stree
     cursor.execute(query, (phone,prefStore,uname))
     # clear cursor
     conn.commit()
-    query = "UPDATE Address SET house_number = %s, street = %s, city = %s, state = %s, zip_code = %s WHERE Username = %s;"
-    cursor.execute(query, (houseNo,streetAddress,city,state,zipp,uname))
+    query = "SELECT address_id FROM Buyer WHERE username = %s"
+    cursor.execute(query, (uname))
+    addID = cursor.fetchone()
+    cursor.fetchall()
+    query = "UPDATE Address SET house_number = %s, street = %s, city = %s, state = %s, zip_code = %s WHERE id = %s;"
+    cursor.execute(query, (houseNo,streetAddress,city,state,zipp,addID))
     # clear cursor
     conn.commit()
 
@@ -183,7 +187,7 @@ def updateBuyerInfo(uname,prefStore,email,prefCard,routingNo,phone,houseNo,stree
     # clear cursor
     conn.commit()
 
-    return
+    return 0
 
 def selectDelivererInfo(uname):
 	cursor.execute("SELECT * FROM Userr Where username=%s",uname)
