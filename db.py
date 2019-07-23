@@ -115,5 +115,10 @@ def selectBuyerInfo(uname):
 	dictry['payment'] = payment
 	dictry['account'] = account
 	dictry['routing'] = routing
+	cursor.execute("SELECT * FROM GroceryStore Where store_id=%s",default_store)
+	store_id, storeName,address_id,b,c,d = cursor.fetchone()
+	dictry['storeName'] = storeName
+	
+	
 	return dictry
 
