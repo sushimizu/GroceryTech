@@ -312,7 +312,7 @@ def litemType():
 
 """
 @app.route('/itemType/<Itype>', methods=['GET','POST'])
-def itemTypeI():
+def itemTypeI(Itype):
 	info = db.popItem(Itype)
 	return render_template('itemType11.html', Itype=Itype, info=info)
 
