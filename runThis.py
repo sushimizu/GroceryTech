@@ -334,6 +334,35 @@ def paymentMethods():
 def newPayment():
 	return render_template('newPayment15.html')
 
+	@app.route('/addNewPayment', methods=['GET','POST'])
+def addNewPayment():
+	if request.method == "POST":
+		#uname = request.form['uname']
+		prefStore = request.form['prefStore']
+		email = request.form['email']
+		prefCard = request.form['prefCard']
+		routingNo = request.form['routingNo']
+
+		arr = re.split(r'[@.]', email)
+		error1 = "phone has incorrect number of digits"
+		error2 = "zip code has incorrect number of digits"
+		error3 = "email contains non-alphanumeric characters"
+		dictry = db.selectBuyerInfo(currentUser)
+		if (len(str(phone))) != 9:#10:
+			return render_template("buyerAccountInfo7.html", error=error1, dictry=dictry)
+		elif (len(str(zipp))) != 5:
+			return render_template("buyerAccountInfo7.html", error=error2, dictry=dictry)
+		elif (len(arr) != 3) or (arr[0].isalnum() and arr[1].isalnum() and arr[2].isalnum())/1 != 1:
+			return render_template("buyerAccountInfo7.html", error=error3, dictry=dictry)
+		else:
+			val = db.updateBuyerInfo(currentUser, prefStore,email,prefCard,routingNo,phone,houseNo,streetAddress,city,state,zipp)
+			dictry = db.selectBuyerInfo(currentUser)
+			if val == 0:
+				return render_template("buyerAccountInfo7.html", error = "Updates Saved", dictry=dictry)
+			else:
+				return render_template("buyerAccountInfo7.html",error = "SQL query error", dictry=dictry)
+	return render_template("buyerFunctionality6.html", error = "Something Wrong")
+
 @app.route('/reciept', methods=['GET','POST'])
 def reciept():
 	dictry = db.reciept(orderID)
