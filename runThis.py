@@ -257,9 +257,9 @@ def updateBuyerAccountInfo():
 		error3 = "zip code has incorrect number of digits"
 		dictry = db.selectBuyerInfo(currentUser)
 		if (len(str(phone))) != 9:#10:
-			return render_template("buyerAccountInfo7.html", error=error1)
+			return render_template("buyerAccountInfo7.html", error=error1, dictry=dictry)
 		elif (len(str(zipp))) != 5:
-			return render_template("buyerAccountInfo7.html", error=error2)
+			return render_template("buyerAccountInfo7.html", error=error2, dictry=dictry)
 		elif (len(arr) != 3) or (arr[0].isalnum() and arr[1].isalnum() and arr[2].isalnum())/1 != 1:
 			return render_template("buyerAccountInfo7.html", error=error3, dictry=dictry)
 		else:
