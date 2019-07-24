@@ -288,7 +288,7 @@ def orderHist(uname):
 	#info.append("")
 	return info
 
-listStores():
+def listStores():
 	cursor.execute("SELECT GroceryStore.store_id, GroceryStore.store_name, Address.house_number, Address.street, Address.city, Address.state, Address.zip_code, GroceryStore.phone, GroceryStore.opening_time, GroceryStore.closing_time FROM GroceryStore JOIN Address ON Address.id=GroceryStore.address_id")
 	storeID, storeName, house, street, city, state, zipp, phone, opening, closing = cursor.fetchone()
 	dictry = {}
