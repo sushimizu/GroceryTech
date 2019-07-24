@@ -466,5 +466,8 @@ def outstandingOrders(uname):
 	info =  tuplesToList(cursor.fetchall())
 	return info
 
-
+def updateDelivery(uname, orderID):
+	cursor.execute("update deliveredBy set is_delivered=1,delivery_time=curtime(), delivery_date=curdate() where order_id=%s and deliverer_username=%s", (orderID, uname))
+	conn.commit()
+	return 0 
 
