@@ -417,6 +417,8 @@ def delivererAccInfo():
 @app.route('/updateDelivererAccInfo', methods=['GET','POST'])
 def updateDelivererAccInfo():
 	if request.method == "POST":
+		fname = request.form['fname']
+		lname = request.form['lname']
 		email = request.form['email']
 
 		arr = re.split(r'[@.]', email)
@@ -425,7 +427,7 @@ def updateDelivererAccInfo():
 		if (len(arr) != 3) or (arr[0].isalnum() and arr[1].isalnum() and arr[2].isalnum())/1 != 1:
 			return render_template("delivererAccountInfo19.html", error=error1, dictry=dictry)
 		else:
-			val = db.updateDelivererInfo(currentUser, email)
+			val = db.updateDelivererInfo(currentUser, email, fname, lname)
 			dictry = db.selectDelivererInfo(currentUser)
 			if val == 0:
 				return render_template("delivererAccountInfo19.html", error = "Updates Saved", dictry=dictry)

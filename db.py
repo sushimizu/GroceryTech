@@ -204,9 +204,9 @@ def selectDelivererInfo(uname):
 	dictry['lname'] = last_name
 	return dictry
 
-def updateDelivererInfo(uname,email):
-    query = "UPDATE Userr SET email = %s WHERE Username = %s;"
-    cursor.execute(query, (email,uname))
+def updateDelivererInfo(uname,email,fname,lname):
+    query = "UPDATE Userr SET first_name = %s, last_name = %s, email = %s WHERE Username = %s;"
+    cursor.execute(query, (fname,lname,email,uname))
     # clear cursor
     conn.commit()
 
@@ -363,8 +363,8 @@ def assignment(uname,orderID):
     query = "SELECT house_number, street, city, state, zipcode FROM Addresses WHERE address_id = %s"
     cursor.execute(query, (aID))
     houseNo, street, city, state, zipp = cursor.fetchone()
-    
-	
+
+
     dictry['houseNo'] = houseNo
     dictry['street'] = street
     dictry['city'] = city
