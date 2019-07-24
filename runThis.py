@@ -240,7 +240,7 @@ def buyerAccountInfo():
 			store.append(" selected ")
 		else:
 			store.append(" ")
-	
+
 
 	return render_template("buyerAccountInfo7.html", dictry=dictry, store=store)
 
@@ -380,7 +380,22 @@ def delivererAccInfo():
 
 @app.route('/updateDelivererAccInfo', methods=['GET','POST'])
 def updateDelivererAccInfo():
-	return
+	if request.method == "POST":
+		email = request.form['email']
+
+		arr = re.split(r'[@.]', email)
+		error1 = "email contains non-alphanumeric characters"
+		dictry = db.selectDelivererInfo(currentUser)
+		if (len(arr) != 3) or (arr[0].isalnum() and arr[1].isalnum() and arr[2].isalnum())/1 != 1:
+			return render_template("delivererAccountInfo19.html", error=error1, dictry=dictry)
+		else:
+			val = db.updateDelivererInfo(currentUser, email)
+			dictry = db.selectDelivererInfo(currentUser)
+			if val == 0:
+				return render_template("delivererAccountInfo19.html", error = "Updates Saved", dictry=dictry)
+			else:
+				return render_template("delivererAccountInfo19.html",error = "SQL query error", dictry=dictry)
+	return render_template("delivererAccountInfo19.html", error = "Something Wrong")
 
 @app.route('/assignments', methods=['GET','POST'])
 def assignments():

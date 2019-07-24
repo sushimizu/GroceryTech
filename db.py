@@ -204,7 +204,13 @@ def selectDelivererInfo(uname):
 	dictry['lname'] = last_name
 	return dictry
 
+def updateDelivererInfo(uname,email):
+    query = "UPDATE Userr SET email = %s WHERE Username = %s;"
+    cursor.execute(query, (email,uname))
+    # clear cursor
+    conn.commit()
 
+    return 0
 
 
 
@@ -306,6 +312,6 @@ def listStores():
 	"""
 	info = tuplesToList(cursor.fetchall())
 	return info
-	
+
 
 
