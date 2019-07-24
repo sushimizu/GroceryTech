@@ -238,9 +238,9 @@ def selectManagerInfo(uname):
 	dictry['zipp'] = zipp
 	return dictry
 
-def updateManagerInfo(uname, prefStore,email,phone,houseNo,streetAddress,city,state,zipp):
-    query = "UPDATE Userr SET email = %s WHERE Username = %s;"
-    cursor.execute(query, (email,uname))
+def updateManagerInfo(uname, prefStore,email,phone,houseNo,streetAddress,city,state,zipp,fname,lname):
+    query = "UPDATE Userr SET first_name = %s, last_name = %s email = %s WHERE Username = %s;"
+    cursor.execute(query, (fname,lname,email,uname))
     # clear cursor
     conn.commit()
     #following query was for checking to see if the addess inputted in is correct, though we figured that the manager should not be able to just change the address of the store.

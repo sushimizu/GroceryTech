@@ -476,7 +476,8 @@ def managerAccInfo():
 @app.route('/updateManagerAccInfo', methods=['GET','POST'])
 def updateManagerAccInfo():
 	if request.method == "POST":
-		#uname = request.form['uname']
+		fname = request.form['fname']
+		lname = request.form['lname']
 		prefStore = request.form['prefStore']
 		email = request.form['email']
 		phone = request.form['phone']
@@ -500,7 +501,7 @@ def updateManagerAccInfo():
 		elif (len(arr) != 3) or (arr[0].isalnum() and arr[1].isalnum() and arr[2].isalnum())/1 != 1:
 			return render_template("managerAccountInfo23.html", error=error3, dictry=dictry, stores=stores, sel=sel)
 		else:
-			val = db.updateManagerInfo(currentUser, prefStore,email,phone,houseNo,streetAddress,city,state,zipp)
+			val = db.updateManagerInfo(currentUser, prefStore,email,phone,houseNo,streetAddress,city,state,zipp,fname,lname)
 			dictry = db.selectManagerInfo(currentUser)
 			stores = db.listStores()
 			sel = ()
