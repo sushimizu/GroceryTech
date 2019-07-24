@@ -234,13 +234,15 @@ def buyerAccountInfo():
 def buyerAccountInfo():
 	#currentUser = 'admirableneville'
 	dictry =  db.selectBuyerInfo(currentUser)
+	store = db.listStores()
+	"""
 	store = []
 	for i in range(1,36):
 		if i == int(dictry['defaultStore']):
 			store.append(" selected ")
 		else:
 			store.append(" ")
-
+	"""
 
 	return render_template("buyerAccountInfo7.html", dictry=dictry, store=store)
 
@@ -323,7 +325,8 @@ def checkout():
 
 @app.route('/paymentMethods', methods=['GET','POST'])
 def paymentMethods():
-	return render_template('paymentMethods14.html')
+	payment = paymentMeth(currentUser)
+	return render_template('paymentMethods14.html', payment= payment )
 
 @app.route('/newPayment', methods=['GET','POST'])
 def newPayment():
@@ -433,7 +436,36 @@ def managerAccInfo():
 
 @app.route('/updateManagerAccInfo', methods=['GET','POST'])
 def updateManagerAccInfo():
-	return
+	if request.method == "POST":
+		#uname = request.form['uname']
+		prefStore = request.form['prefStore']
+		email = request.form['email']
+		phone = request.form['phone']
+		houseNo = request.form['houseNo']
+		streetAddress = request.form['streetAddress']
+		city = request.form['city']
+		state = request.form['state']
+		zipp = request.form['zip']
+
+		arr = re.split(r'[@.]', email)
+		error1 = "phone has incorrect number of digits"
+		error2 = "zip code has incorrect number of digits"
+		error3 = "email contains non-alphanumeric characters"
+		dictry = db.selectManagerInfo(currentUser)
+		if (len(str(phone))) != 9:#10:
+			return render_template("managerAccountInfo23.html", error=error1, dictry=dictry)
+		elif (len(str(zipp))) != 5:
+			return render_template("managerAccountInfo23.html", error=error2, dictry=dictry)
+		elif (len(arr) != 3) or (arr[0].isalnum() and arr[1].isalnum() and arr[2].isalnum())/1 != 1:
+			return render_template("managerAccountInfo23.html", error=error3, dictry=dictry)
+		else:
+			val = db.updateManagerInfo(currentUser, prefStore,email,phone,houseNo,streetAddress,city,state,zipp)
+			dictry = db.selectManagerInfo(currentUser)
+			if val == 0:
+				return render_template("managerAccountInfo23.html", error = "Updates Saved", dictry=dictry)
+			else:
+				return render_template("managerAccountInfo23.html",error = "SQL query error", dictry=dictry)
+	return render_template("managerAccountInfo23.html", error = "Something Wrong")
 
 @app.route('/revenueReport', methods=['GET','POST'])
 def revenueReport():

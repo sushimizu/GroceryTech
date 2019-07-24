@@ -238,7 +238,50 @@ def selectManagerInfo(uname):
 	dictry['zipp'] = zipp
 	return dictry
 
+def updateManagerInfo(uname, prefStore,email,phone,houseNo,streetAddress,city,state,zipp):
+    query = "UPDATE Userr SET email = %s WHERE Username = %s;"
+    cursor.execute(query, (email,uname))
+    # clear cursor
+    conn.commit()
+    #following query was for checking to see if the addess inputted in is correct, though we figured that the manager should not be able to just change the address of the store.
+    '''query = "SELECT id FROM Address WHERE houseNo = %s AND street = %s AND city = %s AND state = %s AND zip_code = %s"
+    cursor.execute(query, (houseNo,streetAddress,city,state,zipp))
+    storeID = cursor.fetchone()
+    cursor.fetchall()
+    if sum(storeID) == 0:
+        return 1'''
+    query = "UPDATE Buyer SET phone = %s, default_store_id = %s WHERE Username = %s;"
+    cursor.execute(query, (phone,storeID,uname))
+    # clear cursor
+    conn.commit()
+    query = "SELECT store_address FROM manages WHERE username = %s"
+    cursor.execute(query, (uname))
+    storeID = cursor.fetchone()
+    cursor.fetchall()
+    query = "UPDATE manages SET store_address = %s WHERE Username = %s AND store_address = %s;"
+    cursor.execute(query, (prefStore,storeID,uname))
+    # clear cursor
+    conn.commit()
+    query = "SELECT address_id FROM Buyer WHERE username = %s"
+    cursor.execute(query, (uname))
+    addID = cursor.fetchone()
+    cursor.fetchall()
+    query = "UPDATE Address SET house_number = %s, street = %s, city = %s, state = %s, zip_code = %s WHERE id = %s;"
+    cursor.execute(query, (houseNo,streetAddress,city,state,zipp,addID))
+    # clear cursor
+    conn.commit()
 
+
+    query = "SELECT default_payment FROM Buyer WHERE username = %s"
+    cursor.execute(query, (uname))
+    payname = cursor.fetchone()
+    cursor.fetchall()
+    query = "UPDATE Payments SET account_number = %s, routing_number = %s WHERE Username = %s AND payment_name = %s;"
+    cursor.execute(query, (prefCard,routingNo,uname,payname))
+    # clear cursor
+    conn.commit()
+
+    return 0
 
 def reciept(orderID):
 	dictry = {}
