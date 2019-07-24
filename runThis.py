@@ -239,7 +239,7 @@ def buyerAccountInfo():
 @app.route('/updateBuyerAccountInfo', methods=['GET','POST'])
 def updateBuyerAccountInfo():
 	if request.method == "POST":
-		uname = request.form['uname']
+		#uname = request.form['uname']
 		prefStore = request.form['prefStore']
 		email = request.form['email']
 		prefCard = request.form['prefCard']
@@ -255,21 +255,28 @@ def updateBuyerAccountInfo():
 		error1 = "email contains non-alphanumeric characters"
 		error2 = "phone has incorrect number of digits"
 		error3 = "zip code has incorrect number of digits"
-		dictry = db.selectBuyerInfo(currentUser)
+
 		if (len(str(phone))) != 9:#10:
 			return render_template("buyerAccountInfo7.html", error=error1, dictry=dictry)
 		elif (len(str(zipp))) != 5:
 			return render_template("buyerAccountInfo7.html", error=error2, dictry=dictry)
 		elif (len(arr) != 3) or (arr[0].isalnum() and arr[1].isalnum() and arr[2].isalnum())/1 != 1:
-			return render_template("buyerAccountInfo7.html", error=error3, dictry=dictry)
+			return render_template("buyerAccountInfo7.html", error=error3)
 		else:
-			val = db.updateBuyerInfo(uname,prefStore,email,prefCard,routingNo,phone,houseNo,streetAddress,city,state,zipp)
+			val =  db.updateBuyerInfo(uname,refStore,email,prefCard,routingNo,phone,houseNo,streetAddress,city,state,zipp)
 			if val == 0:
 				return render_template("buyerAccountInfo7.html", error = "Updates Saved", dictry=dictry)
 			else:
 				return render_template("buyerAccountInfo7.html",error = "SQL query error", dictry=dictry)
 	return render_template("buyerFunctionality6.html", error = "Something Wrong")
 
+@app.route('/deleteAccountInfo', methods=['GET','POST'])
+def deleteAccountInfo():
+	uname = request.form['uname']
+	query = "DELETE FROM Userr WHERE username = @s"
+	db.cursor.execute(query, uname)
+	db.conn.commit()
+	return render_template('login1.html', error = "See ya, wouldn't wanna be ya!")
 
 @app.route('/findItem', methods=['GET','POST'])
 def findItem():
@@ -322,23 +329,27 @@ def reciept():
 def orderHistory():
 	info = db.orderHist(currentUser)
 	isDel = []
+
 	count = 0
 	"""
 	for i in info:
-		
+
 		if int(i[5]) == 1:
 			info[count,5] = 'Yes'
 		else:
 			info[count,5] = 'No'
-		count = count +1 
+		count = count +1
 	"""
 	for i in info:
 		if int( i[5]) == 1:
-			isDel.append('Yes')
+			temp = ('Yes')
+			i = i + temp
 		else:
-			isDel.append('No')
-			
-	info.append(isDel)
+			temp = ('No')
+			i = i + temp
+
+	#info.append(isDel)
+	
 	return render_template('orderHistory17.html', info=info, isDel=isDel)
 
 
@@ -353,6 +364,10 @@ def delivererFunctionality():
 def delivererAccInfo():
 	dictry = db.selectDelivererInfo(currentUser)
 	return render_template('delivererAccountInfo19.html', dictry=dictry)
+
+@app.route('/updateDelivererAccInfo', methods=['GET','POST'])
+def updateDelivererAccInfo():
+	return
 
 @app.route('/assignments', methods=['GET','POST'])
 def assignments():
@@ -374,6 +389,10 @@ def managerFunctionality():
 def managerAccInfo():
 	dictry = db.selectManagerInfo(currentUser)
 	return render_template('managerAccountInfo23.html', dictry=dictry)
+
+@app.route('/updateManagerAccInfo', methods=['GET','POST'])
+def updateManagerAccInfo():
+	return
 
 @app.route('/revenueReport', methods=['GET','POST'])
 def revenueReport():
