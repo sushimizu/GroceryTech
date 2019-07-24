@@ -77,8 +77,6 @@ def registerBuyer():
 def checkregisterBuyer():
 
 	if request.method == "POST":
-		fname = request.form['fname']
-		uname = request.form['uname']
 		password = request.form['password']
 		email = request.form['email']
 		street = request.form['street']
@@ -123,7 +121,7 @@ def checkregisterBuyer():
 			AddID = 90
 			AddID = AddID + 1 #response + 1
 			user_type = 'buyer'
-			reg = db.insertUser(uname,password,user_type,email,fname,lname)
+			reg = db.insertUser(uname,password,user_type,email)
 			if reg == 1:
 				return render_template("registerBuyer3.html", error="Username is Taken.")
 			reg = db.insertPayment(uname,payment,accNo,routingNo)
@@ -224,7 +222,7 @@ def listOfStores():
 @app.route('/storeHomepage', methods=['GET','POST'])
 def storeHomepage():
 	if request.method == "POST":
-		currentStore = request.form["storeName"]	
+		currentStore = request.form["storeName"]
 	return render_template('storeHomepage9.html')
 
 """
@@ -252,7 +250,8 @@ def buyerAccountInfo():
 @app.route('/updateBuyerAccountInfo', methods=['GET','POST'])
 def updateBuyerAccountInfo():
 	if request.method == "POST":
-		#uname = request.form['uname']
+		fname = request.form['fname']
+		lname = request.form['lname']
 		prefStore = request.form['prefStore']
 		email = request.form['email']
 		prefCard = request.form['prefCard']
@@ -277,7 +276,7 @@ def updateBuyerAccountInfo():
 		elif (len(arr) != 3) or (arr[0].isalnum() and arr[1].isalnum() and arr[2].isalnum())/1 != 1:
 			return render_template("buyerAccountInfo7.html", error=error3, dictry=dictry, store=store)
 		else:
-			val = db.updateBuyerInfo(currentUser,prefStore,email,prefCard,routingNo,phone,houseNo,streetAddress,city,state,zipp)
+			val = db.updateBuyerInfo(currentUser,prefStore,email,prefCard,routingNo,phone,houseNo,streetAddress,city,state,zipp,fname,lname)
 			dictry = db.selectBuyerInfo(currentUser)
 			store = db.listStores()
 			if val == 0:
@@ -316,11 +315,11 @@ def litemType():
 """
 @app.route('/itemType/<Itype>', methods=['GET','POST'])
 def itemTypeI(Itype):
-		
+
 	info = db.popItem(Itype, currentStore)
 	return render_template('itemType11.html', Itype=Itype, info=info)
-	
-	
+
+
 
 @app.route('/cart', methods=['GET','POST'])
 def cart():
