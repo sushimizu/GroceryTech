@@ -20,7 +20,16 @@
   Username:  {{ dictry["uname"] }}
  		 <br> <br>
   Preferred Grocery Store:
- 		 <select name="prefStore">
+ 		 
+			    <select name="prefstore">
+		  {% for i in  store %}
+		      {%if i[0] == dictry["defaultStore"]%}
+	  		 <option  selected value={{i[0]}}> {{i[0]}}, {{i[1]}}  </option>
+	  		{% else %}
+		   	 <option  value={{i[0]}}> {{i[0]}}, {{i[1]}}  </option>
+		  	{% endif %}
+		  {% endfor %}
+				    <!--
 		     		 <option {{store[0]}} value="1">1, Publix</option>
 		     		 <option {{store[1]}} value="2">2, Publix</option>
 		     		 <option {{store[2]}} value="3">3, Publix</option>
@@ -57,7 +66,7 @@
 				<option {{store[33]}} value="34">34, Trader Joes</option>
 				<option {{store[34]}} value="35">35, Trader Joes</option>
 				
-			
+			-->
 	
 		    </select>
 
