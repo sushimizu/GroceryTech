@@ -346,10 +346,10 @@ def orderHistory():
 		temp = temp + i
 		if int( i[5]) == 1:
 			a = ('Yes'),
-			temp = (temp + a)
+			temp = (temp + a),
 		else:
 			a = ('No'),
-			temp = (temp + a)
+			temp = (temp + a),
 
 	#info.append(isDel)
 	print (  temp )
