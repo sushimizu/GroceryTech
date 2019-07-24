@@ -310,7 +310,6 @@ def assignments(uname):
 	info = tuplesToList(cursor.fetchall())
 	#a, b, c, d, e = cursor.fetchone()
 	#store, orderID, orderDate, orderTime, noItems, quantity = cursor.fetchone()
-	info.append("")
 	return info
 
 
