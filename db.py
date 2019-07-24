@@ -238,8 +238,8 @@ def selectManagerInfo(uname):
 	dictry['zipp'] = zipp
 	return dictry
 
-def updateManagerInfo(uname, prefStore,email,phone,houseNo,streetAddress,city,state,zipp,fname,lname):
-    query = "UPDATE Userr SET first_name = %s, last_name = %s email = %s WHERE Username = %s;"
+def updateManagerInfo(uname,email,fname,lname):
+    query = "UPDATE Userr SET first_name = %s, last_name = %s, email = %s WHERE Username = %s;"
     cursor.execute(query, (fname,lname,email,uname))
     # clear cursor
     conn.commit()
@@ -254,14 +254,14 @@ def updateManagerInfo(uname, prefStore,email,phone,houseNo,streetAddress,city,st
     # cursor.execute(query, (uname))
     # storeID = cursor.fetchone()
     # cursor.fetchall()
-    query = "UPDATE manages SET store_address = %s WHERE username = %s;"
+    '''query = "UPDATE manages SET store_address = %s WHERE username = %s;"
     cursor.execute(query, (prefStore,uname))
     # clear cursor
     conn.commit()
     query = "UPDATE GroceryStore SET phone = %s WHERE store_id = %s;"
     cursor.execute(query, (phone,prefStore))
     # clear cursor
-    conn.commit()
+    conn.commit()'''
 
     return 0
 

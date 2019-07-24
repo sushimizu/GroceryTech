@@ -478,30 +478,23 @@ def updateManagerAccInfo():
 	if request.method == "POST":
 		fname = request.form['fname']
 		lname = request.form['lname']
-		prefStore = request.form['prefStore']
 		email = request.form['email']
-		phone = request.form['phone']
-		houseNo = request.form['houseNo']
-		streetAddress = request.form['streetAddress']
-		city = request.form['city']
-		state = request.form['state']
-		zipp = request.form['zip']
 
 		arr = re.split(r'[@.]', email)
-		error1 = "phone has incorrect number of digits"
-		error2 = "zip code has incorrect number of digits"
-		error3 = "email contains non-alphanumeric characters"
+		'''error1 = "phone has incorrect number of digits"
+		error2 = "zip code has incorrect number of digits"'''
+		error1 = "email contains non-alphanumeric characters"
 		dictry = db.selectManagerInfo(currentUser)
 		stores = db.listStores()
 		sel = ()
-		if (len(str(phone))) != 9:#10:
+		'''if (len(str(phone))) != 9:#10:
 			return render_template("managerAccountInfo23.html", error=error1, dictry=dictry, stores=stores, sel=sel)
 		elif (len(str(zipp))) != 5:
-			return render_template("managerAccountInfo23.html", error=error2, dictry=dictry, stores=stores, sel=sel)
-		elif (len(arr) != 3) or (arr[0].isalnum() and arr[1].isalnum() and arr[2].isalnum())/1 != 1:
-			return render_template("managerAccountInfo23.html", error=error3, dictry=dictry, stores=stores, sel=sel)
+			return render_template("managerAccountInfo23.html", error=error2, dictry=dictry, stores=stores, sel=sel)'''
+		if (len(arr) != 3) or (arr[0].isalnum() and arr[1].isalnum() and arr[2].isalnum())/1 != 1:
+			return render_template("managerAccountInfo23.html", error=error1, dictry=dictry, stores=stores, sel=sel)
 		else:
-			val = db.updateManagerInfo(currentUser, prefStore,email,phone,houseNo,streetAddress,city,state,zipp,fname,lname)
+			val = db.updateManagerInfo(currentUser,email,fname,lname)
 			dictry = db.selectManagerInfo(currentUser)
 			stores = db.listStores()
 			sel = ()
