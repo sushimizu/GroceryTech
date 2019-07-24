@@ -325,7 +325,7 @@ def checkout():
 
 @app.route('/paymentMethods', methods=['GET','POST'])
 def paymentMethods():
-	payment = paymentMeth(currentUser)
+	payment = db.paymentMeth(currentUser)
 	return render_template('paymentMethods14.html', payment= payment )
 
 @app.route('/newPayment', methods=['GET','POST'])
