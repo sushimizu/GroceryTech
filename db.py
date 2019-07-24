@@ -160,9 +160,9 @@ def selectBuyerInfo(uname):
 
 	return dictry
 
-def updateBuyerInfo(uname,prefStore,email,prefCard,routingNo,phone,houseNo,streetAddress,city,state,zipp):
-    query = "UPDATE Userr SET email = %s WHERE Username = %s;"
-    cursor.execute(query, (email,uname))
+def updateBuyerInfo(uname,prefStore,email,prefCard,routingNo,phone,houseNo,streetAddress,city,state,zipp,fname,lname):
+    query = "UPDATE Userr SET first_name = %s, last_name = %s, email = %s WHERE Username = %s;"
+    cursor.execute(query, (fname,lname,email,uname))
     # clear cursor
     conn.commit()
     query = "SELECT default_store_id FROM Buyer WHERE username = %s"
