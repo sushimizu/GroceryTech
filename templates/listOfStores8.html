@@ -21,58 +21,22 @@
 		    <th>Phone</th>
 		    <th>Hours Today</th>
 		  </tr>
+			{%for i in info %} 
 		  <tr>
-		    <td><input type="radio" name="store" value="Publix"> Other</td>
-		    <td>Maria Anders</td>
-		    <td>Germany</td>
-		 <td>Germany</td>
+		    <td><input type="radio" name="store" value={{dictry["storeID"]}}> {{dictry["storeName"]}}</td>
+		    <td> {{dictry["house"]}} {{dictry["street"]}} {{dictry["city"]}} {{dictry["state"]}} {{dictry["zip"]}}</td>
+		    <td>{{dictry["phone"]}}</td>
+		 <td>{{dictry["open"]}} to {{dictry["close"]}}</td>
 		  </tr>
-		  <tr>
-		    <td><input type="radio" name="store" value="Kroger"> Kroger</td>
-		    <td>Francisco Chang</td>
-		    <td>Mexico</td>
-			<td>Germany</td>
-		  </tr>
-		  <tr>
-		    <td><input type="radio" name="store" value="Costco"> Costco</td>
-		    <td>Roland Mendel</td>
-		    <td>Austria</td>
-			  <td>Germany</td>
-		  </tr>
-		  <tr>
-		    <td><input type="radio" name="store" value="Sprouts"> Sprouts</td>
-		    <td>Helen Bennett</td>
-		    <td>UK</td>
-			  <td>Germany</td>
-		  </tr>
-		  <tr>
-		    <td><input type="radio" name="store" value="Whole Foods"> Whole Foods</td>
-		    <td>Yoshi Tannamuri</td>
-		    <td>Canada</td>
-			  <td>Germany</td>
-		  </tr>
-		
+			
+		  {% endfor %}
 		</table>
 				
 	  <input type="submit" value="Select"> <br> <br>
 
 	</form>
 	
-		<div class="row"> 
-			
-			
-			<div class="column">
-				<form action="/listOfStores" method="post">
-				  <input type="submit" value="Previous" color ="blue">
-					</form> 
-			</div>
-			<div class="column">
-				<form action="/listOfStores" method="post">
-				  <input type="submit" value="Next" color ="blue">
-					</form> 
-			
-			</div>
-		</div>
+		
 	<br><br>
  		
 
