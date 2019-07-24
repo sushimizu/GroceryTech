@@ -24,17 +24,17 @@
 	  <select name="prefstore">
 		  {% for i in  info %}
 		      {%if info[0] == dictry["storeID"]%}
-	  		 <option  selected value={{info[0]}}> {{info[0]}},{{infol[1]}}  </option>
-	  		{%else%}
-		   	 <option  value={{info[0]}}> {{info[0]}},{{infol[1]}}  </option>
-		  	{%endif%}
-		  {%endfor%}
+	  		 <option  selected value={{i[0]}}> {{i[0]}}, {{i[1]}}  </option>
+	  		{% else %}
+		   	 <option  value={{i[0]}}> {{i[0]}}, {{i[1]}}  </option>
+		  	{% endif %}
+		  {% endfor %}
 		  <!--
 	  	{% for i in  sel %}
 	  		 <option name="prefStore" {{sel[j]}} value="{{sel[0]}}">{{sel[0]}},{{sel[1]}}  </option>
 	  	{%endfor%} -->
 	</select >
- 	 	 <input type="text" name="prefStore" value= {{ dictry["storename"] }}> <br> <br>
+ 	 	<br> <br>
      Email:
  		 <input type="text" name="email" value= {{ dictry["email"] }}> <br> <br>
   </div> 
