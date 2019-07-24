@@ -507,7 +507,8 @@ def revenueReport():
 
 @app.route('/outstandingOrders', methods=['GET','POST'])
 def outstnadingOrders():
-	return render_template('outstandingOrders25.html')
+	info = db.outstandingOrders(uname)
+	return render_template('outstandingOrders25.html', info=info)
 @app.route('/inventory', methods=['GET','POST'])
 def inventory():
 	info = db.inventory(currentUser)
