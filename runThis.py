@@ -416,7 +416,8 @@ def managerFunctionality():
 @app.route('/managerAccInfo', methods=['GET','POST'])
 def managerAccInfo():
 	dictry = db.selectManagerInfo(currentUser)
-	return render_template('managerAccountInfo23.html', dictry=dictry)
+	stores = listStores()
+	return render_template('managerAccountInfo23.html', dictry=dictry, stores=stores)
 
 @app.route('/updateManagerAccInfo', methods=['GET','POST'])
 def updateManagerAccInfo():
