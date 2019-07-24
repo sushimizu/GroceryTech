@@ -217,8 +217,8 @@ def checkregisterManager():
 
 @app.route('/listOfStores', methods=['GET','POST'])
 def listOfStores():
-	dictry = db.listStores()
-	return render_template('listOfStores8.html' , dictry=dictry)
+	info = db.listStores()
+	return render_template('listOfStores8.html' , info=info)
 
 @app.route('/storeHomepage', methods=['GET','POST'])
 def storeHomepage():
