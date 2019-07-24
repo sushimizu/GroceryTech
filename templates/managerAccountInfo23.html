@@ -23,7 +23,7 @@
 	  
 	  <select name="prefstore">
 		  {% for i in  info %}
-		      {%if info[0] == dictry["storeID"]%}
+		      {%if i[0] == dictry["storeID"]%}
 	  		 <option  selected value={{i[0]}}> {{i[0]}}, {{i[1]}}  </option>
 	  		{% else %}
 		   	 <option  value={{i[0]}}> {{i[0]}}, {{i[1]}}  </option>
