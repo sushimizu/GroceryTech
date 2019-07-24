@@ -234,7 +234,7 @@ def buyerAccountInfo():
 def buyerAccountInfo():
 	#currentUser = 'admirableneville'
 	dictry =  db.selectBuyerInfo(currentUser)
-	stores = db.listStores()
+	store = db.listStores()
 	"""
 	store = []
 	for i in range(1,36):
