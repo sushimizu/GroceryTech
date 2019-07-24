@@ -21,7 +21,7 @@
  		<br> <br>
  	 Managed Grocery Store:
 	  
-	  <select name="prefstore">
+	  <select name="prefStore">
 		  {% for i in  stores %}
 		      {%if i[0] == dictry["storeID"]%}
 	  		 <option  selected value={{i[0]}}> {{i[0]}}, {{i[1]}}  </option>
