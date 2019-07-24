@@ -234,7 +234,7 @@ def buyerAccountInfo():
 	#currentUser = 'admirableneville'
 	dictry =  db.selectBuyerInfo(currentUser)
 	store = []
-	for i in range(1,35):
+	for i in range(1,36):
 		if i == int(dictry['defaultStore']):
 			store.append("selected")
 		else:
