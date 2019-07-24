@@ -250,12 +250,12 @@ def updateManagerInfo(uname, prefStore,email,phone,houseNo,streetAddress,city,st
     cursor.fetchall()
     if sum(storeID) == 0:
         return 1'''
-    query = "SELECT store_address FROM manages WHERE username = %s"
-    cursor.execute(query, (uname))
-    storeID = cursor.fetchone()
-    cursor.fetchall()
-    query = "UPDATE manages SET store_address = %s WHERE username = %s AND store_address = %s;"
-    cursor.execute(query, (prefStore,uname,storeID))
+    # query = "SELECT store_address FROM manages WHERE username = %s"
+    # cursor.execute(query, (uname))
+    # storeID = cursor.fetchone()
+    # cursor.fetchall()
+    query = "UPDATE manages SET store_address = %s WHERE username = %s;"
+    cursor.execute(query, (prefStore,uname))
     # clear cursor
     conn.commit()
     query = "UPDATE GroceryStore SET phone = %s WHERE store_id = %s;"

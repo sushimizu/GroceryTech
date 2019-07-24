@@ -334,7 +334,7 @@ def paymentMethods():
 def newPayment():
 	return render_template('newPayment15.html')
 
-	@app.route('/addNewPayment', methods=['GET','POST'])
+@app.route('/addNewPayment', methods=['GET','POST'])
 def addNewPayment():
 	if request.method == "POST":
 		#uname = request.form['uname']
