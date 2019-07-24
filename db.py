@@ -295,7 +295,8 @@ def revenueRep(uname):
 	dictry['itemCount'] = item_id
 
 	"""
-	cursor.execute("SELECT COUNT(Item.listed_price*selectItem.quantity), SUM(Item.listed_price*selectItem.quantity-Item.wholesale_price*selectItem.quantity) FROM Item JOIN selectItem ON Item.item_id=selectItem.item_id WHERE selectItem.order_id IN (SELECT order_id FROM Orderr) AND selectItem.item_id IN (SELECT item_id FROM soldAt JOIN manages ON soldAt.store_id=manages.store_address AND manages.username= %s)",uname)
+	cursor.execute("SELECT SUM(selectItem.quantity), SUM(Item.listed_price*selectItem.quantity-Item.wholesale_price*selectItem.quantity) FROM Item JOIN selectItem ON Item.item_id=selectItem.item_id WHERE selectItem.order_id IN (SELECT orderFrom.order_id FROM orderFrom WHERE orderFrom.store_address_id IN (SELECT GroceryStore.store_id FROM GroceryStore WHERE GroceryStore.address_id IN (SELECT manages.store_address FROM manages WHERE manages.username=%s)))", uname)
+	#cursor.execute("SELECT COUNT(Item.listed_price*selectItem.quantity), SUM(Item.listed_price*selectItem.quantity-Item.wholesale_price*selectItem.quantity) FROM Item JOIN selectItem ON Item.item_id=selectItem.item_id WHERE selectItem.order_id IN (SELECT order_id FROM Orderr) AND selectItem.item_id IN (SELECT item_id FROM soldAt JOIN manages ON soldAt.store_id=manages.store_address AND manages.username= %s)",uname)
 	#itemCount, revenue =  cursor.execute("SELECT COUNT(Item.listed_price*selectItem.quantity),SUM(Item.listed_price*selectItem.quantity-Item.wholesale_price*selectItem.quantity) FROM Item JOIN selectItem on Item.item_id=selectItem.item_id Where selectItem.order_id in (select order_id from Order where Order.order_placed_date > 2018-07-23  AND selectItem.item_id in(SELECT item_id from SoldAt JOIN manages on SoldAt.store_address=manages.store_address and manages.username = username=%s",uname)
 	itemCount, revenue =  cursor.fetchone()
 	dictry['itemCount'] = itemCount
@@ -345,3 +346,18 @@ def paymentMeth(uname):
 	cursor.execute("SELECT Buyer.default_payment, Payments.payment_name, Payments.account_number, Payments.routing_number FROM Buyer join Payments ON Payments.username = Buyer.username WHERE Buyer.username=%s", uname)
 	info = tuplesToList(cursor.fetchall())
 	return info
+
+def addNewPay(uname,payment,accName,routingNo):
+    #first check if payment method already exists
+    query = "SELECT Count(*) FROM Payments WHERE username = %s AND payment_name = %s"
+    cursor.execute(query, (uname,payment))
+    payexist = cursor.fetchone()
+    cursor.fetchall()
+    if payexist != 0:
+        return 1
+    query = "INSERT INTO Payments(username, payment_name, account_number, routing_number)"\
+    "VALUES (%s,%s,%s,%s);"
+    cursor.execute(query, (uname,payment,accName,routingNo))
+
+    conn.commit()
+    return 0
