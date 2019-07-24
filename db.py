@@ -362,3 +362,14 @@ def addNewPay(uname,payment,accName,routingNo):
 
     conn.commit()
     return 0
+
+
+
+
+
+def popItem(itemNAme):
+	cursor.execute("SELECT selectItem.quantity, Item.item_name, Item.description, Item.exp_date, Item.listed_price, Item.quantity FROM selectItem JOIN Item ON Item.item_id=selectItem.item_id WHERE Item.food_group="Produce" ",itemName)
+	info = info = tuplesToList(cursor.fetchall())
+	return info
+
+
