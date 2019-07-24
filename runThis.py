@@ -511,10 +511,19 @@ def revenueReport():
 
 @app.route('/outstandingOrders', methods=['GET','POST'])
 def outstnadingOrders():
-	return render_template('outstandingOrders25.html')
+	info = db.outstandingOrders(currentUser)
+	return render_template('outstandingOrders25.html', info=info)
+
+
+
 @app.route('/inventory', methods=['GET','POST'])
 def inventory():
-	return render_template('inventory26.html')
+	info = db.inventory(currentUser)
+	count = 0 
+	for i in info:
+		count = count + i[2]
+		
+	return render_template('inventory26.html', info=info, count = count)
 
 @app.route('/viewOrderDetails', methods=['GET','POST'])
 def viewOrderDetails():

@@ -310,7 +310,6 @@ def assignments(uname):
 	info = tuplesToList(cursor.fetchall())
 	#a, b, c, d, e = cursor.fetchone()
 	#store, orderID, orderDate, orderTime, noItems, quantity = cursor.fetchone()
-	info.append("")
 	return info
 
 def assignment(uname,orderID):
@@ -426,7 +425,22 @@ def updateDefaultPayment(uname,payment):
 
 def popItem(itemName):
 	cursor.execute("SELECT Item.quantity, Item.item_name, Item.description, Item.exp_date, Item.listed_price, Item.item_id FROM Item WHERE Item.food_group=%s",itemName)
-	info = info = tuplesToList(cursor.fetchall())
+	info  = tuplesToList(cursor.fetchall())
 	return info
+
+
+def inventory(uname):
+	cursor.execute("SELECT Item.item_name, Item.description, Item.quantity, Item.listed_price, Item.wholesale_price, Item.exp_date From Item Join soldAt on Item.item_id=soldAt.item_id WHERE soldAt.store_id IN (SELECT GroceryStore.store_id FROM GroceryStore Where GroceryStore.address_id IN (SELECT manages.store_address From manages WHERE manages.username=%s)) ",uname)
+	#cursor.execute("SELECT Item.item_name, Item.description, Item.quantity, Item.listed_price, Item.wholesale_price, Item.exp_date, From Item Join soldAt on soldAt.item_id = Item.item_id WHERE soldAt.store_id IN (SELECT GroceryStore.store_id FROM GroceryStore Where GroceryStore.address_id IN (SELECT manages.store_address From manages WHERE manages.username=%s) ",uname)
+	info =  tuplesToList(cursor.fetchall())
+	return info
+
+
+
+def outstandingOrders(uname):
+	cursor.execute("select GroceryStore.store_name, concat(A.house_number,', ',A.street,', ',A.city,', ',A.state,', ',A.state,', ',A.zip_code), orderFrom.order_id, Orderr.order_placed_date , selectItem.quantity*Item.listed_price, selectItem.quantity, concat(B.house_number,', ',B.street,', ',B.city,', ',B.state,', ',B.state,', ',B.zip_code) from orderFrom natural join Orderr natural join orderedBy natural join selectItem join deliveredby on orderFrom.order_id=deliveredBy.order_id join GroceryStore on GroceryStore.store_id=orderFrom.store_address_id join Buyer on Buyer.username=orderedBy.buyer_username join Address as A on A.id=GroceryStore.store_id join Item on Item.item_id=selectItem.item_id join Address as B on B.id=Buyer.address_id where GroceryStore.address_id in (select store_address from manages where username=%s) and deliveredBy.is_delivered=0",uname)
+	info =  tuplesToList(cursor.fetchall())
+	return info
+
 
 
