@@ -349,6 +349,17 @@ def addNewPayment():
 			return render_template("newPayment15.html",error = "Payment Type Already Used")
 	return render_template("newPayment15.html", error = "Sum Ting Wong")
 
+@app.route('/changeDefaultPayment', methods=['GET','POST'])
+def changeDefaultPayment():
+	if request.method == "POST":
+		payment = request.form['paymentName']
+		val = db.updateDefaultPayment(currentUser,paymentName)
+		payment = db.paymentMeth(currentUser)
+		return render_template('paymentMethods14.html',error = "Default Payment Updated", payment= payment )
+
+	return render_template("newPayment15.html", error = "Wii Tu Lo")
+
+
 @app.route('/reciept', methods=['GET','POST'])
 def reciept():
 	dictry = db.reciept(orderID)

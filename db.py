@@ -363,7 +363,12 @@ def addNewPay(uname,payment,accName,routingNo):
     conn.commit()
     return 0
 
-
+def updateDefaultPayment(uname,payment):
+    query = "UPDATE Buyer SET default_payment = %s WHERE Username = %s;"
+    cursor.execute(query, (payment,uname))
+    # clear cursor
+    conn.commit()
+    return
 
 
 
