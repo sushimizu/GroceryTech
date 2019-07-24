@@ -3,7 +3,7 @@ import pymysql
 conn = pymysql.connect(host="localhost",
 							db="GroceryTech",
 							user="root",
-							passwd='CornyJoke12')
+							passwd='master1999')
 cursor = conn.cursor()
 
 
@@ -306,7 +306,7 @@ def revenueRep(uname):
 
 def assignments(uname):
 	#cursor.execute("SELECT * FROM Orderr")
-	cursor.execute("SELECT GroceryStore.store_name, Orderr.order_id, Orderr.order_placed_date, Orderr.order_placed_time, Orderr.delivery_time, SUM(selectItem.quantity*Item.listed_price), COUNT(selectItem.quantity) FROM GroceryStore Join orderFrom on GroceryStore.store_id=orderFrom.store_address_id Join Orderr on Orderr.order_id=orderFrom.order_id Join selectItem on selectItem.order_id=Orderr.order_id Join Item on Item.item_id=selectItem.item_id join deliveredBy on deliveredBy.order_id=Orderr.order_id where deliveredBy.deliverer_username=%s group by Orderr.order_id", uname)
+	cursor.execute("SELECT GroceryStore.store_name, Orderr.order_id, Orderr.order_placed_date, Orderr.order_placed_time, Orderr.delivery_time, SUM(selectItem.quantity*Item.listed_price), COUNT(selectItem.quantity) FROM GroceryStore Join orderFrom on GroceryStore.store_id=orderFrom.store_address_id Join Orderr on Orderr.order_id=orderFrom.order_id Join selectItem on selectItem.order_id=Orderr.order_id Join Item on Item.item_id=selectItem.item_id join deliveredBy on deliveredBy.order_id=Orderr.order_id where deliveredBy.deliverer_username=%s and deliveredBy.is_delivered=0 group by Orderr.order_id", uname)
 	info = tuplesToList(cursor.fetchall())
 	#a, b, c, d, e = cursor.fetchone()
 	#store, orderID, orderDate, orderTime, noItems, quantity = cursor.fetchone()
@@ -316,7 +316,7 @@ def newAss(uname,orderID):
 	cursor.execute("select Orderr.order_placed_time, Orderr.delivery_time,deliveredBy.is_delivered, concat(A.house_number,', ',A.street,', ',A.city,', ',A.state,', ',A.state,', ',A.zip_code) ,GroceryStore.store_name from deliveredBy join orderFrom on orderFrom.order_id=deliveredBy.order_id join Orderr on orderFrom.order_id=Orderr.order_id join GroceryStore on orderFrom.store_address_id=GroceryStore.store_id join Address as a on GroceryStore.store_id=A.id where deliveredBy.order_id=%s and deliveredBy.deliverer_username=%s", (orderID, uname))
 	orderTime, deliveryTime, isDelivered, address , storeName = cursor.fetchone()
 	dictry = {}
-	dictry["order_placed"] = orderTime 
+	dictry["order_placed"] = orderTime
 	dictry["delivery_time"] = deliveryTime
 	dictry["status"] = isDelivered
 	dictry["address"] = address
@@ -324,9 +324,9 @@ def newAss(uname,orderID):
 	cursor.execute("select Item.item_name,selectItem.quantity from selectItem join Item on Item.item_id=selectItem.item_id where selectItem.order_id =%s", orderID)
 	iandq = tuplesToList(cursor.fetchall())
 	return dictry, iandq
-	
-	
-	
+
+
+
 def assignment(uname,orderID):
     dictry = {}
     query = "SELECT Item.item_name,selectItem.quantity FROM selectItem JOIN Item ON Item.item_id=selectItem.item_id WHERE selectItem.order_id = %s IN (SELECT orderedBy.order_id FROM orderedBy WHERE orderedBy.buyer_username = %s )"
@@ -469,5 +469,5 @@ def outstandingOrders(uname):
 def updateDelivery(uname, orderID):
 	cursor.execute("update deliveredBy set is_delivered=1,delivery_time=curtime(), delivery_date=curdate() where order_id=%s and deliverer_username=%s", (orderID, uname))
 	conn.commit()
-	return 0 
+	return 0
 
