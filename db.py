@@ -315,7 +315,7 @@ def assignments(uname):
 def newAss(uname,orderID):
 	cursor.execute("select Orderr.order_placed_time, Orderr.delivery_time,deliveredBy.is_delivered, concat(A.house_number,', ',A.street,', ',A.city,', ',A.state,', ',A.state,', ',A.zip_code) ,GroceryStore.store_name from deliveredBy join orderFrom on orderFrom.order_id=deliveredBy.order_id join Orderr on orderFrom.order_id=Orderr.order_id join GroceryStore on orderFrom.store_address_id=GroceryStore.store_id join Address as a on GroceryStore.store_id=A.id where deliveredBy.order_id=%s and deliveredBy.deliverer_username=%s", (orderID, uname))
 	orderTime, deliveryTime, isDelivered, address , storeName = cursor.fetchone()
-	dict = {}
+	dictry = {}
 	dictry["order_placed"] = orderTime 
 	dictry["delivery_time"] = deliveryTime
 	dictry["status"] = isDelivered
