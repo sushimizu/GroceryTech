@@ -273,7 +273,7 @@ def updateBuyerAccountInfo():
 
 @app.route('/deleteAccountInfo', methods=['GET','POST'])
 def deleteAccountInfo():
-	uname = request.form['uname']
+	uname = currentUser
 	query = "DELETE FROM Userr WHERE username = @s"
 	db.cursor.execute(query, uname)
 	db.conn.commit()
