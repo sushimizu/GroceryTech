@@ -337,6 +337,7 @@ def newPayment():
 @app.route('/addNewPayment', methods=['GET','POST'])
 def addNewPayment():
 	if request.method == "POST":
+		print("dlf;kja")
 		payment = request.form['payment']
 		accName = request.form['accName']
 		routingNo = request.form['routingNo']
