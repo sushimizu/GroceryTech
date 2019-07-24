@@ -417,7 +417,13 @@ def managerFunctionality():
 def managerAccInfo():
 	dictry = db.selectManagerInfo(currentUser)
 	stores = listStores()
-	return render_template('managerAccountInfo23.html', dictry=dictry, stores=stores)
+	sel = []
+	for i in range(1,36):
+		if i == int(dictry['sotreID']):
+			sel.append(" selected ")
+		else:
+			sel.append(" ")
+	return render_template('managerAccountInfo23.html', dictry=dictry, stores=stores, sel=sel)
 
 @app.route('/updateManagerAccInfo', methods=['GET','POST'])
 def updateManagerAccInfo():
