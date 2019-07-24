@@ -219,12 +219,19 @@ def checkregisterManager():
 @app.route('/listOfStores', methods=['GET','POST'])
 def listOfStores():
 	info = db.listStores()
+
 	return render_template('listOfStores8.html' , info=info)
+
+@app.route('/checkStoreHomepage', methods=['GET','POST'])
+def checkSToreHomepage():
+	global currentStore
+	if request.method == "POST":
+		currentStore = request.form["store"]
+		print(currentStore)
+		return render_template('storeHomepage9.html')
 
 @app.route('/storeHomepage', methods=['GET','POST'])
 def storeHomepage():
-	if request.method == "POST":
-		currentStore = request.form["storeName"]	
 	return render_template('storeHomepage9.html')
 
 """
