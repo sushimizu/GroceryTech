@@ -416,7 +416,7 @@ def managerFunctionality():
 @app.route('/managerAccInfo', methods=['GET','POST'])
 def managerAccInfo():
 	dictry = db.selectManagerInfo(currentUser)
-	stores = listStores()
+	stores = db.listStores()
 	sel = []
 	for i in range(1,36):
 		if i == int(dictry['sotreID']):
