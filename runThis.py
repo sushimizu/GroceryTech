@@ -318,7 +318,7 @@ def itemTypeI(Itype):
 		info = db.popItem(Itype)
 		return render_template('itemType11.html', Itype=Itype, info=info)
 	
-	return return render_template('itemType11.html', Itype=Itype, info=info)
+	return render_template('itemType11.html', Itype=Itype, info=info, error="Incorrect")
 
 @app.route('/cart', methods=['GET','POST'])
 def cart():
