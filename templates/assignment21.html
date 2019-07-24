@@ -12,15 +12,15 @@
 	
 		
 	<form action="/assignments" method="post">
-        Order Placed:  
- 		 <input type="text" name="orderPlaced"> <br>  <br>
+        Order Placed:  {{dictry["order_placed"]}}
+ 		 <br>  <br>
 		Delivery Time:
- 		 <input type="text" name="deliveryTime"> <br> <br>
+ 		 {{dictry["delivery_time"]}} <br> <br>
         
    	Buyer Address:
- 		 <input type="text" name="buyerAddress"> <br> <br>
+ 		 {{dictry["houseNo"]}} {{dictry["street"]}} {{dictry["city"]}} {{dictry["state"]}} {{dictry["zipp"]}} <br> <br>
      Store Name:
- 		 <input type="text" name="StoreName"> <br> <br>
+ 		{{dictry["storeName"]}} <br> <br>
 	 Status:
  		 <select name ="status">
           <option value="Pending">Pending</option>
@@ -31,14 +31,16 @@
     <div class="row">
 	  <div class="column">
 	  Item Name: <br><br>
-		  <input type="text" name="name" placeholder= "apple"> <br> <br>
-		  
+		  {% for i in iandq %}
+		    {{i[0]}} <br> <br>
+		  {%endfor %}
 	    </div>
 	<div class="column">
 		
 	  Quantity: <br><br>
-		<input type="text" name="qty" placeholder= "3"> <br> <br>
-		
+		{% for i in iandq %}
+		{{i[1]}} <br> <br>
+		  {%endfor %}
 	    </div>
 		
 	</div>
