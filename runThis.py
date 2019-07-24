@@ -510,7 +510,7 @@ def outstnadingOrders():
 	return render_template('outstandingOrders25.html')
 @app.route('/inventory', methods=['GET','POST'])
 def inventory():
-	info = db.inventory()
+	info = db.inventory(currentUser)
 	return render_template('inventory26.html', info=info)
 
 
