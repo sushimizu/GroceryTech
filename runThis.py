@@ -539,13 +539,15 @@ def viewOrderDetails():
 
 @app.route('/updateDeliveryInfo', methods=['GET','POST'])
 def updateDeliveryInfo():
+	
 	if request.method == "POST":
 		status = request.form['fname']
 		if status == 0:
-			return render_template('assignments20.html')
+			return assignments()
 		else:
-			return render_template('assignments20.html')
-	return render_template('assignments20.html')
+			db.updateDelivery(currentUser, orderID)
+			return assignments()
+	return assignments()
 
 
 
