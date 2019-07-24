@@ -20,10 +20,19 @@
      Username:  {{ dictry["uname"] }}
  		<br> <br>
  	 Managed Grocery Store:
+	  
 	  <select name="prefstore">
+		  {% for i in  info %}
+		      {%if %}
+	  		 <option name="prefStore" selected value="{{info[0]}}">{{info[0]}},{{infol[1]}}  </option>
+	  		{%else%}
+		   	 <option name="prefStore"   value="{{info[0]}}">{{info[0]}},{{infol[1]}}  </option>
+		  	{%endif%}
+		  {%endfor%}
+		  <!--
 	  	{% for i in  sel %}
 	  		 <option name="prefStore" {{sel[j]}} value="{{sel[0]}}">{{sel[0]}},{{sel[1]}}  </option>
-	  	{%endfor%}
+	  	{%endfor%} -->
 	</select >
  	 	 <input type="text" name="prefStore" value= {{ dictry["storename"] }}> <br> <br>
      Email:
