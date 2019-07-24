@@ -419,7 +419,7 @@ def managerAccInfo():
 	stores = db.listStores()
 	sel = []
 	for i in range(1,36):
-		if i == int(dictry['sotreID']):
+		if i == int(dictry['storeID']):
 			sel.append(" selected ")
 		else:
 			sel.append(" ")
