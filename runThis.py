@@ -41,7 +41,6 @@ def loginReq():
 		_name = request.form['username']
 		_password = request.form['password']
 		num = db.login(_name, _password)
-		currentUser
 		if num == 1:
 			currentUser = _name
 			return render_template('managerFunctionality22.html')
