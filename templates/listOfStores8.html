@@ -23,10 +23,10 @@
 		  </tr>
 			{%for i in info %} 
 		  <tr>
-		    <td><input type="radio" name="store" value={{dictry["storeID"]}}> {{dictry["storeName"]}}</td>
-		    <td> {{dictry["house"]}} {{dictry["street"]}} {{dictry["city"]}} {{dictry["state"]}} {{dictry["zip"]}}</td>
-		    <td>{{dictry["phone"]}}</td>
-		 <td>{{dictry["open"]}} to {{dictry["close"]}}</td>
+		    <td><input type="radio" name="store" value={{i[0]}}> {{i[1]}}</td>
+		    <td> {{i[2]}} {{i[3]}} {{i[4]}} {{i[5]}} {{i[6]}}</td>
+		    <td>{{i[7]}}</td>
+		 <td>{{i[8]}} to {{i[9]}}</td>
 		  </tr>
 			
 		  {% endfor %}
