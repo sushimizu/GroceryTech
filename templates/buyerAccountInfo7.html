@@ -21,7 +21,7 @@
  		 <br> <br>
   Preferred Grocery Store:
 	    <select name="prefstore">
-		  {% for i in  stores %}
+		  {% for i in  store %}
 		      {%if i[0] == dictry["defaultStore"]%}
 	  		 <option  selected value={{i[0]}}> {{i[0]}}, {{i[1]}}  </option>
 	  		{% else %}
