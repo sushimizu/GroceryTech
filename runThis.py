@@ -537,5 +537,17 @@ def viewOrderDetails():
 	return render_template('inventory26.html')
 
 
+@app.route('/updateDeliveryInfo', methods=['GET','POST'])
+def updateDeliveryInfo():
+	if request.method == "POST":
+		status = request.form['fname']
+		if status == 0:
+			return render_template('assignments20.html')
+		else:
+			return render_template('assignments20.html')
+	return render_template('assignments20.html')
+
+
+
 if __name__ == '__main__' :
 	app.run()
