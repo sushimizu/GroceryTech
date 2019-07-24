@@ -347,7 +347,7 @@ def orderHistory():
 	for i in info:
 		if int( i[5]) == 1:
 			a = ('Yes'),
-			
+
 		else:
 			a = ('No'),
 			temp = (temp + a),
