@@ -312,8 +312,9 @@ def litemType():
 
 """
 @app.route('/itemType/<Itype>', methods=['GET','POST'])
-def itemTypeI(Itype):
-	return render_template('itemType11.html', Itype=Itype)
+def itemTypeI():
+	info = db.popItem(Itype)
+	return render_template('itemType11.html', Itype=Itype, info=info)
 
 
 @app.route('/cart', methods=['GET','POST'])
