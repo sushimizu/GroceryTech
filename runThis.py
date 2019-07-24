@@ -119,7 +119,7 @@ def checkregisterBuyer():
 			'''query = "SELECT MAX(id) FROM Address;"
 			response = db.cursor.execute(query)
 			db.cursor.fetchall()'''
-			AddID = 68
+			AddID = 90
 			AddID = AddID + 1 #response + 1
 			user_type = 'buyer'
 			reg = db.insertUser(uname,password,user_type,email,fname,lname)
@@ -436,7 +436,11 @@ def assignments():
 
 @app.route('/assignment', methods=['GET','POST'])
 def assignment():
-	return render_template('assignment21.html')
+	if request.method == "POST":
+		OrderID = request.form['store']
+		dictry, iandq = db.assignment(currentUser,OrderID)
+		return render_template('assignment21.html',dictry = dictry, iandq=iandq)
+	return render_template('assignment21.html', error = "lmao something is really messed up.")
 
 
 
@@ -512,6 +516,9 @@ def outstnadingOrders():
 def inventory():
 	return render_template('inventory26.html')
 
+@app.route('/viewOrderDetails', methods=['GET','POST'])
+def viewOrderDetails():
+	return render_template('inventory26.html')
 
 
 if __name__ == '__main__' :

@@ -313,6 +313,58 @@ def assignments(uname):
 	info.append("")
 	return info
 
+def assignment(uname,orderID):
+    query = "SELECT Item.item_name,selectItem.quantity FROM selectItem JOIN Item ON Item.item_id=selectItem.item_id WHERE selectItem.order_id = %s WHERE Username = %s;"
+    cursor.execute(query, (orderID))
+    itemsandquantities = tuplesToList(cursor.fetchall())
+
+    query = "SELECT order_placed_time FROM Orderr WHERE order_id = %s"
+    cursor.execute(query, (orderID))
+    order_placed =  cursor.fetchone()
+    dictry['order_placed'] = order_placed
+    cursor.fetchall()
+
+    query = "SELECT delivery_time FROM Orderr WHERE order_id = %s"
+    cursor.execute(query, (orderID))
+    delivery_time =  cursor.fetchone()
+    dictry['delivery_time'] = delivery_time
+    cursor.fetchall()
+
+    query = "SELECT isDelivered FROM deliveredBy WHERE order_id = %s"
+    cursor.execute(query, (orderID))
+    status =  cursor.fetchone()
+    dictry['status'] = status
+    cursor.fetchall()
+
+    query = "SELECT store_address FROM orderFrom WHERE order_id = %s"
+    cursor.execute(query, (orderID))
+    storeID =  cursor.fetchone()
+    cursor.fetchall()
+    query = "SELECT store_name FROM GroceryStore WHERE store_id = %s"
+    cursor.execute(query, (storeID))
+    storeName =  cursor.fetchone()
+    dictry['storeName'] = storeName
+    cursor.fetchall()
+
+    query = "SELECT delivery_instructions FROM Orderr WHERE order_id = %s"
+    cursor.execute(query, (orderID))
+    delivery_instructions =  cursor.fetchone()
+    dictry['delivery_instructions'] = delivery_instructions
+    cursor.fetchall()
+
+    query = "SELECT buyer_username FROM orderedBy WHERE order_id = %s"
+    cursor.execute(query, (order_id))
+    buser =  cursor.fetchone()
+    cursor.fetchall()
+    query = "SELECT address_id FROM Buyer WHERE username = %s"
+    cursor.execute(query, (buser))
+    aID =  cursor.fetchone()
+    cursor.fetchall()
+    query = "SELECT house_number, street, city, state, zipcode FROM Addresses WHERE address_id = %s"
+    cursor.execute(query, (aID))
+
+
+    return dictry, iandq
 
 def orderHist(uname):
 	cursor.execute("SELECT GroceryStore.store_name, Orderr.order_id, Orderr.order_placed_date, SUM(selectItem.quantity*Item.listed_price), COUNT(selectItem.quantity), DeliveredBy.is_delivered FROM GroceryStore Join orderFrom on GroceryStore.store_id=orderFrom.store_address_id Join Orderr on Orderr.order_id=orderFrom.order_id Join selectItem on selectItem.order_id=Orderr.order_id Join Item on Item.item_id=selectItem.item_id join deliveredBy on deliveredBy.order_id=Orderr.order_id join orderedBy on orderedBy.order_id=Orderr.order_id where orderedBy.buyer_username=%s group by Orderr.order_id",uname)
