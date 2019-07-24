@@ -345,3 +345,18 @@ def paymentMeth(uname):
 	cursor.execute("SELECT Buyer.default_payment, Payments.payment_name, Payments.account_number, Payments.routing_number FROM Buyer join Payments ON Payments.username = Buyer.username WHERE Buyer.username=%s", uname)
 	info = tuplesToList(cursor.fetchall())
 	return info
+
+def addNewPay(uname,payment,accName,routingNo):
+    #first check if payment method already exists
+    query = "SELECT Count(*) FROM Payments WHERE username = %s AND payment_name = %s"
+    cursor.execute(query, (uname,payment))
+    payexist = cursor.fetchone()
+    cursor.fetchall()
+    if payexist != 0:
+        return 1
+    query = "INSERT INTO Payments(username, payment_name, account_number, routing_number)"\
+    "VALUES (%s,%s,%s,%s);"
+    cursor.execute(query, (uname,payment,accName,routingNo))
+
+    conn.commit()
+    return 0
