@@ -340,20 +340,21 @@ def orderHistory():
 			info[count,5] = 'No'
 		count = count +1
 	"""
+	"""
 	print (  info )
-	temp = ()
+	#temp = ()
 	for i in info:
-		temp = temp + i
 		if int( i[5]) == 1:
 			a = ('Yes'),
-			temp = (temp + a),
+			
 		else:
 			a = ('No'),
 			temp = (temp + a),
 
 	#info.append(isDel)
 	print (  temp )
-	return render_template('orderHistory17.html', info=temp, isDel=isDel)
+	"""
+	return render_template('orderHistory17.html', info=info, isDel=isDel)
 
 
 
