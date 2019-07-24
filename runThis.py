@@ -519,10 +519,10 @@ def outstnadingOrders():
 @app.route('/inventory', methods=['GET','POST'])
 def inventory():
 	info = db.inventory(currentUser)
-	count = 0 
+	count = 0
 	for i in info:
 		count = count + i[2]
-		
+
 	return render_template('inventory26.html', info=info, count = count)
 
 @app.route('/viewOrderDetails', methods=['GET','POST'])
