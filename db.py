@@ -312,6 +312,21 @@ def assignments(uname):
 	#store, orderID, orderDate, orderTime, noItems, quantity = cursor.fetchone()
 	return info
 
+def newAss(uname,orderID):
+	cursor.execute("select Orderr.order_placed_time, Orderr.delivery_time,deliveredBy.is_delivered, concat(A.house_number,', ',A.street,', ',A.city,', ',A.state,', ',A.state,', ',A.zip_code) ,GroceryStore.store_name from deliveredBy join orderFrom on orderFrom.order_id=deliveredBy.order_id join Orderr on orderFrom.order_id=Orderr.order_id join GroceryStore on orderFrom.store_address_id=GroceryStore.store_id join Address as a on GroceryStore.store_id=A.id where deliveredBy.order_id=%s and deliveredBy.deliverer_username=%s", (orderID, uname))
+	orderTime, deliveryTime, isDelivered, address , storeName = cursor.fetchone()
+	dict = {}
+	dictry["order_placed"] = orderTime 
+	dictry["delivery_time"] = deliveryTime
+	dictry["status"] = isDelivered
+	dictry["address"] = address
+	dictry["storeName"] = storeName
+	cursor.execute("select Item.item_name,selectItem.quantity from selectItem join Item on Item.item_id=selectItem.item_id where selectItem.order_id =%s", orderID)
+	iandq = tuplesToList(cursor.fetchall())
+	return dictry, iandq
+	
+	
+	
 def assignment(uname,orderID):
     dictry = {}
     query = "SELECT Item.item_name,selectItem.quantity FROM selectItem JOIN Item ON Item.item_id=selectItem.item_id WHERE selectItem.order_id = %s IN (SELECT orderedBy.order_id FROM orderedBy WHERE orderedBy.buyer_username = %s )"
