@@ -314,7 +314,7 @@ def assignments(uname):
 
 def assignment(uname,orderID):
     query = "SELECT Item.item_name,selectItem.quantity FROM selectItem JOIN Item ON Item.item_id=selectItem.item_id WHERE selectItem.order_id = %s WHERE Username = %s;"
-    cursor.execute(query, (orderID))
+    cursor.execute(query, (orderID, uname))
     itemsandquantities = tuplesToList(cursor.fetchall())
 
     query = "SELECT order_placed_time FROM Orderr WHERE order_id = %s"
