@@ -431,8 +431,9 @@ def updateDefaultPayment(uname,payment):
 
 
 
-def popItem(itemName):
-	cursor.execute("SELECT Item.quantity, Item.item_name, Item.description, Item.exp_date, Item.listed_price, Item.item_id FROM Item WHERE Item.food_group=%s",itemName)
+def popItem(itemName, storeID):
+	cursor.execute("SELECT Item.quantity, Item.item_name, Item.description, Item.exp_date, Item.listed_price, Item.item_id FROM Item join soldAt on soldAt.item_id=Item.item_id where Item.food_group='beverages' and soldAt.store_id=%s",storeID)
+	#cursor.execute("SELECT Item.quantity, Item.item_name, Item.description, Item.exp_date, Item.listed_price, Item.item_id FROM Item WHERE Item.food_group=%s",itemName)
 	info  = tuplesToList(cursor.fetchall())
 	return info
 
