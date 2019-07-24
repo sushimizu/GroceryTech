@@ -236,7 +236,7 @@ def buyerAccountInfo():
 	store = []
 	for i in range(1,36):
 		if i == int(dictry['defaultStore']):
-			store.append("selected")
+			store.append(" selected ")
 		else:
 			store.append(" ")
 	
