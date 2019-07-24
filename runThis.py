@@ -313,7 +313,8 @@ def litemType():
 """
 @app.route('/itemType/<Itype>', methods=['GET','POST'])
 def itemTypeI(Itype):
-	return render_template('itemType11.html', Itype=Itype)
+	info = db.popItem(Itype)
+	return render_template('itemType11.html', Itype=Itype, info=info)
 
 
 @app.route('/cart', methods=['GET','POST'])
@@ -337,7 +338,6 @@ def newPayment():
 @app.route('/addNewPayment', methods=['GET','POST'])
 def addNewPayment():
 	if request.method == "POST":
-		print("dlf;kja")
 		payment = request.form['payment']
 		accName = request.form['accName']
 		routingNo = request.form['routingNo']
@@ -349,6 +349,17 @@ def addNewPayment():
 		else:
 			return render_template("newPayment15.html",error = "Payment Type Already Used")
 	return render_template("newPayment15.html", error = "Sum Ting Wong")
+
+@app.route('/changeDefaultPayment', methods=['GET','POST'])
+def changeDefaultPayment():
+	if request.method == "POST":
+		payment = request.form['paymentName']
+		val = db.updateDefaultPayment(currentUser,paymentName)
+		payment = db.paymentMeth(currentUser)
+		return render_template('paymentMethods14.html',error = "Default Payment Updated", payment= payment )
+
+	return render_template("newPayment15.html", error = "Wii Tu Lo")
+
 
 @app.route('/reciept', methods=['GET','POST'])
 def reciept():

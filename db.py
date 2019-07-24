@@ -352,8 +352,9 @@ def addNewPay(uname,payment,accName,routingNo):
     query = "SELECT Count(*) FROM Payments WHERE username = %s AND payment_name = %s"
     cursor.execute(query, (uname,payment))
     payexist = cursor.fetchone()
+    print(payexist)
     cursor.fetchall()
-    if payexist != 0:
+    if payexist != (0,):
         return 1
     query = "INSERT INTO Payments(username, payment_name, account_number, routing_number)"\
     "VALUES (%s,%s,%s,%s);"
@@ -361,3 +362,19 @@ def addNewPay(uname,payment,accName,routingNo):
 
     conn.commit()
     return 0
+
+def updateDefaultPayment(uname,payment):
+    query = "UPDATE Buyer SET default_payment = %s WHERE Username = %s;"
+    cursor.execute(query, (payment,uname))
+    # clear cursor
+    conn.commit()
+    return
+
+
+
+def popItem(itemName):
+	cursor.execute("SELECT selectItem.quantity, Item.item_name, Item.description, Item.exp_date, Item.listed_price, Item.quantity FROM selectItem JOIN Item ON Item.item_id=selectItem.item_id WHERE Item.food_group=%s",itemName)
+	info = info = tuplesToList(cursor.fetchall())
+	return info
+
+
