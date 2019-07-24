@@ -24,9 +24,9 @@
 	  <select name="prefstore">
 		  {% for i in  info %}
 		      {%if info[0] == dictry["storeID"]%}
-	  		 <option name="prefStore" selected value="{{info[0]}}">{{info[0]}},{{infol[1]}}  </option>
+	  		 <option  selected value="{{info[0]}}"> {{info[0]}},{{infol[1]}}  </option>
 	  		{%else%}
-		   	 <option name="prefStore"   value="{{info[0]}}">{{info[0]}},{{infol[1]}}  </option>
+		   	 <option  value="{{info[0]}}"> {{info[0]}},{{infol[1]}}  </option>
 		  	{%endif%}
 		  {%endfor%}
 		  <!--
