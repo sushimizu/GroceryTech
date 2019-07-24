@@ -20,8 +20,8 @@
      Username:  {{ dictry["uname"] }}
  		<br> <br>
  	 Managed Grocery Store:
-	  	{% for i, j in stores , sel %}
-	  		 <option name="prefStore" {{sel[j]}} value="{{i[0]}}">{{i[0]}},{{i[1]}}  </option>
+	  	{% for i in  sel %}
+	  		 <option name="prefStore" {{sel[j]}} value="{{sel[0]}}">{{sel[0]}},{{sel[1]}}  </option>
 	  	{%endfor%}
  	 	 <input type="text" name="prefStore" value= {{ dictry["storename"] }}> <br> <br>
      Email:
