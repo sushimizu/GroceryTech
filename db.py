@@ -227,6 +227,7 @@ def selectManagerInfo(uname):
 	cursor.execute("SELECT * FROM GroceryStore Where address_id=%s",store_id)
 	store_id, storename, address_id, opening, closing, phone = cursor.fetchone()
 	dictry['storename'] = storename
+	dictry['storeID'] = store_id
 	dictry['phone'] = phone
 	cursor.execute("SELECT * FROM Address Where id=%s",address_id)
 	addid, house, street, city, state, zipp = cursor.fetchone()
@@ -358,3 +359,7 @@ def listStores():
 
 
 
+def paymentMeth(uname):
+	cursor.execute("SELECT Buyer.default_payment, Payments.payment_name, Payments.account_number, Payments.routing_number FROM Buyer join Payments ON Payments.username = Buyer.username WHERE Buyer.username=%s", uname)
+	info = tuplesToList(cursor.fetchall())
+	return info

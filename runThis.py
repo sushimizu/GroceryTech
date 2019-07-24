@@ -234,13 +234,15 @@ def buyerAccountInfo():
 def buyerAccountInfo():
 	#currentUser = 'admirableneville'
 	dictry =  db.selectBuyerInfo(currentUser)
+	store = db.listStores()
+	"""
 	store = []
 	for i in range(1,36):
 		if i == int(dictry['defaultStore']):
 			store.append(" selected ")
 		else:
 			store.append(" ")
-
+	"""
 
 	return render_template("buyerAccountInfo7.html", dictry=dictry, store=store)
 
@@ -416,7 +418,20 @@ def managerFunctionality():
 @app.route('/managerAccInfo', methods=['GET','POST'])
 def managerAccInfo():
 	dictry = db.selectManagerInfo(currentUser)
-	return render_template('managerAccountInfo23.html', dictry=dictry)
+	stores = db.listStores()
+	sel = ()
+	"""
+	print (stores)
+	count = int(0)
+	for i in range(1,len(stores[0])+1):		
+		if i == int(dictry['storeID']):
+			sel = sel + ( stores[0,count], stores[1,count] , "selected"),
+		else:
+			sel = sel +  ( stores[0,count], stores[1,count] , " "),
+		count = count + 1 
+	print(sel)
+	"""
+	return render_template('managerAccountInfo23.html', dictry=dictry, stores=stores, sel=sel)
 
 @app.route('/updateManagerAccInfo', methods=['GET','POST'])
 def updateManagerAccInfo():
