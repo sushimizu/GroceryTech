@@ -227,6 +227,7 @@ def selectManagerInfo(uname):
 	cursor.execute("SELECT * FROM GroceryStore Where address_id=%s",store_id)
 	store_id, storename, address_id, opening, closing, phone = cursor.fetchone()
 	dictry['storename'] = storename
+	dictry['storeID'] = store_id
 	dictry['phone'] = phone
 	cursor.execute("SELECT * FROM Address Where id=%s",address_id)
 	addid, house, street, city, state, zipp = cursor.fetchone()
