@@ -250,34 +250,16 @@ def updateManagerInfo(uname, prefStore,email,phone,houseNo,streetAddress,city,st
     cursor.fetchall()
     if sum(storeID) == 0:
         return 1'''
-    query = "UPDATE Buyer SET phone = %s, default_store_id = %s WHERE Username = %s;"
-    cursor.execute(query, (phone,storeID,uname))
-    # clear cursor
-    conn.commit()
     query = "SELECT store_address FROM manages WHERE username = %s"
     cursor.execute(query, (uname))
     storeID = cursor.fetchone()
     cursor.fetchall()
-    query = "UPDATE manages SET store_address = %s WHERE Username = %s AND store_address = %s;"
-    cursor.execute(query, (prefStore,storeID,uname))
+    query = "UPDATE manages SET store_address = %s WHERE username = %s AND store_address = %s;"
+    cursor.execute(query, (prefStore,uname,storeID))
     # clear cursor
     conn.commit()
-    query = "SELECT address_id FROM Buyer WHERE username = %s"
-    cursor.execute(query, (uname))
-    addID = cursor.fetchone()
-    cursor.fetchall()
-    query = "UPDATE Address SET house_number = %s, street = %s, city = %s, state = %s, zip_code = %s WHERE id = %s;"
-    cursor.execute(query, (houseNo,streetAddress,city,state,zipp,addID))
-    # clear cursor
-    conn.commit()
-
-
-    query = "SELECT default_payment FROM Buyer WHERE username = %s"
-    cursor.execute(query, (uname))
-    payname = cursor.fetchone()
-    cursor.fetchall()
-    query = "UPDATE Payments SET account_number = %s, routing_number = %s WHERE Username = %s AND payment_name = %s;"
-    cursor.execute(query, (prefCard,routingNo,uname,payname))
+    query = "UPDATE GroceryStore SET phone = %s WHERE store_id = %s;"
+    cursor.execute(query, (phone,prefStore))
     # clear cursor
     conn.commit()
 

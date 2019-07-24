@@ -423,12 +423,12 @@ def managerAccInfo():
 	"""
 	print (stores)
 	count = int(0)
-	for i in range(1,len(stores[0])+1):		
+	for i in range(1,len(stores[0])+1):
 		if i == int(dictry['storeID']):
 			sel = sel + ( stores[0,count], stores[1,count] , "selected"),
 		else:
 			sel = sel +  ( stores[0,count], stores[1,count] , " "),
-		count = count + 1 
+		count = count + 1
 	print(sel)
 	"""
 	return render_template('managerAccountInfo23.html', dictry=dictry, stores=stores, sel=sel)
@@ -451,19 +451,23 @@ def updateManagerAccInfo():
 		error2 = "zip code has incorrect number of digits"
 		error3 = "email contains non-alphanumeric characters"
 		dictry = db.selectManagerInfo(currentUser)
+		stores = db.listStores()
+		sel = ()
 		if (len(str(phone))) != 9:#10:
-			return render_template("managerAccountInfo23.html", error=error1, dictry=dictry)
+			return render_template("managerAccountInfo23.html", error=error1, dictry=dictry, stores=stores, sel=sel)
 		elif (len(str(zipp))) != 5:
-			return render_template("managerAccountInfo23.html", error=error2, dictry=dictry)
+			return render_template("managerAccountInfo23.html", error=error2, dictry=dictry, stores=stores, sel=sel)
 		elif (len(arr) != 3) or (arr[0].isalnum() and arr[1].isalnum() and arr[2].isalnum())/1 != 1:
-			return render_template("managerAccountInfo23.html", error=error3, dictry=dictry)
+			return render_template("managerAccountInfo23.html", error=error3, dictry=dictry, stores=stores, sel=sel)
 		else:
 			val = db.updateManagerInfo(currentUser, prefStore,email,phone,houseNo,streetAddress,city,state,zipp)
 			dictry = db.selectManagerInfo(currentUser)
+			stores = db.listStores()
+			sel = ()
 			if val == 0:
-				return render_template("managerAccountInfo23.html", error = "Updates Saved", dictry=dictry)
+				return render_template("managerAccountInfo23.html", error = "Updates Saved", dictry=dictry, stores=stores, sel=sel)
 			else:
-				return render_template("managerAccountInfo23.html",error = "SQL query error", dictry=dictry)
+				return render_template("managerAccountInfo23.html",error = "SQL query error", dictry=dictry, stores=stores, sel=sel)
 	return render_template("managerAccountInfo23.html", error = "Something Wrong")
 
 @app.route('/revenueReport', methods=['GET','POST'])
