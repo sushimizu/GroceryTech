@@ -313,7 +313,7 @@ def assignments(uname):
 	return info
 
 def assignment(uname,orderID):
-    query = "SELECT Item.item_name,selectItem.quantity FROM selectItem JOIN Item ON Item.item_id=selectItem.item_id WHERE selectItem.order_id = %s IN (SELECT orderedBy.order_id FROM orderedBy WHERE Username = %s )"
+    query = "SELECT Item.item_name,selectItem.quantity FROM selectItem JOIN Item ON Item.item_id=selectItem.item_id WHERE selectItem.order_id = %s IN (SELECT orderedBy.order_id FROM orderedBy WHERE orderedBy.buyer_username = %s )"
     cursor.execute(query, (orderID, uname))
     iandq = tuplesToList(cursor.fetchall())
 
