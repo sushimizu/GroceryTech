@@ -315,3 +315,7 @@ def listStores():
 
 
 
+def paymentMeth():
+	cursor.execute("SELECT Buyer.default_payment, Payments.payment_name, Payments.account_number, Payments.routing_number FROM Buyer join Payments ON Payments.username = Buyer.username WHERE Buyer.username=%s", uname)
+	info = tuplesToList(cursor.fetchall())
+	return info
