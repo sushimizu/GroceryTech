@@ -368,7 +368,7 @@ def addNewPay(uname,payment,accName,routingNo):
 
 
 def popItem(itemNAme):
-	cursor.execute("SELECT selectItem.quantity, Item.item_name, Item.description, Item.exp_date, Item.listed_price, Item.quantity FROM selectItem JOIN Item ON Item.item_id=selectItem.item_id WHERE Item.food_group="Produce" ",itemName)
+	cursor.execute("SELECT selectItem.quantity, Item.item_name, Item.description, Item.exp_date, Item.listed_price, Item.quantity FROM selectItem JOIN Item ON Item.item_id=selectItem.item_id WHERE Item.food_group=%s",itemName)
 	info = info = tuplesToList(cursor.fetchall())
 	return info
 
