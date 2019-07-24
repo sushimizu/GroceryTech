@@ -446,7 +446,7 @@ def updateDelivererAccInfo():
 def assignments():
 	if request.method == "POST":
 		currentOrderID = request.form["store"]
-		info = db.assignments(currentUser)
+	info = db.assignments(currentUser)
 	return render_template('assignments20.html', info=info)
 
 @app.route('/assignment', methods=['GET','POST'])
