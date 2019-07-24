@@ -274,7 +274,7 @@ def updateBuyerAccountInfo():
 @app.route('/deleteAccountInfo', methods=['GET','POST'])
 def deleteAccountInfo():
 	uname = currentUser
-	query = "DELETE FROM Userr WHERE username = @s"
+	query = "DELETE FROM Userr WHERE username = %s"
 	db.cursor.execute(query, uname)
 	db.conn.commit()
 	return render_template('login1.html', error = "See ya, wouldn't wanna be ya!")
