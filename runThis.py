@@ -7,6 +7,7 @@ import re
 app = Flask(__name__)
 currentUser = ""
 currentStore = ""
+currentOrderID = ""
 """Temporary usernames, add SQL queries later"""
 """
 def validBuyer(uname, passwd):
@@ -444,7 +445,9 @@ def updateDelivererAccInfo():
 
 @app.route('/assignments', methods=['GET','POST'])
 def assignments():
-	info = db.assignments(currentUser)
+	if request.method == "POST":
+		global currentOrderID = request.form["store"]
+		info = db.assignments(currentUser)
 	return render_template('assignments20.html', info=info)
 
 @app.route('/assignment', methods=['GET','POST'])
@@ -541,11 +544,11 @@ def viewOrderDetails():
 def updateDeliveryInfo():
 	
 	if request.method == "POST":
-		status = request.form['fname']
+		status = request.form['status']
 		if status == 0:
 			return assignments()
 		else:
-			db.updateDelivery(currentUser, orderID)
+			db.updateDelivery(currentUser, currentOrderID)
 			return assignments()
 	return assignments()
 
