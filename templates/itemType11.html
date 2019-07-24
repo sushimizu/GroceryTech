@@ -25,33 +25,33 @@
 		  </tr>
 			
 		{% for i in info %}
-			{% if {{i[0]}} > 0 %)
-		  <tr>
-		     <td>
+			{% if {{i[0]}} != 0 %)
+		  		<tr>
+		     		<td>
 				     <form>
 					 
 					  <input type="number" name="quantity" min="0" max={{i[0]}} >
 					</form>		      
-		   </td>
-		    <td>{{i[1]}}</td>
-		    <td>{{i[2]}}</td>
-		    <td>{{i[3]}}</td>
-		    <td>{{i[4]}}</td>
-		    <td> Yes </td>
-		  </tr>
+				   </td>
+				    <td>{{i[1]}}</td>
+				    <td>{{i[2]}}</td>
+				    <td>{{i[3]}}</td>
+				    <td>{{i[4]}}</td>
+				    <td> Yes </td>
+				  </tr>
 			{% else %}
-			<tr>
-		     <td>< <form>
+				<tr>
+		    		 <td>< <form >
 					  
 					  <input type="number" name="quantity" min="0" max={{i[0]}} >
 					</form>	
-		</td>
-		    <td>{{i[1]}}</td>
-		    <td>{{i[2]}}</td>
-		    <td>{{i[3]}}</td>
-		    <td>{{i[4]}}</td>
-		    <td> No </td>
-		  </tr>
+					</td>
+					    <td>{{i[1]}}</td>
+					    <td>{{i[2]}}</td>
+					    <td>{{i[3]}}</td>
+					    <td>{{i[4]}}</td>
+					    <td> No </td>
+					  </tr>
 			{% endif %}
 		  
 		  {% endfor %}
