@@ -356,7 +356,7 @@ def assignment(uname,orderID):
     buser =  cursor.fetchone()
     cursor.fetchall()
     query = "SELECT address_id FROM Buyer WHERE username = %s"
-    cursor.execute(query, (buser))
+    cursor.execute(query, (uname))
     aID =  cursor.fetchone()
     cursor.fetchall()
     query = "SELECT house_number, street, city, state, zipcode FROM Addresses WHERE address_id = %s"
