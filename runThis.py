@@ -419,12 +419,14 @@ def managerAccInfo():
 	stores = db.listStores()
 	sel = ()
 	print (stores)
+	count = 0
 	for i in range(1,len(stores[0])+1):		
 		if i == int(dictry['storeID']):
-			sel = sel + ( stores[0,i], stores[1,i] , "selected"),
+			sel = sel + ( stores[0,count], stores[1,count] , "selected"),
 		else:
-			sel = sel +  ( stores[1[i]] , " "),
-		print(sel)
+			sel = sel +  ( stores[0,count], stores[1,count] , " "),
+		count = count + 1 
+	print(sel)
 	return render_template('managerAccountInfo23.html', dictry=dictry, stores=stores, sel=sel)
 
 @app.route('/updateManagerAccInfo', methods=['GET','POST'])
