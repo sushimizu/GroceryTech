@@ -33,7 +33,11 @@
 		   	 <td>{{i[2]}}</td>
 			<td>{{i[3]}}</td>
 			<td>{{i[4]}}</td>
-			<td>{{i[6]}}</td>
+				{% if i[5] == 1 %}
+					<td> 'Yes' </td>
+				{%else %}
+					<td> 'No' </td> 
+				{%endif%}
 				
 			{% endfor %}
 				<!--	
