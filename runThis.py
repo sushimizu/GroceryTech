@@ -340,6 +340,7 @@ def orderHistory():
 			info[count,5] = 'No'
 		count = count +1
 	"""
+	print ( shape(info), info )
 	for i in info:
 		if int( i[5]) == 1:
 			temp = ('Yes'),
@@ -349,7 +350,7 @@ def orderHistory():
 			i = i + temp
 
 	#info.append(isDel)
-	
+	print ( shape(info), info )
 	return render_template('orderHistory17.html', info=info, isDel=isDel)
 
 
