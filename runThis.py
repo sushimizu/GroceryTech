@@ -353,7 +353,7 @@ def addNewPayment():
 @app.route('/changeDefaultPayment', methods=['GET','POST'])
 def changeDefaultPayment():
 	if request.method == "POST":
-		payment = request.form['paymentName']
+		paymentName = request.form['paymentName']
 		val = db.updateDefaultPayment(currentUser,paymentName)
 		payment = db.paymentMeth(currentUser)
 		return render_template('paymentMethods14.html',error = "Default Payment Updated", payment= payment )
@@ -510,7 +510,8 @@ def outstnadingOrders():
 	return render_template('outstandingOrders25.html')
 @app.route('/inventory', methods=['GET','POST'])
 def inventory():
-	return render_template('inventory26.html')
+	info = db.inventory(currentUser)
+	return render_template('inventory26.html', info=info)
 
 
 

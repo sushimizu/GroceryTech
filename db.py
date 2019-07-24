@@ -310,7 +310,6 @@ def assignments(uname):
 	info = tuplesToList(cursor.fetchall())
 	#a, b, c, d, e = cursor.fetchone()
 	#store, orderID, orderDate, orderTime, noItems, quantity = cursor.fetchone()
-	info.append("")
 	return info
 
 
@@ -373,8 +372,20 @@ def updateDefaultPayment(uname,payment):
 
 
 def popItem(itemName):
-	cursor.execute("SELECT selectItem.quantity, Item.item_name, Item.description, Item.exp_date, Item.listed_price, Item.quantity FROM selectItem JOIN Item ON Item.item_id=selectItem.item_id WHERE Item.food_group=%s",itemName)
-	info = info = tuplesToList(cursor.fetchall())
+	cursor.execute("SELECT Item.quantity, Item.item_name, Item.description, Item.exp_date, Item.listed_price, Item.item_id FROM Item WHERE Item.food_group=%s",itemName)
+	info  = tuplesToList(cursor.fetchall())
 	return info
+
+
+def inventory(uname):
+	cursor.execute("SELECT Item.item_name, Item.description, Item.quantity, Item.listed_price, Item.exp_date From Item Join soldAt on soldAt.item_id = Item.item_id WHERE soldAt.store_id=manages.store_address HAVING manages.username=%s",uname)
+	info =  tuplesToList(cursor.fetchall())
+	return info
+
+
+
+
+
+
 
 
