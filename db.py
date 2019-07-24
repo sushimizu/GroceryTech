@@ -313,6 +313,7 @@ def assignments(uname):
 	return info
 
 def assignment(uname,orderID):
+    dictry = {}
     query = "SELECT Item.item_name,selectItem.quantity FROM selectItem JOIN Item ON Item.item_id=selectItem.item_id WHERE selectItem.order_id = %s IN (SELECT orderedBy.order_id FROM orderedBy WHERE orderedBy.buyer_username = %s )"
     cursor.execute(query, (orderID, uname))
     iandq = tuplesToList(cursor.fetchall())
@@ -362,7 +363,7 @@ def assignment(uname,orderID):
     query = "SELECT house_number, street, city, state, zipcode FROM Addresses WHERE address_id = %s"
     cursor.execute(query, (aID))
     houseNo, street, city, state, zipp = cursor.fetchone()
-    dictry = {}
+    
 	
     dictry['houseNo'] = houseNo
     dictry['street'] = street
