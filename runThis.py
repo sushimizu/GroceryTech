@@ -5,9 +5,9 @@ import re
 
 
 app = Flask(__name__)
-global currentUser = ""
-global currentStore = ""
-global currentOrderID = ""
+global currentUser 
+global currentStore 
+global currentOrderID 
 """Temporary usernames, add SQL queries later"""
 """
 def validBuyer(uname, passwd):
