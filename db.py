@@ -313,9 +313,10 @@ def assignments(uname):
 	return info
 
 def assignment(uname,orderID):
-    query = "SELECT Item.item_name,selectItem.quantity FROM selectItem JOIN Item ON Item.item_id=selectItem.item_id WHERE selectItem.order_id = %s WHERE Username = %s;"
-    cursor.execute(query, (orderID))
-    itemsandquantities = tuplesToList(cursor.fetchall())
+    dictry = {}
+    query = "SELECT Item.item_name,selectItem.quantity FROM selectItem JOIN Item ON Item.item_id=selectItem.item_id WHERE selectItem.order_id = %s IN (SELECT orderedBy.order_id FROM orderedBy WHERE orderedBy.buyer_username = %s )"
+    cursor.execute(query, (orderID, uname))
+    iandq = tuplesToList(cursor.fetchall())
 
     query = "SELECT order_placed_time FROM Orderr WHERE order_id = %s"
     cursor.execute(query, (orderID))
@@ -329,13 +330,13 @@ def assignment(uname,orderID):
     dictry['delivery_time'] = delivery_time
     cursor.fetchall()
 
-    query = "SELECT isDelivered FROM deliveredBy WHERE order_id = %s"
+    query = "SELECT deliveredBy.isDelivered FROM deliveredBy WHERE deliveredBy.order_id = %s"
     cursor.execute(query, (orderID))
     status =  cursor.fetchone()
     dictry['status'] = status
     cursor.fetchall()
 
-    query = "SELECT store_address FROM orderFrom WHERE order_id = %s"
+    query = "SELECT orderFrom.store_address FROM orderFrom WHERE orderFrom.order_id = %s"
     cursor.execute(query, (orderID))
     storeID =  cursor.fetchone()
     cursor.fetchall()
@@ -345,23 +346,25 @@ def assignment(uname,orderID):
     dictry['storeName'] = storeName
     cursor.fetchall()
 
-    query = "SELECT delivery_instructions FROM Orderr WHERE order_id = %s"
+    query = "SELECT Orderr.delivery_instructions FROM Orderr WHERE order_id = %s"
     cursor.execute(query, (orderID))
     delivery_instructions =  cursor.fetchone()
     dictry['delivery_instructions'] = delivery_instructions
     cursor.fetchall()
 
-    query = "SELECT buyer_username FROM orderedBy WHERE order_id = %s"
+    query = "SELECT orderedBy.buyer_username FROM orderedBy WHERE order_id = %s"
     cursor.execute(query, (order_id))
     buser =  cursor.fetchone()
     cursor.fetchall()
     query = "SELECT address_id FROM Buyer WHERE username = %s"
-    cursor.execute(query, (buser))
+    cursor.execute(query, (uname))
     aID =  cursor.fetchone()
     cursor.fetchall()
     query = "SELECT house_number, street, city, state, zipcode FROM Addresses WHERE address_id = %s"
     cursor.execute(query, (aID))
     houseNo, street, city, state, zipp = cursor.fetchone()
+    
+	
     dictry['houseNo'] = houseNo
     dictry['street'] = street
     dictry['city'] = city
@@ -428,8 +431,9 @@ def updateDefaultPayment(uname,payment):
 
 
 
-def popItem(itemName):
-	cursor.execute("SELECT Item.quantity, Item.item_name, Item.description, Item.exp_date, Item.listed_price, Item.item_id FROM Item WHERE Item.food_group=%s",itemName)
+def popItem(itemName, storeID):
+	cursor.execute("SELECT Item.quantity, Item.item_name, Item.description, Item.exp_date, Item.listed_price, Item.item_id FROM Item join soldAt on soldAt.item_id=Item.item_id where Item.food_group=%s and soldAt.store_id=%s",(itemName,storeID))
+	#cursor.execute("SELECT Item.quantity, Item.item_name, Item.description, Item.exp_date, Item.listed_price, Item.item_id FROM Item WHERE Item.food_group=%s",itemName)
 	info  = tuplesToList(cursor.fetchall())
 	return info
 

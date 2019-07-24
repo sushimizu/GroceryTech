@@ -6,6 +6,7 @@ import re
 
 app = Flask(__name__)
 currentUser = ""
+currentStore = ""
 """Temporary usernames, add SQL queries later"""
 """
 def validBuyer(uname, passwd):
@@ -222,6 +223,8 @@ def listOfStores():
 
 @app.route('/storeHomepage', methods=['GET','POST'])
 def storeHomepage():
+	if request.method == "POST":
+		currentStore = request.form["storeName"]	
 	return render_template('storeHomepage9.html')
 
 """
@@ -313,9 +316,11 @@ def litemType():
 """
 @app.route('/itemType/<Itype>', methods=['GET','POST'])
 def itemTypeI(Itype):
-	info = db.popItem(Itype)
+		
+	info = db.popItem(Itype, currentStore)
 	return render_template('itemType11.html', Itype=Itype, info=info)
-
+	
+	
 
 @app.route('/cart', methods=['GET','POST'])
 def cart():
