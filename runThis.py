@@ -77,8 +77,6 @@ def registerBuyer():
 def checkregisterBuyer():
 
 	if request.method == "POST":
-		fname = request.form['fname']
-		uname = request.form['uname']
 		password = request.form['password']
 		email = request.form['email']
 		street = request.form['street']
@@ -123,7 +121,7 @@ def checkregisterBuyer():
 			AddID = 90
 			AddID = AddID + 1 #response + 1
 			user_type = 'buyer'
-			reg = db.insertUser(uname,password,user_type,email,fname,lname)
+			reg = db.insertUser(uname,password,user_type,email)
 			if reg == 1:
 				return render_template("registerBuyer3.html", error="Username is Taken.")
 			reg = db.insertPayment(uname,payment,accNo,routingNo)
@@ -259,7 +257,8 @@ def buyerAccountInfo():
 @app.route('/updateBuyerAccountInfo', methods=['GET','POST'])
 def updateBuyerAccountInfo():
 	if request.method == "POST":
-		#uname = request.form['uname']
+		fname = request.form['fname']
+		lname = request.form['lname']
 		prefStore = request.form['prefStore']
 		email = request.form['email']
 		prefCard = request.form['prefCard']
@@ -284,7 +283,7 @@ def updateBuyerAccountInfo():
 		elif (len(arr) != 3) or (arr[0].isalnum() and arr[1].isalnum() and arr[2].isalnum())/1 != 1:
 			return render_template("buyerAccountInfo7.html", error=error3, dictry=dictry, store=store)
 		else:
-			val = db.updateBuyerInfo(currentUser,prefStore,email,prefCard,routingNo,phone,houseNo,streetAddress,city,state,zipp)
+			val = db.updateBuyerInfo(currentUser,prefStore,email,prefCard,routingNo,phone,houseNo,streetAddress,city,state,zipp,fname,lname)
 			dictry = db.selectBuyerInfo(currentUser)
 			store = db.listStores()
 			if val == 0:
@@ -323,11 +322,11 @@ def litemType():
 """
 @app.route('/itemType/<Itype>', methods=['GET','POST'])
 def itemTypeI(Itype):
-		
+
 	info = db.popItem(Itype, currentStore)
 	return render_template('itemType11.html', Itype=Itype, info=info)
-	
-	
+
+
 
 @app.route('/cart', methods=['GET','POST'])
 def cart():
@@ -425,6 +424,8 @@ def delivererAccInfo():
 @app.route('/updateDelivererAccInfo', methods=['GET','POST'])
 def updateDelivererAccInfo():
 	if request.method == "POST":
+		fname = request.form['fname']
+		lname = request.form['lname']
 		email = request.form['email']
 
 		arr = re.split(r'[@.]', email)
@@ -433,7 +434,7 @@ def updateDelivererAccInfo():
 		if (len(arr) != 3) or (arr[0].isalnum() and arr[1].isalnum() and arr[2].isalnum())/1 != 1:
 			return render_template("delivererAccountInfo19.html", error=error1, dictry=dictry)
 		else:
-			val = db.updateDelivererInfo(currentUser, email)
+			val = db.updateDelivererInfo(currentUser, email, fname, lname)
 			dictry = db.selectDelivererInfo(currentUser)
 			if val == 0:
 				return render_template("delivererAccountInfo19.html", error = "Updates Saved", dictry=dictry)
@@ -450,7 +451,7 @@ def assignments():
 def assignment():
 	if request.method == "POST":
 		OrderID = request.form['store']
-		dictry, iandq = db.assignment(currentUser,OrderID)
+		dictry, iandq = db.newAss(currentUser,OrderID)
 		return render_template('assignment21.html',dictry = dictry, iandq=iandq)
 	return render_template('assignment21.html', error = "lmao something is really messed up.")
 
@@ -482,31 +483,25 @@ def managerAccInfo():
 @app.route('/updateManagerAccInfo', methods=['GET','POST'])
 def updateManagerAccInfo():
 	if request.method == "POST":
-		#uname = request.form['uname']
-		prefStore = request.form['prefStore']
+		fname = request.form['fname']
+		lname = request.form['lname']
 		email = request.form['email']
-		phone = request.form['phone']
-		houseNo = request.form['houseNo']
-		streetAddress = request.form['streetAddress']
-		city = request.form['city']
-		state = request.form['state']
-		zipp = request.form['zip']
 
 		arr = re.split(r'[@.]', email)
-		error1 = "phone has incorrect number of digits"
-		error2 = "zip code has incorrect number of digits"
-		error3 = "email contains non-alphanumeric characters"
+		'''error1 = "phone has incorrect number of digits"
+		error2 = "zip code has incorrect number of digits"'''
+		error1 = "email contains non-alphanumeric characters"
 		dictry = db.selectManagerInfo(currentUser)
 		stores = db.listStores()
 		sel = ()
-		if (len(str(phone))) != 9:#10:
+		'''if (len(str(phone))) != 9:#10:
 			return render_template("managerAccountInfo23.html", error=error1, dictry=dictry, stores=stores, sel=sel)
 		elif (len(str(zipp))) != 5:
-			return render_template("managerAccountInfo23.html", error=error2, dictry=dictry, stores=stores, sel=sel)
-		elif (len(arr) != 3) or (arr[0].isalnum() and arr[1].isalnum() and arr[2].isalnum())/1 != 1:
-			return render_template("managerAccountInfo23.html", error=error3, dictry=dictry, stores=stores, sel=sel)
+			return render_template("managerAccountInfo23.html", error=error2, dictry=dictry, stores=stores, sel=sel)'''
+		if (len(arr) != 3) or (arr[0].isalnum() and arr[1].isalnum() and arr[2].isalnum())/1 != 1:
+			return render_template("managerAccountInfo23.html", error=error1, dictry=dictry, stores=stores, sel=sel)
 		else:
-			val = db.updateManagerInfo(currentUser, prefStore,email,phone,houseNo,streetAddress,city,state,zipp)
+			val = db.updateManagerInfo(currentUser,email,fname,lname)
 			dictry = db.selectManagerInfo(currentUser)
 			stores = db.listStores()
 			sel = ()

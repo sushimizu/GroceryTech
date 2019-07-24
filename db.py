@@ -204,9 +204,9 @@ def selectDelivererInfo(uname):
 	dictry['lname'] = last_name
 	return dictry
 
-def updateDelivererInfo(uname,email):
-    query = "UPDATE Userr SET email = %s WHERE Username = %s;"
-    cursor.execute(query, (email,uname))
+def updateDelivererInfo(uname,email,fname,lname):
+    query = "UPDATE Userr SET first_name = %s, last_name = %s, email = %s WHERE Username = %s;"
+    cursor.execute(query, (fname,lname,email,uname))
     # clear cursor
     conn.commit()
 
@@ -238,9 +238,9 @@ def selectManagerInfo(uname):
 	dictry['zipp'] = zipp
 	return dictry
 
-def updateManagerInfo(uname, prefStore,email,phone,houseNo,streetAddress,city,state,zipp):
-    query = "UPDATE Userr SET email = %s WHERE Username = %s;"
-    cursor.execute(query, (email,uname))
+def updateManagerInfo(uname,email,fname,lname):
+    query = "UPDATE Userr SET first_name = %s, last_name = %s, email = %s WHERE Username = %s;"
+    cursor.execute(query, (fname,lname,email,uname))
     # clear cursor
     conn.commit()
     #following query was for checking to see if the addess inputted in is correct, though we figured that the manager should not be able to just change the address of the store.
@@ -254,14 +254,14 @@ def updateManagerInfo(uname, prefStore,email,phone,houseNo,streetAddress,city,st
     # cursor.execute(query, (uname))
     # storeID = cursor.fetchone()
     # cursor.fetchall()
-    query = "UPDATE manages SET store_address = %s WHERE username = %s;"
+    '''query = "UPDATE manages SET store_address = %s WHERE username = %s;"
     cursor.execute(query, (prefStore,uname))
     # clear cursor
     conn.commit()
     query = "UPDATE GroceryStore SET phone = %s WHERE store_id = %s;"
     cursor.execute(query, (phone,prefStore))
     # clear cursor
-    conn.commit()
+    conn.commit()'''
 
     return 0
 
@@ -312,6 +312,21 @@ def assignments(uname):
 	#store, orderID, orderDate, orderTime, noItems, quantity = cursor.fetchone()
 	return info
 
+def newAss(uname,orderID):
+	cursor.execute("select Orderr.order_placed_time, Orderr.delivery_time,deliveredBy.is_delivered, concat(A.house_number,', ',A.street,', ',A.city,', ',A.state,', ',A.state,', ',A.zip_code) ,GroceryStore.store_name from deliveredBy join orderFrom on orderFrom.order_id=deliveredBy.order_id join Orderr on orderFrom.order_id=Orderr.order_id join GroceryStore on orderFrom.store_address_id=GroceryStore.store_id join Address as a on GroceryStore.store_id=A.id where deliveredBy.order_id=%s and deliveredBy.deliverer_username=%s", (orderID, uname))
+	orderTime, deliveryTime, isDelivered, address , storeName = cursor.fetchone()
+	dictry = {}
+	dictry["order_placed"] = orderTime 
+	dictry["delivery_time"] = deliveryTime
+	dictry["status"] = isDelivered
+	dictry["address"] = address
+	dictry["storeName"] = storeName
+	cursor.execute("select Item.item_name,selectItem.quantity from selectItem join Item on Item.item_id=selectItem.item_id where selectItem.order_id =%s", orderID)
+	iandq = tuplesToList(cursor.fetchall())
+	return dictry, iandq
+	
+	
+	
 def assignment(uname,orderID):
     dictry = {}
     query = "SELECT Item.item_name,selectItem.quantity FROM selectItem JOIN Item ON Item.item_id=selectItem.item_id WHERE selectItem.order_id = %s IN (SELECT orderedBy.order_id FROM orderedBy WHERE orderedBy.buyer_username = %s )"
@@ -363,8 +378,8 @@ def assignment(uname,orderID):
     query = "SELECT house_number, street, city, state, zipcode FROM Addresses WHERE address_id = %s"
     cursor.execute(query, (aID))
     houseNo, street, city, state, zipp = cursor.fetchone()
-    
-	
+
+
     dictry['houseNo'] = houseNo
     dictry['street'] = street
     dictry['city'] = city
