@@ -423,7 +423,7 @@ def managerAccInfo():
 			sel = sel + ( stores[0[i]], stores[1[i]] , "selected"),
 		else:
 			sel = sel +  ( stores[1[i]] , " "),
-
+		print(sel)
 	return render_template('managerAccountInfo23.html', dictry=dictry, stores=stores, sel=sel)
 
 @app.route('/updateManagerAccInfo', methods=['GET','POST'])
