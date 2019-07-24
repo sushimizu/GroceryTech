@@ -266,20 +266,22 @@ def updateBuyerAccountInfo():
 		error2 = "zip code has incorrect number of digits"
 		error3 = "email contains non-alphanumeric characters"
 		dictry = db.selectBuyerInfo(currentUser)
+		store = db.listStores()
 		if (len(str(phone))) != 9:#10:
-			return render_template("buyerAccountInfo7.html", error=error1, dictry=dictry)
+			return render_template("buyerAccountInfo7.html", error=error1, dictry=dictry, store=store)
 		elif (len(str(zipp))) != 5:
-			return render_template("buyerAccountInfo7.html", error=error2, dictry=dictry)
+			return render_template("buyerAccountInfo7.html", error=error2, dictry=dictry, store=store)
 		elif (len(arr) != 3) or (arr[0].isalnum() and arr[1].isalnum() and arr[2].isalnum())/1 != 1:
-			return render_template("buyerAccountInfo7.html", error=error3, dictry=dictry)
+			return render_template("buyerAccountInfo7.html", error=error3, dictry=dictry, store=store)
 		else:
-			val = db.updateBuyerInfo(currentUser, prefStore,email,prefCard,routingNo,phone,houseNo,streetAddress,city,state,zipp)
+			val = db.updateBuyerInfo(currentUser,prefStore,email,prefCard,routingNo,phone,houseNo,streetAddress,city,state,zipp)
 			dictry = db.selectBuyerInfo(currentUser)
+			store = db.listStores()
 			if val == 0:
-				return render_template("buyerAccountInfo7.html", error = "Updates Saved", dictry=dictry)
+				return render_template("buyerAccountInfo7.html", error = "Updates Saved", dictry=dictry, store=store)
 			else:
-				return render_template("buyerAccountInfo7.html",error = "SQL query error", dictry=dictry)
-	return render_template("buyerFunctionality6.html", error = "Something Wrong")
+				return render_template("buyerAccountInfo7.html",error = "SQL query error", dictry=dictry, store=store)
+	return render_template("buyerFunctionality6.html", error = "ah shit here we go again")
 
 @app.route('/deleteAccountInfo', methods=['GET','POST'])
 def deleteAccountInfo():
