@@ -224,8 +224,7 @@ def listOfStores():
 @app.route('/storeHomepage', methods=['GET','POST'])
 def storeHomepage():
 	if request.method == "POST":
-		currentStore = request.form["storeName"]
-		
+		currentStore = request.form["storeName"]	
 	return render_template('storeHomepage9.html')
 
 """
