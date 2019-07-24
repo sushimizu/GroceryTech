@@ -165,8 +165,12 @@ def updateBuyerInfo(uname,prefStore,email,prefCard,routingNo,phone,houseNo,stree
     cursor.execute(query, (email,uname))
     # clear cursor
     conn.commit()
+    query = "SELECT default_store_id FROM Buyer WHERE username = %s"
+    cursor.execute(query, (uname))
+    storeID = cursor.fetchone()
+    cursor.fetchall()
     query = "UPDATE Buyer SET phone = %s, default_store_id = %s WHERE Username = %s;"
-    cursor.execute(query, (phone,prefStore,uname))
+    cursor.execute(query, (phone,storeID,uname))
     # clear cursor
     conn.commit()
     query = "SELECT address_id FROM Buyer WHERE username = %s"
