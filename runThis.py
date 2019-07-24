@@ -418,9 +418,10 @@ def managerAccInfo():
 	dictry = db.selectManagerInfo(currentUser)
 	stores = db.listStores()
 	sel = ()
+	print (stores)
 	for i in range(1,len(stores[0])+1):		
 		if i == int(dictry['storeID']):
-			sel = sel + ( stores[0[i]], stores[1[i]] , "selected"),
+			sel = sel + ( stores[0,i], stores[1,i] , "selected"),
 		else:
 			sel = sel +  ( stores[1[i]] , " "),
 		print(sel)
