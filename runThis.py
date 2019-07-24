@@ -419,12 +419,12 @@ def managerAccInfo():
 	stores = db.listStores()
 	sel = ()
 	print (stores)
-	count = 0
+	count = int(0)
 	for i in range(1,len(stores[0])+1):		
 		if i == int(dictry['storeID']):
-			sel = sel + ( stores[0,count], stores[1,count] , "selected"),
+			sel = sel + ( stores[0][count], stores[1][count] , "selected"),
 		else:
-			sel = sel +  ( stores[0,count], stores[1,count] , " "),
+			sel = sel +  ( stores[0][count], stores[1][count] , " "),
 		count = count + 1 
 	print(sel)
 	return render_template('managerAccountInfo23.html', dictry=dictry, stores=stores, sel=sel)
