@@ -353,7 +353,7 @@ def addNewPayment():
 @app.route('/changeDefaultPayment', methods=['GET','POST'])
 def changeDefaultPayment():
 	if request.method == "POST":
-		payment = request.form['paymentName']
+		paymentName = request.form['paymentName']
 		val = db.updateDefaultPayment(currentUser,paymentName)
 		payment = db.paymentMeth(currentUser)
 		return render_template('paymentMethods14.html',error = "Default Payment Updated", payment= payment )
