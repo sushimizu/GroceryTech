@@ -444,7 +444,7 @@ def assignments():
 def assignment():
 	if request.method == "POST":
 		OrderID = request.form['store']
-		dictry, iandq = db.assignment(currentUser,OrderID)
+		dictry, iandq = db.newAss(currentUser,OrderID)
 		return render_template('assignment21.html',dictry = dictry, iandq=iandq)
 	return render_template('assignment21.html', error = "lmao something is really messed up.")
 
