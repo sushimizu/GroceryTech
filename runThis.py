@@ -315,7 +315,7 @@ def litemType():
 def itemTypeI(Itype):
 	if request.method == "POST":
 		storeID = request.form['storeName']
-		info = db.popItem(Itype)
+		info = db.popItem(Itype, storeID)
 		return render_template('itemType11.html', Itype=Itype, info=info)
 	
 	return render_template('itemType11.html', Itype=Itype, info=info, error="Incorrect")
