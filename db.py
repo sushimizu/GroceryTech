@@ -362,6 +362,8 @@ def assignment(uname,orderID):
     query = "SELECT house_number, street, city, state, zipcode FROM Addresses WHERE address_id = %s"
     cursor.execute(query, (aID))
     houseNo, street, city, state, zipp = cursor.fetchone()
+    dictry = {}
+	
     dictry['houseNo'] = houseNo
     dictry['street'] = street
     dictry['city'] = city
