@@ -5,9 +5,9 @@ import re
 
 
 app = Flask(__name__)
-global currentUser 
-global currentStore 
-global currentOrderID 
+currentUser = ""
+currentStore = ""
+currentOrderID = ""
 """Temporary usernames, add SQL queries later"""
 """
 def validBuyer(uname, passwd):
@@ -41,6 +41,7 @@ def loginReq():
 		_name = request.form['username']
 		_password = request.form['password']
 		num = db.login(_name, _password)
+		global currentUser
 		if num == 1:
 			currentUser = _name
 			return render_template('managerFunctionality22.html')
@@ -222,7 +223,7 @@ def listOfStores():
 
 @app.route('/checkStoreHomepage', methods=['GET','POST'])
 def checkSToreHomepage():
-	currentStore
+	global currentStore
 	if request.method == "POST":
 		currentStore = request.form["store"]
 		print(currentStore)
@@ -445,6 +446,7 @@ def updateDelivererAccInfo():
 @app.route('/assignments', methods=['GET','POST'])
 def assignments():
 	if request.method == "POST":
+		global currentOrderID
 		currentOrderID = request.form["store"]
 	info = db.assignments(currentUser)
 	return render_template('assignments20.html', info=info)
