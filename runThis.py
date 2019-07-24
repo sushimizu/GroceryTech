@@ -418,6 +418,7 @@ def managerAccInfo():
 	dictry = db.selectManagerInfo(currentUser)
 	stores = db.listStores()
 	sel = ()
+	"""
 	print (stores)
 	count = int(0)
 	for i in range(1,len(stores[0])+1):		
@@ -427,6 +428,7 @@ def managerAccInfo():
 			sel = sel +  ( stores[0,count], stores[1,count] , " "),
 		count = count + 1 
 	print(sel)
+	"""
 	return render_template('managerAccountInfo23.html', dictry=dictry, stores=stores, sel=sel)
 
 @app.route('/updateManagerAccInfo', methods=['GET','POST'])
