@@ -377,7 +377,7 @@ def popItem(itemName):
 	return info
 
 
-def inventory():
+def inventory(uname):
 	cursor.execute("SELECT Item.item_name, Item.description, Item.quantity, Item.listed_price, Item.exp_date From Item Join soldAt on soldAt.item_id = Item.item_id WHERE soldAt.store_id=manages.store_address HAVING manages.username=%s",uname)
 	info =  tuplesToList(cursor.fetchall())
 	return info
