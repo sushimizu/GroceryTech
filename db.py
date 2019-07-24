@@ -330,13 +330,13 @@ def assignment(uname,orderID):
     dictry['delivery_time'] = delivery_time
     cursor.fetchall()
 
-    query = "SELECT isDelivered FROM deliveredBy WHERE order_id = %s"
+    query = "SELECT deliveredBy.isDelivered FROM deliveredBy WHERE deliveredBy.order_id = %s"
     cursor.execute(query, (orderID))
     status =  cursor.fetchone()
     dictry['status'] = status
     cursor.fetchall()
 
-    query = "SELECT store_address FROM orderFrom WHERE order_id = %s"
+    query = "SELECT orderFrom.store_address FROM orderFrom WHERE orderFrom.order_id = %s"
     cursor.execute(query, (orderID))
     storeID =  cursor.fetchone()
     cursor.fetchall()
@@ -346,13 +346,13 @@ def assignment(uname,orderID):
     dictry['storeName'] = storeName
     cursor.fetchall()
 
-    query = "SELECT delivery_instructions FROM Orderr WHERE order_id = %s"
+    query = "SELECT Orderr.delivery_instructions FROM Orderr WHERE order_id = %s"
     cursor.execute(query, (orderID))
     delivery_instructions =  cursor.fetchone()
     dictry['delivery_instructions'] = delivery_instructions
     cursor.fetchall()
 
-    query = "SELECT buyer_username FROM orderedBy WHERE order_id = %s"
+    query = "SELECT orderedBy.buyer_username FROM orderedBy WHERE order_id = %s"
     cursor.execute(query, (order_id))
     buser =  cursor.fetchone()
     cursor.fetchall()
