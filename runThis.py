@@ -336,7 +336,8 @@ def itemTypeI(Itype):
 
 @app.route('/cart', methods=['GET','POST'])
 def cart():
-	return render_template('cart12.html')
+	info = db.popCart()
+	return render_template('cart12.html', info=info)
 
 @app.route('/addToCart', methods=['GET','POST'])
 def addToCart():
