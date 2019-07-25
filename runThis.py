@@ -558,6 +558,17 @@ def updateDeliveryInfo():
 	info = db.assignments(currentUser)
 	return render_template('assignments20.html', info=info)
 
+@app.route('/viewItemM/<item>', methods=['GET','POST'])
+def viewItem(item):
+	
+	return render_template("viewItemM.html", item=item)
+
+
+
+
+
+
+
 
 
 if __name__ == '__main__' :
