@@ -9,6 +9,7 @@ currentUser = ""
 currentStore = ""
 currentOrderID = ""
 AddID = 90
+
 """Temporary usernames, add SQL queries later"""
 """
 def validBuyer(uname, passwd):
@@ -410,7 +411,7 @@ def changeDefaultPayment():
 
 @app.route('/reciept', methods=['GET','POST'])
 def reciept():
-	dictry = db.reciept(orderID)
+	dictry = db.reciept()
 	return render_template('reciept16.html', dictry = dictry)
 
 @app.route('/orderHistory', methods=['GET','POST'])
@@ -617,10 +618,18 @@ def checkCheckout():
 	if request.method == "POST":
 		payment = request.form['payment']
 		dictry = db.selectBuyerInfo(currentUser)
-		if payment == dictry["paymentName"]:
-			return reciept()
-		else:
+		print(payment)
+		print(dictry["defaultPay"])
+		if payment is "Default":
 			return paymentMethods()
+		else:
+			newOrderID = 1000000
+			query = db.getNewOrderID()
+			global currentOrderID
+			while newOrderID in query:
+				newOrderID = newOrderID + 1
+			currentOrderID = newOrderID
+			return reciept()
 	
 	return 
 
