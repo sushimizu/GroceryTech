@@ -35,7 +35,8 @@ def deleteFromCart(quantity,itemID):
     cursor.fetchall()
     return
 
-
+def adjustCart(quantity,itemID):
+    return
 
 # returns 0 if credentials are invalid
 # returns 1 if user is a manager
