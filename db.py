@@ -13,6 +13,13 @@ def tuplesToList(tlist):
         newlist.append(i)
     return newlist
 
+def addToCart(quantity,itemID):
+    #check if item already exists in cart
+    query = "SELECT quantity FROM CartView where itemID = %s"
+    cursor.execute(query, itemID)
+
+    return
+
 
 # returns 0 if credentials are invalid
 # returns 1 if user is a manager
@@ -480,7 +487,7 @@ def create_table():
     sql="DROP TABLE IF EXISTS CartView"
     cursor.execute(sql)
 
-    cursor.execute("CREATE TABLE CartView( Order_id Int(7) not null, Item_name Varchar(64) not null,Description Varchar(256) not null, Quantity Int(5) not null, Price Decimal(5,2) Not null, In_stock Boolean not null)")
+    cursor.execute("CREATE TABLE CartView( quantity Int(8) not null, Item_id INT(2) not null)")
 
 
 def getItemInfo(itemNo):

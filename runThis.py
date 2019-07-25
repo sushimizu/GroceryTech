@@ -338,7 +338,7 @@ def cart():
 def addToCart():
 	quantity = request.form['quantity']
 	itemID = request.form['itemID']
-	val = db.addToCart(currentUser,quantity,itemID)
+	val = db.addToCart(quantity,itemID)
 
 	return render_template('cart12.html')
 
