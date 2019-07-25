@@ -296,8 +296,39 @@ def updateManagerInfo(uname,email,fname,lname):
 
     return 0
 
-def reciept(orderID):
+def reciept(uname,storeID,orderID,payment,deliveryTime,deliveryInstruc):
 	dictry = {}
+
+
+    query = "INSERT INTO Orderr(order_id,delivery_instructions,delivery_time,order_placed_date,order_placed_date)"\
+    "VALUES (%s,%s,%s,%s,%s);"
+    cursor.execute(query, (orderID,deliveryInstruc,delivery_time,curdate(),curtime()))
+    conn.commit()
+
+    query = "INSERT INTO OrderedBy(order_id,buyer_username)"\
+    "VALUES (%s,%s);"
+    cursor.execute(query, (orderID,uname))
+    conn.commit()
+
+    query = "INSERT INTO orderFrom(store_address_id,order_id)"\
+    "VALUES (%s,%s);"
+    cursor.execute(query, (storeID,orderID))
+    conn.commit()
+
+    query = "SELECT * FROM CartView"
+    cursor.execute(query)
+    quantity, itemID = cursor.fetchone()
+    cursor.fetchall()
+    query = "INSERT INTO selectItem(item_id,quantity,order_id)"\
+    "VALUES (%s,%s,%s);"
+    cursor.execute(query, (itemID,quantity,orderID))
+    conn.commit()
+
+    query = "INSERT INTO deliveredBy(order_id,deliverer_username,is_delivered,delivery_time,delivery_date)"\
+    "VALUES (%s,%s,%s,%s,%s);"
+    cursor.execute(query, (orderID,,0,deliveryTime,))
+    conn.commit()
+
 	cursor.execute("SELECT * FROM Order Where order_id=%s",orderID)
 	oid, instructions, delivTime, orderPlacedDate, orderPlacedTime = cursor.fetchone()
 	cursor.execute("SELECT * FROM DeliveredBy Where order_id=%s",orderID)
