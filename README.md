@@ -9,4 +9,4 @@ or
 
 $ python3 runThis.py
 
-then paste http://0.0.0.0:5000 into browser
+then paste the provided link (http://0.0.0.0:5000) into browser
