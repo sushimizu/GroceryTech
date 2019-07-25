@@ -451,6 +451,7 @@ def listStores():
 def paymentMeth(uname):
 	cursor.execute("SELECT Buyer.default_payment, Payments.payment_name, Payments.account_number, Payments.routing_number FROM Buyer join Payments ON Payments.username = Buyer.username WHERE Buyer.username=%s", uname)
 	info = tuplesToList(cursor.fetchall())
+	print(info)
 	return info
 
 def addNewPay(uname,payment,accName,routingNo):
@@ -469,6 +470,7 @@ def addNewPay(uname,payment,accName,routingNo):
     return 0
 
 def updateDefaultPayment(uname,payment):
+    print(payment)
     query = "UPDATE Buyer SET default_payment = %s WHERE Username = %s;"
     cursor.execute(query, (payment,uname))
     # clear cursor
