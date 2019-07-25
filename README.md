@@ -48,10 +48,10 @@ INSTALLING THE DEPENDENCIES:
 WHAT'S WHERE:
 
 
-    runThis.py contains all of the HTML routes. That is, this is where what happens when you visit every page on the website is defined.
-    Some of the functions in runThis.py are organized into db.py to keep everything organized.
-    templates contains the actual HTML used. There is one HTML page for every distinct page on the website. 
-    GroceryTech.sql contains the  sql code to create our database schema and insert values into it.
+    runThis.py contains all of the HTML routes. That is, this is where the connections between every page on the website are defined.
+    Some of the functions in runThis.py are organized into db.py to keep everything organized. We tried to keep most of the actual database queries in the db.py file.
+    Templates contains the actual HTML used. There is one HTML page for every distinct page on the website. 
+    GroceryTech.sql contains the  sql code to create our database schema and populate it with values.
 
 
 TO RUN:
