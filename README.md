@@ -4,7 +4,7 @@ CS 4400 project
 RUNNING THE WEB APP:
 
 
-    If you don't already have them, install Python 3, pip, mySQL Server and mySQL Workbench.
+    If you don't already have them, install Python 3.7, pip, mySQL Server and mySQL Workbench.
 
     Clone the repository to your computer. You can find this repository at https://github.com/sushimizu/GroceryTech . These instructions will assume you cloned it to a directory called GroceryTech.
     
@@ -37,7 +37,7 @@ INSTALLING THE DEPENDENCIES:
 
 
     Make sure you have googleChrome or Safari on your computer, if not download it from your web browser.
-    Make sure you have Python3.7 64 bites, if you don't have it,  go to https://www.python.org/ and install python3
+    Make sure you have Python3.7 64 bits, if you don't have it,  go to https://www.python.org/ and install python3
     
     Make sure you have installed Mysql Workbench, Mysql server, and Mysql connectors. If you dont have it, go to https://dev.mysql.com/downloads/installer/, and install everything as recommended. Make sure to remember the password for your server. You must then go to line 6 in db.py and change the password to your SQL server's password.
     
