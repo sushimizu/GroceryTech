@@ -495,7 +495,7 @@ def updateDelivererAccInfo():
 
 @app.route('/assignments', methods=['GET','POST'])
 def assignments():
-	info = db.assignments(currentUser)
+	info = db.newAss(currentUser, currentOrderID)
 	return render_template('assignments20.html', info=info)
 
 @app.route('/assignment', methods=['GET','POST'])
