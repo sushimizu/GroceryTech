@@ -562,9 +562,10 @@ def updateDeliveryInfo():
 def viewItem(item):
 	if request.method == "POST":
 		itemNo = request.form['itemNo']
-	return render_template("viewItemM.html", item=item)
+		dictry = db.getItemInfo(itemNo)
+		return render_template("viewItemM.html", item=item, dictry=dictry)
 
-
+	return
 
 
 
