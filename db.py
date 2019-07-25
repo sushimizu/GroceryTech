@@ -334,7 +334,7 @@ def updateOrder(uname,storeID,orderID,deliveryInstruc, deliveryTime):
     conn.commit()
 
 
-def reciept(orderID):
+def reciept(orderID, uname):
     dictry = {}
     cursor.execute("SELECT * FROM Orderr WHERE order_id=%s",orderID)
     oid, instructions, delivTime, orderPlacedDate, orderPlacedTime = cursor.fetchone()
@@ -344,8 +344,10 @@ def reciept(orderID):
     fname , lname = cursor.fetchone()
     cursor.execute("select sum(selectItem.quantity) from selectItem Where selectItem.order_id=%s", orderID)
     noItems = tuplesToList(cursor.fetchall())
+    cursor.execute("select Buyer.default_payment from Buyer where Buyer.username=%s ",uname)
+    payment = cursor.fetchone()
     dictry['orderID'] = oid
-    dictry['payment'] = ""
+    dictry['payment'] = payment
     dictry['fname'] = fname
     dictry['lname'] = lname
     dictry['deliveryTime'] = delivTime
