@@ -345,11 +345,11 @@ def addToCart(Itype):
 	quantity = request.form['quantity']
 	itemID = request.form['itemID']
 	val = db.addToCart(quantity,itemID)
-	info = db.popCart(Itype, currentStore)
+	info = db.popCart()
 	if val == 1:
-		return render_template('itemType11.html', error = "Item already exists, try editing the item in the cart page.", Itype=Itype, info=info)
+		return render_template('itemType11.html', error = "Item already exists, try editing the item in the cart page.", info=info)
 	else:
-		return render_template('itemType11.html', error = "Item Added. Please Select View Cart to View the Items Currently in Your Cart.", Itype=Itype, info=info)
+		return render_template('itemType11.html', error = "Item Added. Please Select View Cart to View the Items Currently in Your Cart.", info=info)
 
 @app.route('/deleteFromCart', methods=['GET','POST'])
 def deleteFromCart(Itype):
