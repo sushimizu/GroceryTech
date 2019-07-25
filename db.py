@@ -348,7 +348,7 @@ def reciept(orderID):
     dictry['payment'] = ""
     dictry['fname'] = fname
     dictry['lname'] = lname
-    dictry['deliveryTime'] = delTime
+    dictry['deliveryTime'] = delivTime
     dictry['orderTime'] = orderPlacedTime
 
     return dictry, noItems
