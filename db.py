@@ -340,9 +340,13 @@ def reciept(orderID):
     oid, instructions, delivTime, orderPlacedDate, orderPlacedTime = cursor.fetchone()
     cursor.execute("SELECT * FROM DeliveredBy WHERE order_id=%s",orderID)
     oidd, dusername, isDel, delTime, delDate = cursor.fetchone()
-    cursor.execute("SELECT first_name,last_name FROM DeliveredBy WHERE order_id=%s",oid)
+    cursor.execute("SELECT Userr.first_name, Userr.last_name FROM Userr Join DeliveredBy ON Userr.username=DeliveredBy.deliverer_username WHERE deliveredBy.order_id=%s",oid)
+    fname , lname = cursor.fetchone()
     dictry['orderID'] = oid
     dictry['payment'] = ""
+    dictry['fname'] = fname
+    dictry['lname'] = lname
+    dictry['noItems'] = noItems
     dictry['deliveryTime'] = delTime
     dictry['orderTime'] = orderPlacedTime
 
