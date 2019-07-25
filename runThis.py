@@ -348,8 +348,10 @@ def addToCart():
 	val = db.addToCart(quantity,itemID)
 	info = db.popCart()
 	if val == 1:
+		#return itemTypeI(itemName, error)
 		return render_template('itemType11.html', error = "Item already exists, try editing the item in the cart page.", info=info)
 	else:
+		#return itemTypeI(itemName, error)
 		return render_template('itemType11.html', error = "Item Added. Please Select View Cart to View the Items Currently in Your Cart.", info=info)
 
 @app.route('/deleteFromCart', methods=['GET','POST'])
