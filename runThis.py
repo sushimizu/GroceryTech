@@ -375,9 +375,8 @@ def checkout():
 	query = "SELECT sum( CartView.quantity*Item.listed_price) Item join CartView on Item.item_id=CartView.Item_id"
 	db.cursor.execute(query)
 	total = db.cursor.fetchone()
-    #print(itemexist)
-    db.cursor.fetchall()
-	return render_template('checkout13.html',total = total)
+	db.cursor.fetchall()
+	return render_template('checkout13.html',total=total)
 
 
 @app.route('/paymentMethods', methods=['GET','POST'])
@@ -636,7 +635,6 @@ def checkCheckout():
 				newOrderID = newOrderID + 1
 			currentOrderID = newOrderID
 			return reciept()
-			
 	return
 
 
