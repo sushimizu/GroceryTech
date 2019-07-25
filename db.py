@@ -547,7 +547,7 @@ def popCart():
 
 
 def orderTot():
-	cursor.execute("Select CartView.quantity*Item.listed_price, %s from Item join CartView on Item.item_id=CartView.Item_id", "yes")
+	cursor.execute("Select CartView.quantity*Item.listed_price from Item join CartView on Item.item_id=CartView.Item_id")
 	totPrice =  cursor.fetchone()
 	return totPrice
 
