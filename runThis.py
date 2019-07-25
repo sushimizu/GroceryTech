@@ -9,6 +9,7 @@ currentUser = ""
 currentStore = ""
 currentOrderID = ""
 AddID = 90
+
 """Temporary usernames, add SQL queries later"""
 """
 def validBuyer(uname, passwd):
@@ -371,12 +372,12 @@ def adjustCart():
 
 @app.route('/checkout', methods=['GET','POST'])
 def checkout():
-	query = "SELECT sum( CartView.quantity*Item.listed_price) Item join CartView on Item.item_id=CartView.Item_id"
-	db.cursor.execute(query)
-	total = db.cursor.fetchone()
-    #print(itemexist)
-    db.cursor.fetchall()
-	return render_template('checkout13.html',total = total)
+	#query = "SELECT sum( CartView.quantity*Item.listed_price) Item join CartView on Item.item_id=CartView.Item_id"
+	#db.cursor.execute(query)
+	#total = db.cursor.fetchone()
+	#db.cursor.fetchall()
+	total = db.orderTot()
+	return render_template('checkout13.html',total=total)
 
 
 @app.route('/paymentMethods', methods=['GET','POST'])
@@ -626,14 +627,22 @@ def viewOrderB():
 def checkCheckout():
 	if request.method == "POST":
 		payment = request.form['payment']
+		deliveryInstructions = request.form['deliveryInstructions']
+		deliveryTime = request.form['deliveryTime']
 		dictry = db.selectBuyerInfo(currentUser)
-		if payment == dictry["paymentName"]:
-			return reciept()
-		else:
+		print(payment)
+		print(dictry["defaultPay"])
+		if payment is "Default":
 			return paymentMethods()
-
+		else:
+			newOrderID = 1000000
+			query = db.getNewOrderID()
+			global currentOrderID
+			while newOrderID in query:
+				newOrderID = newOrderID + 1
+			currentOrderID = newOrderID
+			return reciept()
 	return
-
 
 
 if __name__ == '__main__' :

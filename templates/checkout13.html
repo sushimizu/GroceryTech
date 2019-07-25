@@ -12,7 +12,7 @@
 	<h2> Checkout </h2>
 	
 		
-	<form action="/checkCheckout">
+	<form action="/checkCheckout" method="post">
 	    <div class="row">
           <div class="column">
 		   Payment: 
@@ -25,7 +25,7 @@
           </div>
           <div class="column">
           Delivery time: 
-		  <select>
+		  <select name ="deliveryTime">
       <option value="ASAP">ASAP</option>
       <option value="1 hour">1 hour</option>
        <option value="2 hour">2 hour</option>
@@ -42,9 +42,12 @@
           
     </div>
 	<br> 
-	Total Price ($):
- 		 <input type="text" name ='' placeholder= "1000"> <br><br>
+	Total Price ($): {% for i in total %} {{i}} {%endfor %}
+
+ 		 <br><br>
 	  	
+	<br><br>
+	Delivery Instructions:  <input type="text" name ='deliveryInstructions' value=" "> <br><br>
 	  <input type="submit" value="Finalize Order"> <br> <br>
 		
 	</form>
