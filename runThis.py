@@ -563,7 +563,7 @@ def viewItem():
 	if request.method == "POST":
 		itemNo = request.form['itemNo']
 		dictry = db.getItemInfo(itemNo)
-		return render_template("viewItemM.html", item=item, dictry=dictry)
+		return render_template("viewItemM.html",  dictry=dictry)
 
 	return
 
