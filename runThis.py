@@ -553,6 +553,7 @@ def updateDeliveryInfo():
 		else:
 			print("yeeET")
 			db.updateDelivery(currentUser, currentOrderID)
+			print("the YEEeet returns")
 			info = db.assignments(currentUser)
 			return render_template('assignments20.html', info=info)
 	info = db.assignments(currentUser)
