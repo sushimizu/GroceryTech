@@ -75,7 +75,8 @@ def registrationType():
 
 @app.route('/registerBuyer', methods=['GET','POST'])
 def registerBuyer():
-	return render_template('registerBuyer3.html')
+	store = db.listStores()
+	return render_template('registerBuyer3.html', store=store)
 
 @app.route('/checkregisterBuyer', methods=['GET','POST'])
 def checkregisterBuyer():
