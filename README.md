@@ -16,11 +16,11 @@ RUNNING THE WEB APP:
 
     Sign in with the following credentials, or create your own account:
 
-    buyer: admin@example.com / password
+    buyer: adepttimberry / cakeholmium
 
-    deliverer: someone@example.com / password
+    deliverer: chivalrouspotatoes / clamcarbon
 
-    Manager:
+    Manager: ciscocobalt / santandercesium
 
 PROJECT STRUCTURE:
     This repository contains 3 main things:
