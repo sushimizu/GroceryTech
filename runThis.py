@@ -341,7 +341,7 @@ def cart():
 	return render_template('cart12.html', info=info)
 
 @app.route('/addToCart', methods=['GET','POST'])
-def addToCart(Itype):
+def addToCart():
 	quantity = request.form['quantity']
 	itemID = request.form['itemID']
 	val = db.addToCart(quantity,itemID)
@@ -352,12 +352,12 @@ def addToCart(Itype):
 		return render_template('itemType11.html', error = "Item Added. Please Select View Cart to View the Items Currently in Your Cart.", info=info)
 
 @app.route('/deleteFromCart', methods=['GET','POST'])
-def deleteFromCart(Itype):
+def deleteFromCart():
 	quantity = request.form['quantity']
 	itemID = request.form['itemID']
 	val = db.deleteFromCart(quantity,itemID)
 	info = db.popCart()
-	return render_template('itemType11.html', error = "Item Added. Please Select View Cart to View the Items Currently in Your Cart.", Itype=Itype, info=info)
+	return render_template('itemType11.html', error = "Item Added. Please Select View Cart to View the Items Currently in Your Cart.", info=info)
 
 
 @app.route('/checkout', methods=['GET','POST'])
