@@ -337,7 +337,8 @@ def cart():
 @app.route('/addToCart', methods=['GET','POST'])
 def addToCart():
 	quantity = request.form['quantity']
-	iname = request.form['itemID']
+	itemID = request.form['itemID']
+	val = db.addToCart(currentUser,quantity,itemID)
 
 	return render_template('cart12.html')
 
