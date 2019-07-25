@@ -446,17 +446,15 @@ def updateDelivererAccInfo():
 
 @app.route('/assignments', methods=['GET','POST'])
 def assignments():
-	if request.method == "POST":
-		global currentOrderID
-		currentOrderID = request.form["store"]
 	info = db.assignments(currentUser)
 	return render_template('assignments20.html', info=info)
 
 @app.route('/assignment', methods=['GET','POST'])
 def assignment():
 	if request.method == "POST":
-		OrderID = request.form['store']
-		dictry, iandq = db.newAss(currentUser,OrderID)
+		global currentOrderID
+		currentOrderID = request.form["store"]
+		dictry, iandq = db.newAss(currentUser,currentOrderID)
 		return render_template('assignment21.html',dictry = dictry, iandq=iandq)
 	return render_template('assignment21.html', error = "lmao something is really messed up.")
 
@@ -554,11 +552,33 @@ def updateDeliveryInfo():
 		else:
 			print("yeeET")
 			db.updateDelivery(currentUser, currentOrderID)
-			print("the YEEeet returns")
+			print(currentOrderID)
+			print(currentUser)
 			info = db.assignments(currentUser)
 			return render_template('assignments20.html', info=info)
 	info = db.assignments(currentUser)
 	return render_template('assignments20.html', info=info)
+
+@app.route('/viewItemM', methods=['GET','POST'])
+def viewItem():
+	if request.method == "POST":
+		itemNo = request.form['itemNo']
+		dictry = db.getItemInfo(itemNo)
+		return render_template("viewItemM.html",  dictry=dictry)
+
+	return
+
+
+@app.route('/viewOrderB', methods=['GET','POST'])
+def viewOrderB():
+	if request.method == "POST":
+		orderID = request.form['store']
+		dictry = db.getOrderInfo(currentUser, orderID)
+		return render_template("viewOrderB.html",  dictry=dictry, orderID=orderID)
+
+	return orderHistory()
+
+
 
 
 

@@ -459,7 +459,7 @@ def popItem(itemName, storeID):
 
 
 def inventory(uname):
-	cursor.execute("SELECT Item.item_name, Item.description, Item.quantity, Item.listed_price, Item.wholesale_price, Item.exp_date From Item Join soldAt on Item.item_id=soldAt.item_id WHERE soldAt.store_id IN (SELECT GroceryStore.store_id FROM GroceryStore Where GroceryStore.address_id IN (SELECT manages.store_address From manages WHERE manages.username=%s)) ",uname)
+	cursor.execute("SELECT Item.item_name, Item.description, Item.quantity, Item.listed_price, Item.wholesale_price, Item.exp_date, Item.item_id From Item Join soldAt on Item.item_id=soldAt.item_id WHERE soldAt.store_id IN (SELECT GroceryStore.store_id FROM GroceryStore Where GroceryStore.address_id IN (SELECT manages.store_address From manages WHERE manages.username=%s)) ",uname)
 	#cursor.execute("SELECT Item.item_name, Item.description, Item.quantity, Item.listed_price, Item.wholesale_price, Item.exp_date, From Item Join soldAt on soldAt.item_id = Item.item_id WHERE soldAt.store_id IN (SELECT GroceryStore.store_id FROM GroceryStore Where GroceryStore.address_id IN (SELECT manages.store_address From manages WHERE manages.username=%s) ",uname)
 	info =  tuplesToList(cursor.fetchall())
 	return info
@@ -482,6 +482,32 @@ def create_table():
     cursor.execute(sql)
 
     cursor.execute("CREATE TABLE CartView( Order_id Int(7) not null, Item_name Varchar(64) not null,Description Varchar(256) not null, Quantity Int(5) not null, Price Decimal(5,2) Not null, In_stock Boolean not null)")
+
+
+def getItemInfo(itemNo):
+	cursor.execute(" SELECT Item.item_name, Item.description, Item.quantity, Item.listed_price, Item.wholesale_price, Item.exp_date FROM Item Where Item.item_id = %s " ,itemNo)
+	itemName, description, quantity, listedPrice, wholesalePrice, expDate = cursor.fetchone()
+	dictry = {}
+	dictry["itemName"] = itemName
+	dictry["description"] = description
+	dictry["quantity"] = quantity
+	dictry["listedPrice"] = listedPrice
+	dictry["wholesalePrice"] = wholesalePrice
+	dictry["expDate"] = expDate
+	return dictry
+
+def getOrderInfo(uname,orderID):
+	cursor.execute("SELECT GroceryStore.store_name,  Orderr.order_placed_date, SUM(selectItem.quantity*Item.listed_price), COUNT(selectItem.quantity), DeliveredBy.is_delivered FROM GroceryStore Join orderFrom on GroceryStore.store_id=orderFrom.store_address_id Join Orderr on Orderr.order_id=orderFrom.order_id Join selectItem on selectItem.order_id=Orderr.order_id Join Item on Item.item_id=selectItem.item_id join deliveredBy on deliveredBy.order_id=Orderr.order_id join orderedBy on orderedBy.order_id=Orderr.order_id where orderedBy.buyer_username=%s AND Orderr.order_id=%s " , (uname,orderID) )
+	storeName, orderDate, totPrice, totItems, deliverer = cursor.fetchone()
+	dictry = {}
+	dictry["storeName"] = storeName
+	dictry["orderDate"] = orderDate
+	dictry["totPrice"] = totPrice
+	dictry["totItems"] = totItems
+	dictry["deliverer"] = deliverer
+	return dictry
+
+
 
 
 
