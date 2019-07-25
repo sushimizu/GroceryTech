@@ -359,6 +359,13 @@ def deleteFromCart():
 	info = db.popCart()
 	return render_template('cart12.html', error = "Item Deleted", info=info)
 
+@app.route('/adjustCart', methods=['GET','POST'])
+def adjustCart():
+	quantity = request.form['quantity']
+	itemID = request.form['itemID']
+	val = db.adjustCart(quantity,itemID)
+	info = db.popCart()
+	return render_template('cart12.html', error = "Item quantity adjusted.", info=info)
 
 @app.route('/checkout', methods=['GET','POST'])
 def checkout():
@@ -604,7 +611,12 @@ def viewOrderB():
 
 	return orderHistory()
 
-
+@app.route('/checkCheckout', methods=['GET','POST'])
+def checkCheckout():
+	if request.method == "POST":
+		payment = request.form['payment']
+		
+	return
 
 
 
