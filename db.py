@@ -28,7 +28,11 @@ def addToCart(quantity,itemID):
     conn.commit()
     return 0
 
-def deleteFromCart():
+def deleteFromCart(quantity,itemID):
+    query = "DELETE FROM CartView where itemID = %s"
+    cursor.execute(query, itemID)
+    itemexist = cursor.fetchone()
+    cursor.fetchall()
     return
 
 # returns 0 if credentials are invalid

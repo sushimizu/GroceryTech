@@ -357,7 +357,7 @@ def deleteFromCart():
 	itemID = request.form['itemID']
 	val = db.deleteFromCart(quantity,itemID)
 	info = db.popCart()
-	return render_template('itemType11.html', error = "Item Added. Please Select View Cart to View the Items Currently in Your Cart.", info=info)
+	return render_template('cart12.html', error = "Item Deleted", info=info)
 
 
 @app.route('/checkout', methods=['GET','POST'])
