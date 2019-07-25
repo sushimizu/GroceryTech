@@ -22,14 +22,15 @@
 		    <th>Expiration Date</th>
 		   <th>Price</th>
 		    <th>In Stock</th>
+			  <th>   </th>
 		  </tr>
 			
 		{% for i in info %}
 			{% if i[0] != 0 %}
-			<form action="/addToCart" method="post">
+			<form action="/addToCart" name="itemID" value={{i[5]}} method="post">
 		  		<tr>
 		     		<td>
-				     <form action="/addToCart" name method="post">
+				     <form action="/addToCart" method="post">
 					 
 					  <input type="number" name="quantity" value="0" min="0" max={{i[0]}} >
 							      
@@ -39,7 +40,7 @@
 				    <td>{{i[3]}}</td>
 				    <td>{{i[4]}}</td>
 				    <td> Yes </td>
-					<td> <input type="submit" name="itemID" value={{i[5]}} > Add To Cart </td>
+					<td> <input type="submit"  value="Add To Cart" > Add To Cart </td>
 				  </tr>
 				
 				
