@@ -615,7 +615,9 @@ def viewOrderB():
 def checkCheckout():
 	if request.method == "POST":
 		payment = request.form['payment']
-		
+		dictry = db.selectBuyerInfo(currentUser)
+		if payment == dictry["paumentName"]:
+			
 	return
 
 
