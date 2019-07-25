@@ -8,8 +8,6 @@ RUNNING THE WEB APP:
 
     Clone this repository to your computer. You can find this repository at https://github.com/sushimizu/GroceryTech . These instructions will assume you clone it to a directory called GroceryTech.
 
-    Copy the .env.example file to .env and add the required values by following the directions in the files.
-
     Run GroceryTech.sql to setup and add starter data to the database.
 
     You can access the application at 127.0.0.1:5000 or localhost:5000.
@@ -52,7 +50,7 @@ WHAT'S WHERE:
 
     runThis.py contains all of the HTTP routes. That is, this is where what happens when you visit every page on the website is defined.
     Some of the functions in runThis.py are organized into db.py to keep everything organized.
-    templates contains the actual HTML used. There is none HTML page for every distinct page on the website. 
+    templates contains the actual HTML used. There is one HTML page for every distinct page on the website. 
     GroceryTech.sql contains the  sql code to create our database schema and insert values into it.
 
 
