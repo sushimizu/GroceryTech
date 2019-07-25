@@ -490,7 +490,7 @@ def getItemInfo(itemNo):
 	return dictry
 
 def getOrderInfo(uname,orderID):
-	cursor.execute("SELECT GroceryStore.store_name,  Orderr.order_placed_date, SUM(selectItem.quantity*Item.listed_price), COUNT(selectItem.quantity), DeliveredBy.is_delivered FROM GroceryStore Join orderFrom on GroceryStore.store_id=orderFrom.store_address_id Join Orderr on Orderr.order_id=orderFrom.order_id Join selectItem on selectItem.order_id=Orderr.order_id Join Item on Item.item_id=selectItem.item_id join deliveredBy on deliveredBy.order_id=Orderr.order_id join orderedBy on orderedBy.order_id=Orderr.order_id where orderedBy.buyer_username=%s group AND Orderr.order_id=%s " , (uname,orderID) )
+	cursor.execute("SELECT GroceryStore.store_name,  Orderr.order_placed_date, SUM(selectItem.quantity*Item.listed_price), COUNT(selectItem.quantity), DeliveredBy.is_delivered FROM GroceryStore Join orderFrom on GroceryStore.store_id=orderFrom.store_address_id Join Orderr on Orderr.order_id=orderFrom.order_id Join selectItem on selectItem.order_id=Orderr.order_id Join Item on Item.item_id=selectItem.item_id join deliveredBy on deliveredBy.order_id=Orderr.order_id join orderedBy on orderedBy.order_id=Orderr.order_id where orderedBy.buyer_username=%s AND Orderr.order_id=%s " , (uname,orderID) )
 	storeName, orderDate, totPrice, totItems, deliverer = cursor.fetchone()
 	dictry = {}
 	dictry["storeName"] = storeName
