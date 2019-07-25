@@ -617,8 +617,11 @@ def checkCheckout():
 		payment = request.form['payment']
 		dictry = db.selectBuyerInfo(currentUser)
 		if payment == dictry["paumentName"]:
-			
-	return
+		return paymentMethods()
+	else:
+		
+	
+	return 
 
 
 
