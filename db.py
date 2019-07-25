@@ -5,8 +5,7 @@ conn = pymysql.connect(host="localhost",
 							user="root",
 							passwd='master1999')
 cursor = conn.cursor()
-sql="DROP TABLE IF EXISTS CartView"
-cursor.execute(sql)
+
 
 def tuplesToList(tlist):
     newlist = []
