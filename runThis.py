@@ -7,6 +7,7 @@ import re
 app = Flask(__name__)
 currentUser = ""
 currentStore = ""
+currentOrderID = ""
 """Temporary usernames, add SQL queries later"""
 """
 def validBuyer(uname, passwd):
@@ -49,6 +50,7 @@ def loginReq():
 			return render_template('delivererFunctionality18.html')
 		elif num == 3:
 			currentUser = _name
+			db.create_table()
 			return render_template('buyerFunctionality6.html')
 		else:
 			return render_template("login1.html", error="Credentials Incorrect")
@@ -333,6 +335,14 @@ def itemTypeI(Itype):
 def cart():
 	return render_template('cart12.html')
 
+@app.route('/addToCart', methods=['GET','POST'])
+def addToCart():
+	quantity = request.form['quantity']
+	itemID = request.form['itemID']
+	val = db.addToCart(quantity,itemID)
+
+	return render_template('cart12.html')
+
 @app.route('/checkout', methods=['GET','POST'])
 def checkout():
 	return render_template('checkout13.html')
@@ -451,8 +461,9 @@ def assignments():
 @app.route('/assignment', methods=['GET','POST'])
 def assignment():
 	if request.method == "POST":
-		OrderID = request.form['store']
-		dictry, iandq = db.newAss(currentUser,OrderID)
+		global currentOrderID
+		currentOrderID = request.form["store"]
+		dictry, iandq = db.newAss(currentUser,currentOrderID)
 		return render_template('assignment21.html',dictry = dictry, iandq=iandq)
 	return render_template('assignment21.html', error = "lmao something is really messed up.")
 
@@ -536,6 +547,48 @@ def inventory():
 @app.route('/viewOrderDetails', methods=['GET','POST'])
 def viewOrderDetails():
 	return render_template('inventory26.html')
+
+
+@app.route('/updateDeliveryInfo', methods=['GET','POST'])
+def updateDeliveryInfo():
+
+	if request.method == "POST":
+		status = request.form['status']
+		if int(status) == 0:
+			print("fuck")
+			info = db.assignments(currentUser)
+			return render_template('assignments20.html', info=info)
+		else:
+			print("yeeET")
+			db.updateDelivery(currentUser, currentOrderID)
+			print(currentOrderID)
+			print(currentUser)
+			info = db.assignments(currentUser)
+			return render_template('assignments20.html', info=info)
+	info = db.assignments(currentUser)
+	return render_template('assignments20.html', info=info)
+
+@app.route('/viewItemM', methods=['GET','POST'])
+def viewItem():
+	if request.method == "POST":
+		itemNo = request.form['itemNo']
+		dictry = db.getItemInfo(itemNo)
+		return render_template("viewItemM.html",  dictry=dictry)
+
+	return
+
+
+@app.route('/viewOrderB', methods=['GET','POST'])
+def viewOrderB():
+	if request.method == "POST":
+		orderID = request.form['store']
+		dictry = db.getOrderInfo(currentUser, orderID)
+		return render_template("viewOrderB.html",  dictry=dictry, orderID=orderID)
+
+	return orderHistory()
+
+
+
 
 
 if __name__ == '__main__' :

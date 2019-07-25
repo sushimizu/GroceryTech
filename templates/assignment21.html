@@ -11,7 +11,7 @@
 	<h2> Assignment</h2>
 	
 		
-	<form action="/assignments" method="post">
+	<form action="/updateDeliveryInfo" method="post">
         Order Placed:  {{dictry["order_placed"]}}
  		 <br>  <br>
 		Delivery Time:
@@ -23,8 +23,8 @@
  		{{dictry["storeName"]}} <br> <br>
 	 Status:
  		 <select name ="status">
-          <option value="Pending">Pending</option>
-           <option value="Delivered">Delivered</option>
+          <option value = "0" >Pending</option>
+           <option value = "1" >Delivered</option>
 		  </select>
 		<br><br>
     

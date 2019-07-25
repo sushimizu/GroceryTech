@@ -1,0 +1,51 @@
+<!DOCTYPE HTML> 
+
+<html>
+	<head>
+		<title> </title>
+		<link rel="stylesheet" type="text/css" href="/static/style.css"/>
+	</head>
+<body>
+
+	
+	<h2> Order: {{orderID}} </h2>
+	
+		
+	
+   Store Name:  {{dictry["storeName"]}}
+ 		  <br> <br>
+		Order ID:  {{orderID}}
+ 		 <br> <br>
+     Date:  {{dictry["orderDate"]}}
+ 		 <br> <br>
+        Total Price:  {{dictry["totPrice"]}}
+ 		  <br> <br>
+         Number Of Items:  {{dictry["totItems"]}}
+ 		  <br> <br>
+	
+        Is Delivered:  
+	{% if dictry["deliverer"] == 1 %}
+
+	 Yes
+	{% else %}
+	 No 
+	{% endif %}
+ 		  <br> <br>
+
+    
+   <form action="/orderHistory" method="post"> 
+    <input type="submit" value="Back"> <br> <br>
+
+	</form>
+	
+		
+		
+    
+</body>
+
+	
+	
+	
+	
+	
+</html>

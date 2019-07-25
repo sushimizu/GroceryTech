@@ -11,7 +11,7 @@
 	<h2> Inventory</h2>
 	
 		
-		<form action="/inventory" method="post">
+		<form action="/viewItemM" method="post">
 		
 		<table>
 		  <tr>
@@ -25,7 +25,8 @@
 		  </tr>
 			{% for i in info %}
 		  <tr>
-		    <td>{{i[0]}}</td>
+		<td><input type="radio" name="itemNo" value={{i[6]}}>{{i[0]}}</td>
+
 		    <td>{{i[1]}}</td>
 		    <td>{{i[2]}}</td>
 		    <td>{{i[3]}}</td>
@@ -41,7 +42,7 @@
 	Total Number of Items: {{count}} <br><br>
         
        <!-- <input type="submit" value="Delete Item"> <br> <br>  -->
-        
+         <input type="submit" value="View Item" color ="blue">
   </form>
 	
 	<!--

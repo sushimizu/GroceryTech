@@ -13,6 +13,13 @@ def tuplesToList(tlist):
         newlist.append(i)
     return newlist
 
+def addToCart(quantity,itemID):
+    #check if item already exists in cart
+    query = "SELECT quantity FROM CartView where itemID = %s"
+    cursor.execute(query, itemID)
+
+    return
+
 
 # returns 0 if credentials are invalid
 # returns 1 if user is a manager
@@ -290,12 +297,16 @@ def revenueRep(uname):
 	cursor.execute("SELECT * FROM GroceryStore Where address_id=%s",store_id)
 	store_id, storename, address_id, opening, closing, phone = cursor.fetchone()
 	dictry['storename'] = storename
-	"""
-	item_id = cursor.execute("SELECT item_id FROM soldAt JOIN manages ON soldAt.store_id=manages.store_address AND manages.username= %s",uname)
-	dictry['itemCount'] = item_id
 
-	"""
-	cursor.execute("SELECT SUM(selectItem.quantity), SUM(Item.listed_price*selectItem.quantity-Item.wholesale_price*selectItem.quantity) FROM Item JOIN selectItem ON Item.item_id=selectItem.item_id WHERE selectItem.order_id IN (SELECT orderFrom.order_id FROM orderFrom WHERE orderFrom.store_address_id IN (SELECT GroceryStore.store_id FROM GroceryStore WHERE GroceryStore.address_id IN (SELECT manages.store_address FROM manages WHERE manages.username=%s)))", uname)
+	#item_id = cursor.execute("SELECT item_id FROM soldAt JOIN manages ON soldAt.store_id=manages.store_address AND manages.username= %s",uname)
+	#dictry['itemCount'] = item_id
+
+
+
+
+
+	cursor.execute("SELECT SUM(selectItem.quantity), SUM(Item.listed_price*selectItem.quantity-Item.wholesale_price*selectItem.quantity) FROM Item JOIN selectItem ON Item.item_id=selectItem.item_id join Orderr on selectItem.order_id=Orderr.order_id WHERE selectItem.order_id IN (SELECT orderFrom.order_id FROM orderFrom join Orderr on orderFrom.order_id=Orderr.order_id  WHERE orderFrom.store_address_id IN (SELECT GroceryStore.store_id FROM GroceryStore WHERE GroceryStore.address_id IN (SELECT manages.store_address FROM manages WHERE manages.username=%s)) and Orderr.order_placed_date > date_sub(curdate(),Interval 1 year))", uname)
+    #cursor.execute("SELECT SUM(selectItem.quantity), SUM(Item.listed_price*selectItem.quantity-Item.wholesale_price*selectItem.quantity) FROM Item JOIN selectItem ON Item.item_id=selectItem.item_id WHERE selectItem.order_id IN (SELECT orderFrom.order_id FROM orderFrom WHERE orderFrom.store_address_id IN (SELECT GroceryStore.store_id FROM GroceryStore WHERE GroceryStore.address_id IN (SELECT manages.store_address FROM manages WHERE manages.username=%s)))", uname)
 	#cursor.execute("SELECT COUNT(Item.listed_price*selectItem.quantity), SUM(Item.listed_price*selectItem.quantity-Item.wholesale_price*selectItem.quantity) FROM Item JOIN selectItem ON Item.item_id=selectItem.item_id WHERE selectItem.order_id IN (SELECT order_id FROM Orderr) AND selectItem.item_id IN (SELECT item_id FROM soldAt JOIN manages ON soldAt.store_id=manages.store_address AND manages.username= %s)",uname)
 	#itemCount, revenue =  cursor.execute("SELECT COUNT(Item.listed_price*selectItem.quantity),SUM(Item.listed_price*selectItem.quantity-Item.wholesale_price*selectItem.quantity) FROM Item JOIN selectItem on Item.item_id=selectItem.item_id Where selectItem.order_id in (select order_id from Order where Order.order_placed_date > 2018-07-23  AND selectItem.item_id in(SELECT item_id from SoldAt JOIN manages on SoldAt.store_address=manages.store_address and manages.username = username=%s",uname)
 	itemCount, revenue =  cursor.fetchone()
@@ -306,7 +317,7 @@ def revenueRep(uname):
 
 def assignments(uname):
 	#cursor.execute("SELECT * FROM Orderr")
-	cursor.execute("SELECT GroceryStore.store_name, Orderr.order_id, Orderr.order_placed_date, Orderr.order_placed_time, Orderr.delivery_time, SUM(selectItem.quantity*Item.listed_price), COUNT(selectItem.quantity) FROM GroceryStore Join orderFrom on GroceryStore.store_id=orderFrom.store_address_id Join Orderr on Orderr.order_id=orderFrom.order_id Join selectItem on selectItem.order_id=Orderr.order_id Join Item on Item.item_id=selectItem.item_id join deliveredBy on deliveredBy.order_id=Orderr.order_id where deliveredBy.deliverer_username=%s group by Orderr.order_id", uname)
+	cursor.execute("SELECT GroceryStore.store_name, Orderr.order_id, Orderr.order_placed_date, Orderr.order_placed_time, Orderr.delivery_time, SUM(selectItem.quantity*Item.listed_price), COUNT(selectItem.quantity) FROM GroceryStore Join orderFrom on GroceryStore.store_id=orderFrom.store_address_id Join Orderr on Orderr.order_id=orderFrom.order_id Join selectItem on selectItem.order_id=Orderr.order_id Join Item on Item.item_id=selectItem.item_id join deliveredBy on deliveredBy.order_id=Orderr.order_id where deliveredBy.deliverer_username=%s and deliveredBy.is_delivered=0 group by Orderr.order_id", uname)
 	info = tuplesToList(cursor.fetchall())
 	#a, b, c, d, e = cursor.fetchone()
 	#store, orderID, orderDate, orderTime, noItems, quantity = cursor.fetchone()
@@ -316,7 +327,7 @@ def newAss(uname,orderID):
 	cursor.execute("select Orderr.order_placed_time, Orderr.delivery_time,deliveredBy.is_delivered, concat(A.house_number,', ',A.street,', ',A.city,', ',A.state,', ',A.state,', ',A.zip_code) ,GroceryStore.store_name from deliveredBy join orderFrom on orderFrom.order_id=deliveredBy.order_id join Orderr on orderFrom.order_id=Orderr.order_id join GroceryStore on orderFrom.store_address_id=GroceryStore.store_id join Address as a on GroceryStore.store_id=A.id where deliveredBy.order_id=%s and deliveredBy.deliverer_username=%s", (orderID, uname))
 	orderTime, deliveryTime, isDelivered, address , storeName = cursor.fetchone()
 	dictry = {}
-	dictry["order_placed"] = orderTime 
+	dictry["order_placed"] = orderTime
 	dictry["delivery_time"] = deliveryTime
 	dictry["status"] = isDelivered
 	dictry["address"] = address
@@ -324,9 +335,9 @@ def newAss(uname,orderID):
 	cursor.execute("select Item.item_name,selectItem.quantity from selectItem join Item on Item.item_id=selectItem.item_id where selectItem.order_id =%s", orderID)
 	iandq = tuplesToList(cursor.fetchall())
 	return dictry, iandq
-	
-	
-	
+
+
+
 def assignment(uname,orderID):
     dictry = {}
     query = "SELECT Item.item_name,selectItem.quantity FROM selectItem JOIN Item ON Item.item_id=selectItem.item_id WHERE selectItem.order_id = %s IN (SELECT orderedBy.order_id FROM orderedBy WHERE orderedBy.buyer_username = %s )"
@@ -454,7 +465,7 @@ def popItem(itemName, storeID):
 
 
 def inventory(uname):
-	cursor.execute("SELECT Item.item_name, Item.description, Item.quantity, Item.listed_price, Item.wholesale_price, Item.exp_date From Item Join soldAt on Item.item_id=soldAt.item_id WHERE soldAt.store_id IN (SELECT GroceryStore.store_id FROM GroceryStore Where GroceryStore.address_id IN (SELECT manages.store_address From manages WHERE manages.username=%s)) ",uname)
+	cursor.execute("SELECT Item.item_name, Item.description, Item.quantity, Item.listed_price, Item.wholesale_price, Item.exp_date, Item.item_id From Item Join soldAt on Item.item_id=soldAt.item_id WHERE soldAt.store_id IN (SELECT GroceryStore.store_id FROM GroceryStore Where GroceryStore.address_id IN (SELECT manages.store_address From manages WHERE manages.username=%s)) ",uname)
 	#cursor.execute("SELECT Item.item_name, Item.description, Item.quantity, Item.listed_price, Item.wholesale_price, Item.exp_date, From Item Join soldAt on soldAt.item_id = Item.item_id WHERE soldAt.store_id IN (SELECT GroceryStore.store_id FROM GroceryStore Where GroceryStore.address_id IN (SELECT manages.store_address From manages WHERE manages.username=%s) ",uname)
 	info =  tuplesToList(cursor.fetchall())
 	return info
@@ -465,6 +476,44 @@ def outstandingOrders(uname):
 	cursor.execute("select GroceryStore.store_name, concat(A.house_number,', ',A.street,', ',A.city,', ',A.state,', ',A.state,', ',A.zip_code), orderFrom.order_id, Orderr.order_placed_date , selectItem.quantity*Item.listed_price, selectItem.quantity, concat(B.house_number,', ',B.street,', ',B.city,', ',B.state,', ',B.state,', ',B.zip_code) from orderFrom natural join Orderr natural join orderedBy natural join selectItem join deliveredby on orderFrom.order_id=deliveredBy.order_id join GroceryStore on GroceryStore.store_id=orderFrom.store_address_id join Buyer on Buyer.username=orderedBy.buyer_username join Address as A on A.id=GroceryStore.store_id join Item on Item.item_id=selectItem.item_id join Address as B on B.id=Buyer.address_id where GroceryStore.address_id in (select store_address from manages where username=%s) and deliveredBy.is_delivered=0",uname)
 	info =  tuplesToList(cursor.fetchall())
 	return info
+
+def updateDelivery(uname, orderID):
+	cursor.execute("update deliveredBy set is_delivered=1,delivery_time=curtime(), delivery_date=curdate() where order_id=%s and deliverer_username=%s", (orderID, uname))
+	print("superyeeEET")
+	conn.commit()
+	return 0
+
+def create_table():
+    sql="DROP TABLE IF EXISTS CartView"
+    cursor.execute(sql)
+
+    cursor.execute("CREATE TABLE CartView( quantity Int(8) not null, Item_id INT(2) not null)")
+
+
+def getItemInfo(itemNo):
+	cursor.execute(" SELECT Item.item_name, Item.description, Item.quantity, Item.listed_price, Item.wholesale_price, Item.exp_date FROM Item Where Item.item_id = %s " ,itemNo)
+	itemName, description, quantity, listedPrice, wholesalePrice, expDate = cursor.fetchone()
+	dictry = {}
+	dictry["itemName"] = itemName
+	dictry["description"] = description
+	dictry["quantity"] = quantity
+	dictry["listedPrice"] = listedPrice
+	dictry["wholesalePrice"] = wholesalePrice
+	dictry["expDate"] = expDate
+	return dictry
+
+def getOrderInfo(uname,orderID):
+	cursor.execute("SELECT GroceryStore.store_name,  Orderr.order_placed_date, SUM(selectItem.quantity*Item.listed_price), COUNT(selectItem.quantity), DeliveredBy.is_delivered FROM GroceryStore Join orderFrom on GroceryStore.store_id=orderFrom.store_address_id Join Orderr on Orderr.order_id=orderFrom.order_id Join selectItem on selectItem.order_id=Orderr.order_id Join Item on Item.item_id=selectItem.item_id join deliveredBy on deliveredBy.order_id=Orderr.order_id join orderedBy on orderedBy.order_id=Orderr.order_id where orderedBy.buyer_username=%s AND Orderr.order_id=%s " , (uname,orderID) )
+	storeName, orderDate, totPrice, totItems, deliverer = cursor.fetchone()
+	dictry = {}
+	dictry["storeName"] = storeName
+	dictry["orderDate"] = orderDate
+	dictry["totPrice"] = totPrice
+	dictry["totItems"] = totItems
+	dictry["deliverer"] = deliverer
+	return dictry
+
+
 
 
 
