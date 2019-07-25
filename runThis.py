@@ -80,6 +80,8 @@ def checkregisterBuyer():
 
 	if request.method == "POST":
 		uname = request.form['uname']
+		fname = request.form['fname']
+		lname = request.form['lname']
 		password = request.form['password']
 		email = request.form['email']
 		street = request.form['street']
@@ -124,7 +126,7 @@ def checkregisterBuyer():
 			AddID = 90
 			AddID = AddID + 1 #response + 1
 			user_type = 'buyer'
-			reg = db.insertUser(uname,password,user_type,email)
+			reg = db.insertUser(uname,password,user_type,email,fname,lname)
 			if reg == 1:
 				return render_template("registerBuyer3.html", error="Username is Taken.")
 			reg = db.insertPayment(uname,payment,accNo,routingNo)
