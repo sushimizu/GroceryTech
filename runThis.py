@@ -630,14 +630,13 @@ def checkCheckout():
 		deliveryInstructions = request.form['deliveryInstructions']
 		deliveryTime = request.form['deliveryTime']
 		dictry = db.selectBuyerInfo(currentUser)
-		print(payment)
-		print(dictry["defaultPay"])
-		if payment is "Default":
+		global currentOrderID
+		print(payment + "first")
+		if payment == "Other":
 			return paymentMethods()
 		else:
 			newOrderID = 1000000
 			query = db.getNewOrderID()
-			global currentOrderID
 			while newOrderID in query:
 				newOrderID = newOrderID + 1
 			currentOrderID = newOrderID
