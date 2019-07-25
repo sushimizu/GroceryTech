@@ -423,7 +423,7 @@ def reciept():
 		deliveryTime = request.form['deliveryTime']
 		deliveryInstruc = request.form['deliveryInstruc']
 	"""
-	dictry = db.reciept(currentOrderID)
+	dictry, noItems = db.reciept(currentOrderID)
 	return render_template('reciept16.html', dictry = dictry)
 
 @app.route('/orderHistory', methods=['GET','POST'])
