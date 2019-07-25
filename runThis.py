@@ -617,10 +617,10 @@ def checkCheckout():
 	if request.method == "POST":
 		payment = request.form['payment']
 		dictry = db.selectBuyerInfo(currentUser)
-		if payment == dictry["paumentName"]:
-			return paymentMethods()
-		else:
+		if payment == dictry["paymentName"]:
 			return reciept()
+		else:
+			return paymentMethods()
 	
 	return 
 
