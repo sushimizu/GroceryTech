@@ -14,7 +14,7 @@
 	<form action="/buyerFunctionality" method="post">
    Order Number: {{dictry["orderID"]}}
  		 <br> <br>
-		Payment Name: {{dictry["payment"]}} <br> <br>
+		Payment Name: {% for j in payment%} {{j[0]}} {% endfor %} <br> <br>
       Deliverer's Name:  {{dictry["fname"]}} {{dictry["lname"]}} <br> <br>
    	Number of Items: {% for i in noItems%} {{i[0]}} {% endfor %}
 		
