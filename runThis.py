@@ -50,6 +50,7 @@ def loginReq():
 			return render_template('delivererFunctionality18.html')
 		elif num == 3:
 			currentUser = _name
+			db.create_table()
 			return render_template('buyerFunctionality6.html')
 		else:
 			return render_template("login1.html", error="Credentials Incorrect")
@@ -543,7 +544,7 @@ def viewOrderDetails():
 
 @app.route('/updateDeliveryInfo', methods=['GET','POST'])
 def updateDeliveryInfo():
-	
+
 	if request.method == "POST":
 		status = request.form['status']
 		if int(status) == 0:

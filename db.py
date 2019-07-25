@@ -3,9 +3,10 @@ import pymysql
 conn = pymysql.connect(host="localhost",
 							db="GroceryTech",
 							user="root",
-							passwd='CornyJoke12')
+							passwd='master1999')
 cursor = conn.cursor()
-
+sql="DROP TABLE IF EXISTS CartView"
+cursor.execute(sql)
 
 def tuplesToList(tlist):
     newlist = []
@@ -475,4 +476,12 @@ def updateDelivery(uname, orderID):
 	print("superyeeEET")
 	conn.commit()
 	return 0
+
+def create_table():
+    sql="DROP TABLE IF EXISTS CartView"
+    cursor.execute(sql)
+
+    cursor.execute("CREATE TABLE CartView( Order_id Int(7) not null, Item_name Varchar(64) not null,Description Varchar(256) not null, Quantity Int(5) not null, Price Decimal(5,2) Not null, In_stock Boolean not null)")
+
+
 
