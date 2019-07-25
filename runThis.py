@@ -8,6 +8,7 @@ app = Flask(__name__)
 currentUser = ""
 currentStore = ""
 currentOrderID = ""
+addID = 90
 """Temporary usernames, add SQL queries later"""
 """
 def validBuyer(uname, passwd):
@@ -123,7 +124,7 @@ def checkregisterBuyer():
 			'''query = "SELECT MAX(id) FROM Address;"
 			response = db.cursor.execute(query)
 			db.cursor.fetchall()'''
-			AddID = 90
+			global addID
 			AddID = AddID + 1 #response + 1
 			user_type = 'buyer'
 			reg = db.insertUser(uname,password,user_type,email,fname,lname)
