@@ -30,8 +30,7 @@ def addToCart(quantity,itemID):
 
 def deleteFromCart(quantity,itemID):
     query = "DELETE FROM CartView where Item_id = %s"
-    cursor.execute(query, itemID)
-    itemexist = cursor.fetchone()
+    cursor.execute(query)
     cursor.fetchall()
     return
 
