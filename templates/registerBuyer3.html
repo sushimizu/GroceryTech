@@ -56,6 +56,20 @@
  		 <input type="text" name="zip"> <br> <br>
 			</div>
 			Default Store ID:
+			
+			    <select name="dsID">
+		  {% for i in  store %}
+		      {%if i[0] == dictry["defaultStore"]%}
+	  		 <option  selected value={{i[0]}}> {{i[0]}}, {{i[1]}}  </option>
+	  		{% else %}
+		   	 <option  value={{i[0]}}> {{i[0]}}, {{i[1]}}  </option>
+		  	{% endif %}
+		  {% endfor %}
+	
+		    </select>
+
+      <br><br>
+			<!--
 			<select name="dsID">
 		      <option value="1">1, Publix</option>
 		      <option value="2">2, Publix</option>
@@ -96,6 +110,7 @@
 			
 	
 		    </select>
+-->
  		  <br> <br>
 		</div>
 	   	
