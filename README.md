@@ -41,7 +41,7 @@ INSTALLING THE DEPENDENCIES:
     
     Make sure you have installed Mysql Workbench, Mysql server, and Mysql connectors. If you dont have it, go to https://dev.mysql.com/downloads/installer/, and install everything as recommended. Make sure to remember the password for your server.
     
-    Open a shell (Terminal or Command Prompt), enter the directory and run pip install -r requirements.txt to install Flaskif flask is not already installed on python.
+    Open a shell (Terminal or Command Prompt), enter the directory and run pip install -r requirements.txt to the needed python modules not already installed on python.
     
     If after running any code, if any library is misssing, type in the command promt under the directory in which python is installed  "pip install" plus the name of the library
     
