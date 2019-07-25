@@ -17,19 +17,19 @@ RUNNING THE WEB APP:
 
     Visit the web app at the URL listed or localhost:5000
 
-    Sign in with the following credentials, or create your own account:
+    Sign in with the following sample credentials, or create your own account:
 
-buyer: admin@example.com / password
+    buyer: adepttimberry / cakeholmium
 
-deliverer: someone@example.com / password
+    deliverer: chivalrouspotatoes / clamcarbon
 
-Manager:
+    Manager: ciscocobalt / santandercesium
 
 PROJECT STRUCTURE:
 This repository contains 3 main things:
 
     SQL files for setting up the database
-    Flask server (backend) files
+    Python with Flask and pymysql (backend) files
     HTML (frontend) files
 
 Prerequisites to run the webserver:
