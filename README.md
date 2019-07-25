@@ -37,7 +37,7 @@ INSTALLING THE DEPENDENCIES:
 
 
     Make sure you have googleChrome or Safary on your computer, if not downlowad it from your web browser.
-    Make sure you have Python3 64 bites, if you don't have it,  go to https://www.python.org/ and istall python3
+    Make sure you have Python3.7 64 bites, if you don't have it,  go to https://www.python.org/ and istall python3
     
     Make sure you have installed Mysql Workbench, Mysql server, and Mysql connectors. If you dont have it, go to https://dev.mysql.com/downloads/installer/, and install everything as recommended. Make sure to remember the password for your server.
     
@@ -65,4 +65,4 @@ or
 
 $ python3 runThis.py
 
-then paste the provided link (http://0.0.0.0:5000) into browser
+then paste the provided link (http://127.0.0.1:5000) into browser. If link is different to what is given in the terminal upon running runThis.py, defer to the link in the terminal.
