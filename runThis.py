@@ -349,15 +349,16 @@ def addToCart():
 	val = db.addToCart(quantity,itemID)
 	info = db.popCart()
 	if val == 1:
+		#return itemTypeI(itemName, error)
 		return render_template('itemType11.html', error = "Item already exists, try editing the item in the cart page.", info=info)
 	else:
+		#return itemTypeI(itemName, error)
 		return render_template('itemType11.html', error = "Item Added. Please Select View Cart to View the Items Currently in Your Cart.", info=info)
 
 @app.route('/deleteFromCart', methods=['GET','POST'])
 def deleteFromCart():
-	quantity = request.form['quantity']
 	itemID = request.form['itemID']
-	val = db.deleteFromCart(quantity,itemID)
+	val = db.deleteFromCart(itemID)
 	info = db.popCart()
 	return render_template('cart12.html', error = "Item Deleted", info=info)
 
@@ -371,7 +372,12 @@ def adjustCart():
 
 @app.route('/checkout', methods=['GET','POST'])
 def checkout():
-	return render_template('checkout13.html')
+	query = "SELECT sum( CartView.quantity*Item.listed_price) Item join CartView on Item.item_id=CartView.Item_id"
+	db.cursor.execute(query)
+	total = db.cursor.fetchone()
+    #print(itemexist)
+    db.cursor.fetchall()
+	return render_template('checkout13.html',total = total)
 
 
 @app.route('/paymentMethods', methods=['GET','POST'])
@@ -630,9 +636,8 @@ def checkCheckout():
 				newOrderID = newOrderID + 1
 			currentOrderID = newOrderID
 			return reciept()
-	
-	return 
-
+			
+	return
 
 
 if __name__ == '__main__' :
