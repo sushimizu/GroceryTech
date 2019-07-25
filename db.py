@@ -545,6 +545,12 @@ def popCart():
 	info =  tuplesToList(cursor.fetchall())
 	return info
 
+
+def orderTot():
+	cursor.execute("Select CartView.quantity*Item.listed_price, %s from Item join CartView on Item.item_id=CartView.Item_id", "yes")
+	totPrice =  cursor.fetchone()
+	return totPrice
+
 def getNewOrderID():
 	cursor.execute("SELECT Orderr.order_id FROM Orderr")
 	info = tuplesToList(cursor.fetchall())
