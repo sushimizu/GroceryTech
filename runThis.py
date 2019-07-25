@@ -229,6 +229,7 @@ def listOfStores():
 @app.route('/checkStoreHomepage', methods=['GET','POST'])
 def checkSToreHomepage():
 	global currentStore
+	db.create_table()
 	if request.method == "POST":
 		currentStore = request.form["store"]
 		print(currentStore)
@@ -337,15 +338,35 @@ def itemTypeI():
 
 @app.route('/cart', methods=['GET','POST'])
 def cart():
-	return render_template('cart12.html')
+	info = db.popCart()
+	return render_template('cart12.html', info=info)
 
 @app.route('/addToCart', methods=['GET','POST'])
 def addToCart():
 	quantity = request.form['quantity']
 	itemID = request.form['itemID']
 	val = db.addToCart(quantity,itemID)
+	info = db.popCart()
+	if val == 1:
+		return render_template('itemType11.html', error = "Item already exists, try editing the item in the cart page.", info=info)
+	else:
+		return render_template('itemType11.html', error = "Item Added. Please Select View Cart to View the Items Currently in Your Cart.", info=info)
 
-	return render_template('cart12.html')
+@app.route('/deleteFromCart', methods=['GET','POST'])
+def deleteFromCart():
+	quantity = request.form['quantity']
+	itemID = request.form['itemID']
+	val = db.deleteFromCart(quantity,itemID)
+	info = db.popCart()
+	return render_template('cart12.html', error = "Item Deleted", info=info)
+
+@app.route('/adjustCart', methods=['GET','POST'])
+def adjustCart():
+	quantity = request.form['quantity']
+	itemID = request.form['itemID']
+	val = db.adjustCart(quantity,itemID)
+	info = db.popCart()
+	return render_template('cart12.html', error = "Item quantity adjusted.", info=info)
 
 @app.route('/checkout', methods=['GET','POST'])
 def checkout():
@@ -591,7 +612,17 @@ def viewOrderB():
 
 	return orderHistory()
 
-
+@app.route('/checkCheckout', methods=['GET','POST'])
+def checkCheckout():
+	if request.method == "POST":
+		payment = request.form['payment']
+		dictry = db.selectBuyerInfo(currentUser)
+		if payment == dictry["paumentName"]:
+			return paymentMethods()
+		else:
+			return reciept()
+	
+	return 
 
 
 

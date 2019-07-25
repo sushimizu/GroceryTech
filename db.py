@@ -15,11 +15,32 @@ def tuplesToList(tlist):
 
 def addToCart(quantity,itemID):
     #check if item already exists in cart
-    query = "SELECT quantity FROM CartView where itemID = %s"
-    cursor.execute(query, itemID)
+    query = "SELECT count(quantity) FROM CartView where Item_id = %s"
+    cursor.execute(query,itemID)
+    itemexist = cursor.fetchone()
+    cursor.fetchall()
+    if itemexist != (0,):
+        return 1
+    else:
+        query = "INSERT INTO CartView(quantity,Item_id)"\
+        "VALUES (%s,%s);"
+        cursor.execute(query, (quantity,itemID))
+    # clear cursor
+    conn.commit()
+    return 0
 
+def deleteFromCart(quantity,itemID):
+    query = "DELETE FROM CartView where Item_id = %s"
+    cursor.execute(query)
+    cursor.fetchall()
     return
 
+def adjustCart(quantity,itemID):
+    query = "UPDATE CartView SET quantity = %s WHERE Item_id = %s;"
+    cursor.execute(query, (itemID))
+    # clear cursor
+    conn.commit()
+    return
 
 # returns 0 if credentials are invalid
 # returns 1 if user is a manager
@@ -438,7 +459,6 @@ def addNewPay(uname,payment,accName,routingNo):
     query = "SELECT Count(*) FROM Payments WHERE username = %s AND payment_name = %s"
     cursor.execute(query, (uname,payment))
     payexist = cursor.fetchone()
-    print(payexist)
     cursor.fetchall()
     if payexist != (0,):
         return 1
@@ -517,5 +537,7 @@ def getOrderInfo(uname,orderID):
 
 
 
-
-
+def popCart():
+	cursor.execute("Select Item.item_id,Item.item_name, Item.description, CartView.quantity, CartView.quantity*Item.listed_price, %s from Item join CartView on Item.item_id=CartView.Item_id", "yes")
+	info =  tuplesToList(cursor.fetchall())
+	return info
