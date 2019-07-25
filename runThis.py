@@ -225,6 +225,7 @@ def listOfStores():
 @app.route('/checkStoreHomepage', methods=['GET','POST'])
 def checkSToreHomepage():
 	global currentStore
+	db.create_table()
 	if request.method == "POST":
 		currentStore = request.form["store"]
 		print(currentStore)
@@ -331,16 +332,29 @@ def itemTypeI(Itype):
 
 
 @app.route('/cart', methods=['GET','POST'])
-def cart():
-	return render_template('cart12.html')
+def cart(Itype):
+	info = db.popItem(Itype, currentStore)
+	return render_template('cart12.html', Itype=Itype, info=info)
 
 @app.route('/addToCart', methods=['GET','POST'])
-def addToCart():
+def addToCart(Itype):
 	quantity = request.form['quantity']
 	itemID = request.form['itemID']
 	val = db.addToCart(quantity,itemID)
+	info = db.popItem(Itype, currentStore)
+	if val == 1:
+		return render_template('itemType11.html', error = "Item already exists, try editing the item in the cart page.", Itype=Itype, info=info)
+	else:
+		return render_template('itemType11.html', error = "Item Added. Please Select View Cart to View the Items Currently in Your Cart.", Itype=Itype, info=info)
 
-	return render_template('cart12.html')
+@app.route('/deleteFromCart', methods=['GET','POST'])
+def deleteFromCart(Itype):
+	quantity = request.form['quantity']
+	itemID = request.form['itemID']
+	val = db.deleteFromCart(quantity,itemID)
+	info = db.popItem(Itype, currentStore)
+	return render_template('itemType11.html', error = "Item Added. Please Select View Cart to View the Items Currently in Your Cart.", Itype=Itype, info=info)
+
 
 @app.route('/checkout', methods=['GET','POST'])
 def checkout():

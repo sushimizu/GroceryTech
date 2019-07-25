@@ -15,10 +15,20 @@ def tuplesToList(tlist):
 
 def addToCart(quantity,itemID):
     #check if item already exists in cart
-    query = "SELECT quantity FROM CartView where itemID = %s"
+    query = "SELECT count(quantity) FROM CartView where itemID = %s"
     cursor.execute(query, itemID)
+    itemexist = cursor.fetchone()
+    cursor.fetchall()
+    if itemexist > 0:
+        return 1
+    query = "INSERT INTO CartView(quantity,itemID)"\
+    "VALUES (%s,%s);"
+    cursor.execute(query, (quantity,itemID))
+    # clear cursor
+    conn.commit()
+    return 0
 
-    return
+def deleteFromCart():
 
 
 # returns 0 if credentials are invalid
@@ -437,7 +447,6 @@ def addNewPay(uname,payment,accName,routingNo):
     query = "SELECT Count(*) FROM Payments WHERE username = %s AND payment_name = %s"
     cursor.execute(query, (uname,payment))
     payexist = cursor.fetchone()
-    print(payexist)
     cursor.fetchall()
     if payexist != (0,):
         return 1
