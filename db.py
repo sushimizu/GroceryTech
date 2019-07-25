@@ -298,7 +298,7 @@ def updateManagerInfo(uname,email,fname,lname):
 
 
 
-def updateOrder(uname,storeID,orderID,deliveryInstruc):
+def updateOrder(uname,storeID,orderID,deliveryInstruc, deliveryTime):
     query = "INSERT INTO Orderr(order_id,delivery_instructions,delivery_time,order_placed_date,order_placed_date)"\
     "VALUES (%s,%s,%s,curdate(),curtime());"
     cursor.execute(query, (orderID,deliveryInstruc,deliveryTime))
