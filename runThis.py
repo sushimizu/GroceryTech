@@ -547,11 +547,14 @@ def updateDeliveryInfo():
 	if request.method == "POST":
 		status = request.form['status']
 		if status == 0:
-			return assignments()
+			info = db.assignments(currentUser)
+			return render_template('assignments20.html', info=info)
 		else:
 			db.updateDelivery(currentUser, currentOrderID)
-			return assignments()
-	return assignments()
+			info = db.assignments(currentUser)
+			return render_template('assignments20.html', info=info)
+	info = db.assignments(currentUser)
+	return render_template('assignments20.html', info=info)
 
 
 
