@@ -3,7 +3,7 @@ import pymysql
 conn = pymysql.connect(host="localhost",
 							db="GroceryTech",
 							user="root",
-							passwd='password')
+							passwd='CornyJoke12')
 cursor = conn.cursor()
 
 
@@ -297,7 +297,7 @@ def updateManagerInfo(uname,email,fname,lname):
     return 0
 
 def reciept(uname,storeID,orderID,deliveryInstruc):
-	dictry = {}
+    dictry = {}
 
 
     query = "INSERT INTO Orderr(order_id,delivery_instructions,delivery_time,order_placed_date,order_placed_date)"\
@@ -334,20 +334,20 @@ def reciept(uname,storeID,orderID,deliveryInstruc):
     # clear cursor
     conn.commit()
 
-	cursor.execute("SELECT * FROM Order Where order_id=%s",orderID)
-	oid, instructions, delivTime, orderPlacedDate, orderPlacedTime = cursor.fetchone()
-	cursor.execute("SELECT * FROM DeliveredBy Where order_id=%s",orderID)
-	oid, dusername, isDel, delTime, delDate = cursor.fetchone()
-	cursor.execute("SELECT first_name, last_name FROM DeliveredBy Where order_id=%s",orderID)
-	dictry['orderID'] = oid
-	dictry['payment'] = ""
-	dictry['fname'] = fname
-	dictry['lname'] = lname
-	dictry['noItems'] = noItems
-	dictry['deliveryTime'] = delTime
-	dictry['orderTime'] = orderPlacedTime
+    cursor.execute("SELECT * FROM Order Where order_id=%s",orderID)
+    oid, instructions, delivTime, orderPlacedDate, orderPlacedTime = cursor.fetchone()
+    cursor.execute("SELECT * FROM DeliveredBy Where order_id=%s",orderID)
+    oid, dusername, isDel, delTime, delDate = cursor.fetchone()
+    cursor.execute("SELECT first_name, last_name FROM DeliveredBy Where order_id=%s",orderID)
+    dictry['orderID'] = oid
+    dictry['payment'] = ""
+    dictry['fname'] = fname
+    dictry['lname'] = lname
+    dictry['noItems'] = noItems
+    dictry['deliveryTime'] = delTime
+    dictry['orderTime'] = orderPlacedTime
 
-	return dictry
+    return dictry
 
 def revenueRep(uname):
 	#SELECT DATEADD(yy, DATEDIFF(yy, 0, GETDATE()) - 1, 0))

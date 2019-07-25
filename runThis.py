@@ -421,7 +421,7 @@ def reciept():
 		payment = request.form['payment']
 		deliveryTime = request.form['deliveryTime']
 		deliveryInstruc = request.form['deliveryInstruc']
-		dictry = db.reciept(currentUser, currentStore currentOrderID,deliveryInstruc)
+		dictry = db.reciept(currentUser, currentStore, currentOrderID,deliveryInstruc)
 
 		return render_template('reciept16.html', dictry = dictry)
 
