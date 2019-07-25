@@ -63,7 +63,7 @@ INSTALLING THE DEPENDENCIES:
     
     Open a shell (Terminal or Command Prompt), enter the directory and run pip install -r requirements.txt to install Flaskif flask is not already installed on python.
     
-    If after running any code, if any library is misssing, type in the command promt under the directory in which python is installed and type "pip install" plus the name of the library
+    If after running any code, if any library is misssing, type in the command promt under the directory in which python is installed  "pip install" plus the name of the library
     
     
 
