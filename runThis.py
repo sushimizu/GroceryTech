@@ -372,10 +372,11 @@ def adjustCart():
 
 @app.route('/checkout', methods=['GET','POST'])
 def checkout():
-	query = "SELECT sum( CartView.quantity*Item.listed_price) Item join CartView on Item.item_id=CartView.Item_id"
-	db.cursor.execute(query)
-	total = db.cursor.fetchone()
-	db.cursor.fetchall()
+	#query = "SELECT sum( CartView.quantity*Item.listed_price) Item join CartView on Item.item_id=CartView.Item_id"
+	#db.cursor.execute(query)
+	#total = db.cursor.fetchone()
+	#db.cursor.fetchall()
+	total = db.orderTot()
 	return render_template('checkout13.html',total=total)
 
 
