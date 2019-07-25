@@ -4,7 +4,7 @@ conn = pymysql.connect(host="localhost",
 							db="GroceryTech",
 							user="root",
 
-							passwd='master1999')
+							passwd='CornyJoke12')
 
 cursor = conn.cursor()
 
