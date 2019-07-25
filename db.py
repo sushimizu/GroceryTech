@@ -478,7 +478,7 @@ def updateDelivery(uname, orderID):
 
 
 def getItemInfo(itemNo):
-	cursor.execute(" Item.item_name, Item.description, Item.quantity, Item.listed_price, Item.wholesale_price, Item.exp_date FROM Item Where Item.item_id = %s " ,itemNo)
+	cursor.execute(" SELECT Item.item_name, Item.description, Item.quantity, Item.listed_price, Item.wholesale_price, Item.exp_date FROM Item Where Item.item_id = %s " ,itemNo)
 	itemName, description, quantity, listedPrice, wholesalePrice, expDate = cursor.fetchone()
 	dictry = {}
 	dictry["itemName"] = itemName
