@@ -642,7 +642,7 @@ def checkCheckout():
 			while newOrderID in query:
 				newOrderID = newOrderID + 1
 			currentOrderID = newOrderID
-			db.updateOrder(currentUser,currentStoreID,currentOrderID,deliveryInstructions)
+			db.updateOrder(currentUser,currentStoreID,currentOrderID,deliveryInstructions, deliveryTime)
 			return reciept()
 	return
 
