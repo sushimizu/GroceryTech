@@ -345,15 +345,15 @@ def reciept(orderID, uname):
     cursor.execute("select sum(selectItem.quantity) from selectItem Where selectItem.order_id=%s", orderID)
     noItems = tuplesToList(cursor.fetchall())
     cursor.execute("select Buyer.default_payment from Buyer where Buyer.username=%s ",uname)
-    payment = cursor.fetchone()
+    payment = tuplesToList(cursor.fetchall())
     dictry['orderID'] = oid
-    dictry['payment'] = payment
+    #dictry['payment'] = payment
     dictry['fname'] = fname
     dictry['lname'] = lname
     dictry['deliveryTime'] = delivTime
     dictry['orderTime'] = orderPlacedTime
 
-    return dictry, noItems
+    return dictry, noItems, payment
 
 def revenueRep(uname):
 	#SELECT DATEADD(yy, DATEDIFF(yy, 0, GETDATE()) - 1, 0))
