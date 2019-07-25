@@ -16,7 +16,8 @@
  		 <br> <br>
 		Payment Name: {{dictry["payment"]}} <br> <br>
       Deliverer's Name:  {{dictry["fname"]}} {{dictry["lname"]}} <br> <br>
-   	Number of Items:{{dictry["noItems"]}}
+   	Number of Items: {% for i in noItems%} i[0] {% endfor %}
+		
  		  <br> <br>
      Time Order Places:  {{dictry["orderTime"]}}
  		 <br> <br>
