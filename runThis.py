@@ -575,6 +575,14 @@ def viewItem():
 	return
 
 
+@app.route('/viewOrderB', methods=['GET','POST'])
+def viewOrderB():
+	if request.method == "POST":
+		orderID = request.form['store']
+		dictry = db.getOrderInfo(currentUser, orderID)
+		return render_template("viewOrderB.html",  dictry=dictry, orderID=orderID)
+
+	return orderHistory()
 
 
 
