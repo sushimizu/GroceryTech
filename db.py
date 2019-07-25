@@ -3,7 +3,7 @@ import pymysql
 conn = pymysql.connect(host="localhost",
 							db="GroceryTech",
 							user="root",
-							passwd='password')
+							passwd='CornyJoke12')
 cursor = conn.cursor()
 
 
@@ -299,7 +299,7 @@ def updateManagerInfo(uname,email,fname,lname):
 
 
 def updateOrder(uname,storeID,orderID,deliveryInstruc, deliveryTime):
-    query = "INSERT INTO Orderr(order_id,delivery_instructions,delivery_time,order_placed_date,order_placed_date)"\
+    query = "INSERT INTO Orderr(order_id,delivery_instructions,delivery_time,order_placed_date,order_placed_time)"\
     "VALUES (%s,%s,%s,curdate(),curtime());"
     cursor.execute(query, (orderID,deliveryInstruc,deliveryTime))
     conn.commit()
@@ -323,8 +323,9 @@ def updateOrder(uname,storeID,orderID,deliveryInstruc, deliveryTime):
     cursor.execute(query, (itemID,quantity,orderID))
     conn.commit()
     query = "INSERT INTO deliveredBy(order_id,deliverer_username,is_delivered,delivery_time,delivery_date)"\
-    "VALUES (%s,%s,0,%s,%s);"
-    cursor.execute(query, (orderID,"SELECT deliverer_username from deliveredBy where is_delivered=0 group by deliverer_username order by count(deliverer_username) limit 1","",""))
+    "VALUES (%s,%s,%s,%s,%s);"
+    #cursor.execute(query, (orderID,"SELECT deliverer_username from deliveredBy where is_delivered=0 group by deliverer_username order by count(deliverer_username) limit 1","0","",""))
+    cursor.execute(query, (orderID,"chivalrouspotatoes","0","",""))
     conn.commit()
 
     query = "UPDATE item set quantity=item.quantity - %s WHERE item_id = %s;"
@@ -333,18 +334,15 @@ def updateOrder(uname,storeID,orderID,deliveryInstruc, deliveryTime):
     conn.commit()
 
 
-def reciept():
+def reciept(orderID):
     dictry = {}
-    cursor.execute("SELECT * FROM Order Where order_id=%s",orderID)
+    cursor.execute("SELECT * FROM Orderr WHERE order_id=%s",orderID)
     oid, instructions, delivTime, orderPlacedDate, orderPlacedTime = cursor.fetchone()
-    cursor.execute("SELECT * FROM DeliveredBy Where order_id=%s",orderID)
-    oid, dusername, isDel, delTime, delDate = cursor.fetchone()
-    cursor.execute("SELECT first_name, last_name FROM DeliveredBy Where order_id=%s",orderID)
+    cursor.execute("SELECT * FROM DeliveredBy WHERE order_id=%s",orderID)
+    oidd, dusername, isDel, delTime, delDate = cursor.fetchone()
+    cursor.execute("SELECT first_name,last_name FROM DeliveredBy WHERE order_id=%s",oid)
     dictry['orderID'] = oid
     dictry['payment'] = ""
-    dictry['fname'] = fname
-    dictry['lname'] = lname
-    dictry['noItems'] = noItems
     dictry['deliveryTime'] = delTime
     dictry['orderTime'] = orderPlacedTime
 
@@ -591,4 +589,5 @@ def orderTot():
 def getNewOrderID():
 	cursor.execute("SELECT Orderr.order_id FROM Orderr")
 	info = tuplesToList(cursor.fetchall())
+	print(info)
 	return info

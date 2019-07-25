@@ -423,7 +423,7 @@ def reciept():
 		deliveryTime = request.form['deliveryTime']
 		deliveryInstruc = request.form['deliveryInstruc']
 	"""
-	dictry = db.reciept()
+	dictry = db.reciept(currentOrderID)
 	return render_template('reciept16.html', dictry = dictry)
 
 @app.route('/orderHistory', methods=['GET','POST'])
@@ -640,8 +640,9 @@ def checkCheckout():
 			global currentStore
 			newOrderID = 1000000
 			query = db.getNewOrderID()
-			while newOrderID in query:
-				newOrderID = newOrderID + 1
+			for i in query:
+				if i[0] == newOrderID:
+					newOrderID = newOrderID + 1
 			currentOrderID = newOrderID
 			db.updateOrder(currentUser,currentStore,currentOrderID,deliveryInstructions, deliveryTime)
 			return reciept()
