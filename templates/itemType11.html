@@ -27,10 +27,10 @@
 			
 		{% for i in info %}
 			{% if i[0] != 0 %}
-			<form action="/addToCart" name="itemID" value={{i[5]}} method="post">
+				<form action="/addToCart" method="post">
 		  		<tr>
 		     		<td>
-				     <form action="/addToCart" method="post">
+				    
 					 
 					  <input type="number" name="quantity" value="0" min="0" max={{i[0]}} >
 							      
@@ -40,9 +40,9 @@
 				    <td>{{i[3]}}</td>
 				    <td>{{i[4]}}</td>
 				    <td> Yes </td>
-					<td> <input type="submit"  value="Add To Cart" > </td>
+					<td> <input type="radio" name="itemID" value="{{i[5]}} > <input type="submit"  value="Add To Cart" > </td>
 				  </tr>
-				
+			</form> 
 				
 			{% else %}
 				<tr>
