@@ -8,7 +8,7 @@ app = Flask(__name__)
 currentUser = ""
 currentStore = ""
 currentOrderID = ""
-addID = 90
+AddID = 90
 """Temporary usernames, add SQL queries later"""
 """
 def validBuyer(uname, passwd):
@@ -124,8 +124,8 @@ def checkregisterBuyer():
 			'''query = "SELECT MAX(id) FROM Address;"
 			response = db.cursor.execute(query)
 			db.cursor.fetchall()'''
-			global addID
-			AddID = AddID + 1 #response + 1
+			global AddID
+			AddID = AddID + 1
 			user_type = 'buyer'
 			reg = db.insertUser(uname,password,user_type,email,fname,lname)
 			if reg == 1:
@@ -326,9 +326,10 @@ def litemType():
 
 
 """
-@app.route('/itemType/<Itype>', methods=['GET','POST'])
-def itemTypeI(Itype):
-
+@app.route('/itemType', methods=['GET','POST'])
+def itemTypeI():
+	if request.method=='POST':
+		Itype = request.form['Itype']
 	info = db.popItem(Itype, currentStore)
 	return render_template('itemType11.html', Itype=Itype, info=info)
 
