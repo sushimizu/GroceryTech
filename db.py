@@ -458,7 +458,7 @@ def popItem(itemName, storeID):
 
 
 def inventory(uname):
-	cursor.execute("SELECT Item.item_name, Item.description, Item.quantity, Item.listed_price, Item.wholesale_price, Item.exp_date From Item Join soldAt on Item.item_id=soldAt.item_id WHERE soldAt.store_id IN (SELECT GroceryStore.store_id FROM GroceryStore Where GroceryStore.address_id IN (SELECT manages.store_address From manages WHERE manages.username=%s)) ",uname)
+	cursor.execute("SELECT Item.item_name, Item.description, Item.quantity, Item.listed_price, Item.wholesale_price, Item.exp_date, Item.item_id From Item Join soldAt on Item.item_id=soldAt.item_id WHERE soldAt.store_id IN (SELECT GroceryStore.store_id FROM GroceryStore Where GroceryStore.address_id IN (SELECT manages.store_address From manages WHERE manages.username=%s)) ",uname)
 	#cursor.execute("SELECT Item.item_name, Item.description, Item.quantity, Item.listed_price, Item.wholesale_price, Item.exp_date, From Item Join soldAt on soldAt.item_id = Item.item_id WHERE soldAt.store_id IN (SELECT GroceryStore.store_id FROM GroceryStore Where GroceryStore.address_id IN (SELECT manages.store_address From manages WHERE manages.username=%s) ",uname)
 	info =  tuplesToList(cursor.fetchall())
 	return info
