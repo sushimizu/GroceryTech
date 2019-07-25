@@ -188,7 +188,7 @@ def checkregisterDeliverer():
 @app.route('/registerManager', methods=['GET','POST'])
 def registerManager():
 	store = db.listStores()
-	return render_template('registerManager5.html' store=store)
+	return render_template('registerManager5.html', store=store)
 
 @app.route('/checkregisterManager', methods=['GET','POST'])
 def checkregisterManager():
