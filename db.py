@@ -19,7 +19,7 @@ def addToCart(quantity,itemID):
     cursor.execute(query, itemID)
     itemexist = cursor.fetchone()
     cursor.fetchall()
-    if itemexist > 0:
+    if itemexist > (0,):
         return 1
     query = "INSERT INTO CartView(quantity,itemID)"\
     "VALUES (%s,%s);"
@@ -34,6 +34,8 @@ def deleteFromCart(quantity,itemID):
     itemexist = cursor.fetchone()
     cursor.fetchall()
     return
+
+
 
 # returns 0 if credentials are invalid
 # returns 1 if user is a manager
