@@ -8,21 +8,28 @@
 <body>
 
 	
-	<h2> {{dictry["itemName"]}} </h2>
+	<h2> Order: {{orderID}} </h2>
 	
 		
 	
-   Item Name:  {{dictry["itemName"]}}
+   Store Name:  {{dictry["storeName"]}}
  		  <br> <br>
-		Description:  {{dictry["description"]}}
+		Order ID:  {{orderID}}
  		 <br> <br>
-     Quantity:  {{dictry["quantity"]}}
+     Date:  {{dictry["orderDate"]}}
  		 <br> <br>
-        Retail Price:  {{dictry["retailPrice"]}}
+        Total Price:  {{dictry["totPrice"]}}
  		  <br> <br>
-         Wholesale Price:  {{dictry["wholesalePrice"]}}
+         Number Of Items:  {{dictry["totItems"]}}
  		  <br> <br>
-        Expiration Date:  {{dictry["expDate"]}}
+	
+        Is Delivered:  
+	{% if dictry["deliverer"] == 1 %}
+
+	 Yes
+	{% else %}
+	 No 
+	{% endif %}
  		  <br> <br>
 
     
