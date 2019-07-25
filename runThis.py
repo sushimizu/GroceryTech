@@ -333,6 +333,13 @@ def itemTypeI(Itype):
 def cart():
 	return render_template('cart12.html')
 
+@app.route('/addToCart', methods=['GET','POST'])
+def addToCart():
+	quantity = request.form['quantity']
+	iname = request.form['itemID']
+
+	return render_template('cart12.html')
+
 @app.route('/checkout', methods=['GET','POST'])
 def checkout():
 	return render_template('checkout13.html')
@@ -541,7 +548,7 @@ def viewOrderDetails():
 
 @app.route('/updateDeliveryInfo', methods=['GET','POST'])
 def updateDeliveryInfo():
-	
+
 	if request.method == "POST":
 		status = request.form['status']
 		if int(status) == 0:
