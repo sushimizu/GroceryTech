@@ -37,7 +37,7 @@ INSTALLING THE DEPENDENCIES:
     Make sure you have googleChrome or Safary on your computer, if not downlowad it from your web browser.
     Make sure you have Python3.7 64 bites, if you don't have it,  go to https://www.python.org/ and istall python3
     
-    Make sure you have installed Mysql Workbench, Mysql server, and Mysql connectors. If you dont have it, go to https://dev.mysql.com/downloads/installer/, and install everything as recommended. Make sure to remember the password for your server.
+    Make sure you have installed Mysql Workbench, Mysql server, and Mysql connectors. If you dont have it, go to https://dev.mysql.com/downloads/installer/, and install everything as recommended. Make sure to remember the password for your server. You must then go to line 6 in db.py and change the password to your SQL server's password.
     
     Open a shell (Terminal or Command Prompt), enter the directory and run pip install -r requirements.txt to the needed python modules not already installed on python.
     
