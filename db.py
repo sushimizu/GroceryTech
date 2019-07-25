@@ -342,6 +342,8 @@ def reciept(orderID):
     oidd, dusername, isDel, delTime, delDate = cursor.fetchone()
     cursor.execute("SELECT Userr.first_name, Userr.last_name FROM Userr Join DeliveredBy ON Userr.username=DeliveredBy.deliverer_username WHERE deliveredBy.order_id=%s",oid)
     fname , lname = cursor.fetchone()
+    cursor.execute("select sum(selectItem.quantity) from selectItem Where selectItem.order_id=%s", orderID)
+    noItems = cursor.fetchone()
     dictry['orderID'] = oid
     dictry['payment'] = ""
     dictry['fname'] = fname
