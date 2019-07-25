@@ -546,7 +546,7 @@ def updateDeliveryInfo():
 	
 	if request.method == "POST":
 		status = request.form['status']
-		if status == 0:
+		if int(status) == 0:
 			info = db.assignments(currentUser)
 			return render_template('assignments20.html', info=info)
 		else:
