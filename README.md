@@ -6,13 +6,15 @@ RUNNING THE WEB APP:
 
     If you don't already have them, install Python 3, pip, mySQL Server and mySQL Workbench.
 
-    Clone this repository to your computer. You can find this repository at https://github.com/sushimizu/GroceryTech . These instructions will assume you clone it to a directory called GroceryTech.
+    Clone the repository to your computer. You can find this repository at https://github.com/sushimizu/GroceryTech . These instructions will assume you cloned it to a directory called GroceryTech.
+    
+    Look at line 6 from db.py, ensure that the password on that file is the password (passwd) you use to acces your local host root in mysql workbench.
 
     Run GroceryTech.sql to setup and add starter data to the database.
 
-    You can access the application at 127.0.0.1:5000 or localhost:5000.
+    You can access the application at (127.0.0.1:5000) or (localhost:5000).
 
-    Sign in with the following credentials, or create your own account:
+    Sign in with the following credentials, or create your own account. Note that there are a variety of populated users to enter in as:
 
     buyer: adepttimberry / cakeholmium
 
