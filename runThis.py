@@ -353,9 +353,8 @@ def addToCart():
 
 @app.route('/deleteFromCart', methods=['GET','POST'])
 def deleteFromCart():
-	quantity = request.form['quantity']
 	itemID = request.form['itemID']
-	val = db.deleteFromCart(quantity,itemID)
+	val = db.deleteFromCart(itemID)
 	info = db.popCart()
 	return render_template('cart12.html', error = "Item Deleted", info=info)
 
@@ -620,8 +619,8 @@ def checkCheckout():
 			return paymentMethods()
 		else:
 			return reciept()
-	
-	return 
+
+	return
 
 
 

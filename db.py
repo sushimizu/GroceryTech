@@ -29,9 +29,9 @@ def addToCart(quantity,itemID):
     conn.commit()
     return 0
 
-def deleteFromCart(quantity,itemID):
+def deleteFromCart(itemID):
     query = "DELETE FROM CartView where Item_id = %s"
-    cursor.execute(query)
+    cursor.execute(query, itemID)
     cursor.fetchall()
     return
 
