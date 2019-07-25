@@ -324,8 +324,10 @@ def updateOrder(uname,storeID,orderID,deliveryInstruc, deliveryTime):
     conn.commit()
     query = "INSERT INTO deliveredBy(order_id,deliverer_username,is_delivered,delivery_time,delivery_date)"\
     "VALUES (%s,%s,%s,%s,%s);"
-    #cursor.execute(query, (orderID,"SELECT deliverer_username from deliveredBy where is_delivered=0 group by deliverer_username order by count(deliverer_username) limit 1","0","",""))
-    cursor.execute(query, (orderID,"chivalrouspotatoes","0","",""))
+    cursor.execute(query, (orderID,"SELECT deliverer_username from deliveredBy where is_delivered=0 group by deliverer_username order by count(deliverer_username) limit 1","0","",""))
+    #query = "INSERT INTO deliveredBy(order_id,deliverer_username,is_delivered,delivery_time,delivery_date)"\
+    #"VALUES (%s,%s,%s,%s,%s);"
+    #cursor.execute(query, (orderID,"chivalrouspotatoes","0","",""))
     conn.commit()
 
     query = "UPDATE item set quantity=item.quantity - %s WHERE item_id = %s;"
