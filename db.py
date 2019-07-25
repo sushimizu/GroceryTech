@@ -18,9 +18,9 @@ def addToCart(quantity,itemID):
     query = "SELECT count(quantity) FROM CartView where Item_id = %s"
     cursor.execute(query,itemID)
     itemexist = cursor.fetchone()
-    print(itemexist)
+    #print(itemexist)
     cursor.fetchall()
-    if itemexist != (0,):
+    if itemexist == (0,):
         return 1
     else:
         query = "INSERT INTO CartView(quantity,Item_id)"\
