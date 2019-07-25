@@ -560,7 +560,8 @@ def updateDeliveryInfo():
 
 @app.route('/viewItemM/<item>', methods=['GET','POST'])
 def viewItem(item):
-	
+	if request.method == "POST":
+		itemNo = request.form['itemNo']
 	return render_template("viewItemM.html", item=item)
 
 
