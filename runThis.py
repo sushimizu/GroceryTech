@@ -558,8 +558,8 @@ def updateDeliveryInfo():
 	info = db.assignments(currentUser)
 	return render_template('assignments20.html', info=info)
 
-@app.route('/viewItemM/<item>', methods=['GET','POST'])
-def viewItem(item):
+@app.route('/viewItemM', methods=['GET','POST'])
+def viewItem():
 	if request.method == "POST":
 		itemNo = request.form['itemNo']
 		dictry = db.getItemInfo(itemNo)
