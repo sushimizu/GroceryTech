@@ -36,6 +36,10 @@ def deleteFromCart(quantity,itemID):
     return
 
 def adjustCart(quantity,itemID):
+    query = "UPDATE CartView SET quantity = %s WHERE Item_id = %s;"
+    cursor.execute(query, (itemID))
+    # clear cursor
+    conn.commit()
     return
 
 # returns 0 if credentials are invalid
