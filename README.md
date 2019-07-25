@@ -63,4 +63,4 @@ or
 
 $ python3 runThis.py
 
-then paste the provided link (http://127.0.0.1:5000) into browser. If link is different to what is given in the terminal upon running runThis.py, defer to the link in the terminal.
+then paste the provided link (usually http://127.0.0.1:5000) into browser. If link is different to what is given in the terminal upon running runThis.py, defer to the link in the terminal.
