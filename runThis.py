@@ -77,6 +77,7 @@ def registerBuyer():
 def checkregisterBuyer():
 
 	if request.method == "POST":
+		uname = request.form['uname']
 		password = request.form['password']
 		email = request.form['email']
 		street = request.form['street']
