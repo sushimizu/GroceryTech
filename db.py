@@ -515,5 +515,7 @@ def getOrderInfo(uname,orderID):
 
 
 
-
-
+def popCart():
+	cursor.execute("Select Item.item_id, Item.description, CartView.quantity, CartView.quantity*Item.listed_price, ‘yes’ from Item join CartView on Item.item_id=CartView.Item_id")
+	info =  tuplesToList(cursor.fetchall())
+	return info
