@@ -343,7 +343,7 @@ def reciept(orderID):
     cursor.execute("SELECT Userr.first_name, Userr.last_name FROM Userr Join DeliveredBy ON Userr.username=DeliveredBy.deliverer_username WHERE deliveredBy.order_id=%s",oid)
     fname , lname = cursor.fetchone()
     cursor.execute("select sum(selectItem.quantity) from selectItem Where selectItem.order_id=%s", orderID)
-    noItems = cursor.fetchone()
+    noItems = tuplesToList(cursor.fetchall())
     dictry['orderID'] = oid
     dictry['payment'] = ""
     dictry['fname'] = fname
@@ -352,7 +352,7 @@ def reciept(orderID):
     dictry['deliveryTime'] = delTime
     dictry['orderTime'] = orderPlacedTime
 
-    return dictry
+    return dictry, noItems
 
 def revenueRep(uname):
 	#SELECT DATEADD(yy, DATEDIFF(yy, 0, GETDATE()) - 1, 0))
