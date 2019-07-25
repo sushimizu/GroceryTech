@@ -476,3 +476,17 @@ def updateDelivery(uname, orderID):
 	conn.commit()
 	return 0
 
+
+def getItemInfo(itemNo):
+	cursor.execute(" Item.item_name, Item.description, Item.quantity, Item.listed_price, Item.wholesale_price, Item.exp_date FROM Item Where Item.item_id = %s " ,itemNo)
+	itemName, description, quantity, listedPrice, wholesalePrice, expDate = cursor.fetchone()
+	dictry = {}
+	dictry["itemName"] = itemName
+	dictry["description"] = description
+	dictry["quantity"] = quantity
+	dictry["listedPrice"] = listedPrice
+	dictry["wholesalePrice"] = wholesalePrice
+	dictry["expDate"] = expDate
+	return dictry
+
+
