@@ -611,7 +611,12 @@ def viewOrderB():
 
 	return orderHistory()
 
-
+@app.route('/checkCheckout', methods=['GET','POST'])
+def checkCheckout():
+	if request.method == "POST":
+		payment = request.form['payment']
+		
+	return
 
 
 
