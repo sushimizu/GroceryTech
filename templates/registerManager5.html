@@ -40,11 +40,9 @@
 			
 			    <select name="dsID">
 		  {% for i in  store %}
-		      {%if i[0] == dictry["defaultStore"]%}
-	  		 <option  selected value={{i[0]}}> {{i[0]}}, {{i[1]}}  </option>
-	  		{% else %}
+		      
 		   	 <option  value={{i[0]}}> {{i[0]}}, {{i[1]}}  </option>
-		  	{% endif %}
+		  	
 		  {% endfor %}
 	
 		    </select>
