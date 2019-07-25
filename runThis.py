@@ -8,6 +8,7 @@ app = Flask(__name__)
 currentUser = ""
 currentStore = ""
 currentOrderID = ""
+addID = 90
 """Temporary usernames, add SQL queries later"""
 """
 def validBuyer(uname, passwd):
@@ -79,6 +80,9 @@ def registerBuyer():
 def checkregisterBuyer():
 
 	if request.method == "POST":
+		uname = request.form['uname']
+		fname = request.form['fname']
+		lname = request.form['lname']
 		password = request.form['password']
 		email = request.form['email']
 		street = request.form['street']
@@ -120,10 +124,10 @@ def checkregisterBuyer():
 			'''query = "SELECT MAX(id) FROM Address;"
 			response = db.cursor.execute(query)
 			db.cursor.fetchall()'''
-			AddID = 90
+			global addID
 			AddID = AddID + 1 #response + 1
 			user_type = 'buyer'
-			reg = db.insertUser(uname,password,user_type,email)
+			reg = db.insertUser(uname,password,user_type,email,fname,lname)
 			if reg == 1:
 				return render_template("registerBuyer3.html", error="Username is Taken.")
 			reg = db.insertPayment(uname,payment,accNo,routingNo)
@@ -332,16 +336,16 @@ def itemTypeI(Itype):
 
 
 @app.route('/cart', methods=['GET','POST'])
-def cart(Itype):
-	info = db.popItem(Itype, currentStore)
-	return render_template('cart12.html', Itype=Itype, info=info)
+def cart():
+	info = db.popCart()
+	return render_template('cart12.html', info=info)
 
 @app.route('/addToCart', methods=['GET','POST'])
 def addToCart(Itype):
 	quantity = request.form['quantity']
 	itemID = request.form['itemID']
 	val = db.addToCart(quantity,itemID)
-	info = db.popItem(Itype, currentStore)
+	info = db.popCart(Itype, currentStore)
 	if val == 1:
 		return render_template('itemType11.html', error = "Item already exists, try editing the item in the cart page.", Itype=Itype, info=info)
 	else:
@@ -352,7 +356,7 @@ def deleteFromCart(Itype):
 	quantity = request.form['quantity']
 	itemID = request.form['itemID']
 	val = db.deleteFromCart(quantity,itemID)
-	info = db.popItem(Itype, currentStore)
+	info = db.popCart()
 	return render_template('itemType11.html', error = "Item Added. Please Select View Cart to View the Items Currently in Your Cart.", Itype=Itype, info=info)
 
 
