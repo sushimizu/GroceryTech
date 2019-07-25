@@ -445,17 +445,15 @@ def updateDelivererAccInfo():
 
 @app.route('/assignments', methods=['GET','POST'])
 def assignments():
-	if request.method == "POST":
-		global currentOrderID
-		currentOrderID = request.form["store"]
 	info = db.assignments(currentUser)
 	return render_template('assignments20.html', info=info)
 
 @app.route('/assignment', methods=['GET','POST'])
 def assignment():
 	if request.method == "POST":
-		OrderID = request.form['store']
-		dictry, iandq = db.newAss(currentUser,OrderID)
+		global currentOrderID
+		currentOrderID = request.form["store"]
+		dictry, iandq = db.newAss(currentUser,currentOrderID)
 		return render_template('assignment21.html',dictry = dictry, iandq=iandq)
 	return render_template('assignment21.html', error = "lmao something is really messed up.")
 
