@@ -3,7 +3,7 @@ import pymysql
 conn = pymysql.connect(host="localhost",
 							db="GroceryTech",
 							user="root",
-							passwd='CornyJoke12')
+							passwd='master1999')
 cursor = conn.cursor()
 
 
@@ -14,13 +14,15 @@ def tuplesToList(tlist):
     return newlist
 
 def addToCart(quantity,itemID):
+    print("asd")
     #check if item already exists in cart
-    query = "SELECT count(quantity) FROM CartView where Item_id = %s"
+    query = "SELECT quantity FROM CartView where Item_id = %s"
     cursor.execute(query,itemID)
     itemexist = cursor.fetchone()
     #print(itemexist)
     cursor.fetchall()
-    if itemexist == (0,):
+    print(itemexist)
+    if itemexist != None:
         return 1
     else:
         query = "INSERT INTO CartView(quantity,Item_id)"\
