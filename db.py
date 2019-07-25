@@ -296,10 +296,9 @@ def updateManagerInfo(uname,email,fname,lname):
 
     return 0
 
-def reciept(uname,storeID,orderID,deliveryInstruc):
-    dictry = {}
 
 
+def updateOrder(uname,storeID,orderID,deliveryInstruc):
     query = "INSERT INTO Orderr(order_id,delivery_instructions,delivery_time,order_placed_date,order_placed_date)"\
     "VALUES (%s,%s,%s,curdate(),curtime());"
     cursor.execute(query, (orderID,deliveryInstruc,deliveryTime))
@@ -323,7 +322,6 @@ def reciept(uname,storeID,orderID,deliveryInstruc):
     "VALUES (%s,%s,%s);"
     cursor.execute(query, (itemID,quantity,orderID))
     conn.commit()
-
     query = "INSERT INTO deliveredBy(order_id,deliverer_username,is_delivered,delivery_time,delivery_date)"\
     "VALUES (%s,%s,0,%s,%s);"
     cursor.execute(query, (orderID,"SELECT deliverer_username from deliveredBy where is_delivered=0 group by deliverer_username order by count(deliverer_username) limit 1","",""))
@@ -334,6 +332,9 @@ def reciept(uname,storeID,orderID,deliveryInstruc):
     # clear cursor
     conn.commit()
 
+
+def reciept():
+    dictry = {}
     cursor.execute("SELECT * FROM Order Where order_id=%s",orderID)
     oid, instructions, delivTime, orderPlacedDate, orderPlacedTime = cursor.fetchone()
     cursor.execute("SELECT * FROM DeliveredBy Where order_id=%s",orderID)
