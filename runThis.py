@@ -575,7 +575,7 @@ def viewOrderB():
 		dictry = db.getOrderInfo(currentUser, orderID)
 		return render_template("viewOrderB.html",  dictry=dictry, orderID=orderID)
 
-	return
+	return orderHistory()
 
 
 
