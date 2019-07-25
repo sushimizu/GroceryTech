@@ -417,8 +417,12 @@ def changeDefaultPayment():
 
 @app.route('/reciept', methods=['GET','POST'])
 def reciept():
-	dictry = db.reciept()
-	return render_template('reciept16.html', dictry = dictry)
+	if request.method == "POST":
+		payment = request.form['payment']
+		deliveryTime = request.form['deliveryTime']
+		deliveryInstruc = request.form['deliveryInstruc']
+		dictry = db.reciept(currentUser, currentStore currentOrderID,payment,deliveryTime,deliveryInstruc)
+		return render_template('reciept16.html', dictry = dictry)
 
 @app.route('/orderHistory', methods=['GET','POST'])
 def orderHistory():
