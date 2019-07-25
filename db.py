@@ -15,13 +15,13 @@ def tuplesToList(tlist):
 
 def addToCart(quantity,itemID):
     #check if item already exists in cart
-    query = "SELECT count(quantity) FROM CartView where itemID = %s"
+    query = "SELECT count(quantity) FROM CartView where Item_id = %s"
     cursor.execute(query, itemID)
     itemexist = cursor.fetchone()
     cursor.fetchall()
     if itemexist != (0,):
         return 1
-    query = "INSERT INTO CartView(quantity,itemID)"\
+    query = "INSERT INTO CartView(quantity,Item_id)"\
     "VALUES (%s,%s);"
     cursor.execute(query, (quantity,itemID))
     # clear cursor
@@ -29,7 +29,7 @@ def addToCart(quantity,itemID):
     return 0
 
 def deleteFromCart(quantity,itemID):
-    query = "DELETE FROM CartView where itemID = %s"
+    query = "DELETE FROM CartView where Item_id = %s"
     cursor.execute(query, itemID)
     itemexist = cursor.fetchone()
     cursor.fetchall()
