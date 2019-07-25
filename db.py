@@ -301,8 +301,8 @@ def reciept(uname,storeID,orderID,payment,deliveryTime,deliveryInstruc):
 
 
     query = "INSERT INTO Orderr(order_id,delivery_instructions,delivery_time,order_placed_date,order_placed_date)"\
-    "VALUES (%s,%s,%s,%s,%s);"
-    cursor.execute(query, (orderID,deliveryInstruc,delivery_time,curdate(),curtime()))
+    "VALUES (%s,%s,%s,curdate(),curtime());"
+    cursor.execute(query, (orderID,deliveryInstruc,deliveryTime))
     conn.commit()
 
     query = "INSERT INTO OrderedBy(order_id,buyer_username)"\
