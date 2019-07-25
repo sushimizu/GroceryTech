@@ -619,7 +619,7 @@ def checkCheckout():
 		if payment == dictry["paumentName"]:
 		return paymentMethods()
 	else:
-		
+		return reciept()
 	
 	return 
 
