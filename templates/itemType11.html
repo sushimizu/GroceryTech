@@ -11,7 +11,7 @@
 	<h2> {{Itype}}</h2>
 	
 		
-		<form action="/cart" method="post">
+		
 		
 		
 		<table>
@@ -26,19 +26,23 @@
 			
 		{% for i in info %}
 			{% if i[0] != 0 %}
+			<form action="/addToCart" method="post">
 		  		<tr>
 		     		<td>
-				     <form>
+				     <form action="/addToCart" name method="post">
 					 
 					  <input type="number" name="quantity" value="0" min="0" max={{i[0]}} >
-					</form>		      
+							      
 				   </td>
 				    <td>{{i[1]}}</td>
 				    <td>{{i[2]}}</td>
 				    <td>{{i[3]}}</td>
 				    <td>{{i[4]}}</td>
 				    <td> Yes </td>
+					<td> <input type="submit" name="itemID" value={{i[5]}} > Add To Cart </td>
 				  </tr>
+				
+				
 			{% else %}
 				<tr>
 		    		 <td>< <form >
@@ -56,26 +60,13 @@
 		  
 		  {% endfor %}
 		</table>
-				
+		
+<form action="/addToCart" method="post">
 	  <input type="submit" value="Add To Cart"> <br> <br>
 
 	</form>
 	
-		<div class="row"> 
-			
-			
-			<div class="column">
-				<form action="/itemType/{{Itype}}" method="post">
-				  <input type="submit" value="Previous" color ="blue">
-					</form> 
-			</div>
-			<div class="column">
-				<form action="/itemType/{{Itype}}" method="post">
-				  <input type="submit" value="Next" color ="blue">
-					</form> 
-			
-			</div>
-		</div>
+		
  
 			<form action="/checkout" method="post">
 				  <input type="submit" value="Check Out" color ="blue">
