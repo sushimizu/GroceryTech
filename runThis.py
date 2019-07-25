@@ -623,6 +623,8 @@ def viewOrderB():
 def checkCheckout():
 	if request.method == "POST":
 		payment = request.form['payment']
+		deliveryInstructions = request.form['deliveryInstructions']
+		deliveryTime = request.form['deliveryTime']
 		dictry = db.selectBuyerInfo(currentUser)
 		print(payment)
 		print(dictry["defaultPay"])
