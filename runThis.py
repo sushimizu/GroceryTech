@@ -637,12 +637,13 @@ def checkCheckout():
 		if payment == "Other":
 			return paymentMethods()
 		else:
+			global currentStore
 			newOrderID = 1000000
 			query = db.getNewOrderID()
 			while newOrderID in query:
 				newOrderID = newOrderID + 1
 			currentOrderID = newOrderID
-			db.updateOrder(currentUser,currentStoreID,currentOrderID,deliveryInstructions, deliveryTime)
+			db.updateOrder(currentUser,currentStore,currentOrderID,deliveryInstructions, deliveryTime)
 			return reciept()
 	return
 
