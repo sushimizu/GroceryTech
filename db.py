@@ -3,7 +3,9 @@ import pymysql
 conn = pymysql.connect(host="localhost",
 							db="GroceryTech",
 							user="root",
+
 							passwd='master1999')
+
 cursor = conn.cursor()
 
 
@@ -322,14 +324,22 @@ def updateOrder(uname,storeID,orderID,deliveryInstruc, deliveryTime):
     "VALUES (%s,%s,%s);"
     cursor.execute(query, (itemID,quantity,orderID))
     conn.commit()
+    cursor.execute("SELECT deliveredBy.deliverer_username FROM deliveredBy ORDER BY rand() limit 1 ")
+    dusername = cursor.fetchone()
+    #query = "INSERT INTO deliveredBy(order_id,deliverer_username,is_delivered,delivery_time,delivery_date)"\
+    #"VALUES (%s,%s,%s,%s,%s);"
+
+    #cursor.execute(query, (orderID,"SELECT deliverer_username from deliveredBy where is_delivered=0 group by deliverer_username order by count(deliverer_username) limit 1","0","",""))
     query = "INSERT INTO deliveredBy(order_id,deliverer_username,is_delivered,delivery_time,delivery_date)"\
     "VALUES (%s,%s,%s,%s,%s);"
+
     another_query="SELECT deliverer_username from deliveredBy where is_delivered=0 group by deliverer_username order by count(deliverer_username)"
     cursor.execute(another_query)
     name=cursor.fetchall()
 
     cursor.execute(query, (orderID,name[0][0],"0","",""))
     #cursor.execute(query, (orderID,"chivalrouspotatoes","0","",""))
+
     conn.commit()
 
     query = "UPDATE item set quantity=item.quantity - %s WHERE item_id = %s;"
