@@ -472,6 +472,7 @@ def outstandingOrders(uname):
 
 def updateDelivery(uname, orderID):
 	cursor.execute("update deliveredBy set is_delivered=1,delivery_time=curtime(), delivery_date=curdate() where order_id=%s and deliverer_username=%s", (orderID, uname))
+	print("superyeeEET")
 	conn.commit()
 	return 0
 
