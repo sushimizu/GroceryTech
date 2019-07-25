@@ -26,7 +26,7 @@ PROJECT STRUCTURE:
     This repository contains 3 main things:
 
     SQL files for setting up the database
-    Flask server (backend) files
+    Python with Flask and pymySQL addons (backend) files
     HTML (frontend) files
 
 Prerequisites to run the webserver:
